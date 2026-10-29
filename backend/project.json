@@ -1,0 +1,38 @@
+{
+  "name": "backend",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "backend/src",
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "continuous": true,
+      "options": {
+        "command": "uv run uvicorn islamtrove.main:app --reload --host 127.0.0.1 --port 8000",
+        "cwd": "backend",
+        "forwardAllArgs": false
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv run pytest -q",
+        "cwd": "backend",
+        "forwardAllArgs": false
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv run ruff check . && uv run ruff format --check . && uv run pyright",
+        "cwd": "backend",
+        "forwardAllArgs": false
+      }
+    }
+  },
+  "tags": [
+    "type:backend",
+    "lang:python"
+  ]
+}

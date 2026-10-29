@@ -1,0 +1,25 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "defaultBase": "main",
+  "namedInputs": {
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
+    "sharedGlobals": [
+      "{workspaceRoot}/nx.json"
+    ]
+  },
+  "targetDefaults": {
+    "serve": {
+      "cache": false,
+      "continuous": true
+    },
+    "test": {
+      "cache": false
+    },
+    "lint": {
+      "cache": false
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "islamtrove-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "IslamTrove Angular + FastAPI Nx workspace",
+  "scripts": {
+    "dev": "nx run-many -t serve -p backend frontend --parallel=2",
+    "build": "nx run frontend:build",
+    "test": "nx run-many -t test -p backend frontend --parallel=2",
+    "lint": "nx run backend:lint",
+    "graph": "nx graph"
+  },
+  "devDependencies": {
+    "nx": "^24.0.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

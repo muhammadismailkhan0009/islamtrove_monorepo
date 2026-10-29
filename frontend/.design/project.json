@@ -1,0 +1,395 @@
+{
+  "schemaVersion": "0.1",
+  "id": "5e06f679-9567-4786-9816-675b2e8f5686",
+  "name": "frontend",
+  "sourceTopology": {
+    "portsPath": "src/application/ports",
+    "adaptersPath": "src/infrastructure/adapters"
+  },
+  "dataSchemas": [],
+  "tokenSets": [],
+  "components": [
+    {
+      "id": "player",
+      "name": "Audio Player",
+      "anatomy": [
+        "Surah selection",
+        "Listening mode",
+        "Reciter and translation",
+        "Ayah breakpoints",
+        "Playback sequence",
+        "Player controls"
+      ],
+      "properties": {},
+      "variants": {},
+      "states": [
+        "recitation-only",
+        "recitation-with-translation"
+      ],
+      "events": [],
+      "tokenBindings": {},
+      "sourceOwner": {
+        "type": "feature",
+        "featureId": "listening-studio"
+      },
+      "childComponentIds": [],
+      "implementationRoots": [
+        "src/features/listening-studio/components/player"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "id": "75bea7da-dc96-4837-a8e3-8a9f75e65bcf",
+      "name": "Listening Studio",
+      "routeHint": "/",
+      "regions": [],
+      "rootFeatureId": "listening-studio",
+      "implementationRoots": [
+        "src/features/listening-studio"
+      ],
+      "frameworkBindingPaths": [
+        "src/main.ts"
+      ]
+    }
+  ],
+  "designDirections": [
+    {
+      "id": "default",
+      "name": "Default"
+    }
+  ],
+  "defaultDesignDirectionId": "default",
+  "ports": [
+    {
+      "id": "quran-catalog",
+      "name": "Quran Catalog",
+      "description": "Read Surah metadata and Ayah counts",
+      "operations": {
+        "listSurahs": {
+          "description": "List available Surahs with display metadata and Ayah counts"
+        }
+      },
+      "implementationRoots": [
+        "src/application/ports/quran-catalog"
+      ]
+    },
+    {
+      "id": "audio-options",
+      "name": "Audio Options",
+      "description": "List available reciters and audio-translation languages",
+      "operations": {
+        "listAudioOptions": {
+          "description": "List voices and available spoken translation languages"
+        }
+      },
+      "implementationRoots": [
+        "src/application/ports/audio-options"
+      ]
+    },
+    {
+      "id": "audio-media",
+      "name": "Audio Media",
+      "description": "Resolve recitation and spoken-translation audio per Ayah",
+      "operations": {
+        "getSurahAudio": {
+          "description": "Resolve chosen reciter and translation for an entire Surah, preserving Ayah indexes"
+        }
+      },
+      "implementationRoots": [
+        "src/application/ports/audio-media"
+      ]
+    },
+    {
+      "id": "verse-preview",
+      "name": "Verse Reading Text",
+      "description": "Retrieve Arabic verse text and translated reading text separately from spoken audio",
+      "operations": {
+        "getSurahVerses": {
+          "description": "Retrieve a Surah’s Arabic text and selected language translations"
+        }
+      },
+      "implementationRoots": [
+        "src/application/ports/verse-preview"
+      ]
+    },
+    {
+      "id": "media-cache",
+      "name": "Browser Media Cache",
+      "description": "High-capacity in-memory audio bytes, with request coalescing and LRU eviction",
+      "operations": {
+        "get": {
+          "description": "Download or reuse audio binary Blob bytes from browser-session memory"
+        }
+      },
+      "implementationRoots": [
+        "src/application/ports/media-cache"
+      ]
+    },
+    {
+      "id": "continuous-recitation",
+      "name": "QUL Continuous Arabic Recitation",
+      "description": "Trusted Ayah timing metadata and one full-Surah audio source (Mujawwad)",
+      "operations": {
+        "getSurah": {
+          "description": "Fetch verified contiguous per-Ayah millisecond boundaries"
+        }
+      },
+      "implementationRoots": [
+        "src/application/ports/continuous-recitation"
+      ]
+    },
+    {
+      "id": "streaming-source",
+      "name": "Progressive Streaming Source",
+      "description": "Resolve a QUL continuous Surah recording to a progressive media URL; production uses an approved range proxy and persistent service-worker cache",
+      "operations": {
+        "resolve": {
+          "description": "Resolve original CDN URL to a streamable media endpoint without full-file download"
+        }
+      },
+      "implementationRoots": [
+        "src/application/ports/streaming-source"
+      ]
+    }
+  ],
+  "scenarios": [],
+  "flows": [],
+  "views": [
+    {
+      "id": "3a074c85-eb68-4b26-823b-4143c3076eff",
+      "name": "Listening Studio · Desktop",
+      "target": {
+        "type": "page",
+        "id": "75bea7da-dc96-4837-a8e3-8a9f75e65bcf"
+      },
+      "designDirectionId": "default",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "canvas": {
+        "x": 80,
+        "y": 80,
+        "width": 1440,
+        "height": 960
+      },
+      "resourcePath": "/"
+    },
+    {
+      "id": "bef2febd-0dfc-4425-89f8-f3e1ab4a9a38",
+      "name": "Listening Studio · Mobile",
+      "target": {
+        "type": "page",
+        "id": "75bea7da-dc96-4837-a8e3-8a9f75e65bcf"
+      },
+      "designDirectionId": "default",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "canvas": {
+        "x": 1559.5641855638369,
+        "y": 92.20165054902216,
+        "width": 390,
+        "height": 844
+      },
+      "resourcePath": "/"
+    }
+  ],
+  "sourceArchitecture": {
+    "managed": true,
+    "version": 2
+  },
+  "features": [
+    {
+      "id": "listening-studio",
+      "name": "Listening Studio",
+      "componentIds": [
+        "player"
+      ],
+      "portIds": [
+        "quran-catalog",
+        "audio-options",
+        "audio-media",
+        "verse-preview",
+        "media-cache",
+        "continuous-recitation",
+        "streaming-source"
+      ],
+      "implementationRoots": [
+        "src/features/listening-studio"
+      ]
+    }
+  ],
+  "adapters": [
+    {
+      "id": "mock-quran-catalog",
+      "name": "Mock Quran Catalog Adapter",
+      "capabilityId": "quran-catalog",
+      "portIds": [
+        "quran-catalog"
+      ],
+      "kind": "mock",
+      "implementationRoots": [
+        "src/infrastructure/adapters/mock/quran-catalog"
+      ]
+    },
+    {
+      "id": "production-quran-catalog",
+      "name": "Production Quran Catalog Adapter",
+      "capabilityId": "quran-catalog",
+      "portIds": [
+        "quran-catalog"
+      ],
+      "kind": "production",
+      "implementationRoots": [
+        "src/infrastructure/adapters/production/quran-catalog"
+      ]
+    },
+    {
+      "id": "mock-audio-options",
+      "name": "Mock Audio Options Adapter",
+      "capabilityId": "audio-options",
+      "portIds": [
+        "audio-options"
+      ],
+      "kind": "mock",
+      "implementationRoots": [
+        "src/infrastructure/adapters/mock/audio-options"
+      ]
+    },
+    {
+      "id": "production-audio-options",
+      "name": "Production Audio Options Adapter",
+      "capabilityId": "audio-options",
+      "portIds": [
+        "audio-options"
+      ],
+      "kind": "production",
+      "implementationRoots": [
+        "src/infrastructure/adapters/production/audio-options"
+      ]
+    },
+    {
+      "id": "mock-audio-media",
+      "name": "Mock Audio Media Adapter",
+      "capabilityId": "audio-media",
+      "portIds": [
+        "audio-media"
+      ],
+      "kind": "mock",
+      "implementationRoots": [
+        "src/infrastructure/adapters/mock/audio-media"
+      ]
+    },
+    {
+      "id": "production-audio-media",
+      "name": "Production Audio Media Adapter",
+      "capabilityId": "audio-media",
+      "portIds": [
+        "audio-media"
+      ],
+      "kind": "production",
+      "implementationRoots": [
+        "src/infrastructure/adapters/production/audio-media"
+      ]
+    },
+    {
+      "id": "mock-verse-preview",
+      "name": "Mock Verse Preview Adapter",
+      "capabilityId": "verse-preview",
+      "portIds": [
+        "verse-preview"
+      ],
+      "kind": "mock",
+      "implementationRoots": [
+        "src/infrastructure/adapters/mock/verse-preview"
+      ]
+    },
+    {
+      "id": "production-verse-preview",
+      "name": "Production Verse Preview Adapter",
+      "capabilityId": "verse-preview",
+      "portIds": [
+        "verse-preview"
+      ],
+      "kind": "production",
+      "implementationRoots": [
+        "src/infrastructure/adapters/production/verse-preview"
+      ]
+    },
+    {
+      "id": "mock-media-cache",
+      "name": "Mock Media Cache Adapter",
+      "capabilityId": "media-cache",
+      "portIds": [
+        "media-cache"
+      ],
+      "kind": "mock",
+      "implementationRoots": [
+        "src/infrastructure/adapters/mock/media-cache"
+      ]
+    },
+    {
+      "id": "production-media-cache",
+      "name": "Production Media Cache Adapter",
+      "capabilityId": "media-cache",
+      "portIds": [
+        "media-cache"
+      ],
+      "kind": "production",
+      "implementationRoots": [
+        "src/infrastructure/adapters/production/media-cache"
+      ]
+    },
+    {
+      "id": "mock-continuous-recitation",
+      "name": "Mock Continuous Recitation Adapter",
+      "capabilityId": "continuous-recitation",
+      "portIds": [
+        "continuous-recitation"
+      ],
+      "kind": "mock",
+      "implementationRoots": [
+        "src/infrastructure/adapters/mock/continuous-recitation"
+      ]
+    },
+    {
+      "id": "production-continuous-recitation",
+      "name": "Production Continuous Recitation Adapter",
+      "capabilityId": "continuous-recitation",
+      "portIds": [
+        "continuous-recitation"
+      ],
+      "kind": "production",
+      "implementationRoots": [
+        "src/infrastructure/adapters/production/continuous-recitation"
+      ]
+    },
+    {
+      "id": "mock-streaming-source",
+      "name": "Mock Streaming Source Adapter",
+      "capabilityId": "streaming-source",
+      "portIds": [
+        "streaming-source"
+      ],
+      "kind": "mock",
+      "implementationRoots": [
+        "src/infrastructure/adapters/mock/streaming-source"
+      ]
+    },
+    {
+      "id": "production-streaming-source",
+      "name": "Production Streaming Source Adapter",
+      "capabilityId": "streaming-source",
+      "portIds": [
+        "streaming-source"
+      ],
+      "kind": "production",
+      "implementationRoots": [
+        "src/infrastructure/adapters/production/streaming-source"
+      ]
+    }
+  ]
+}

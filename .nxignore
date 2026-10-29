@@ -1,0 +1,3 @@
+# Design Canvas metadata is not an Nx project.
+frontend/.design/**
+.serena/**

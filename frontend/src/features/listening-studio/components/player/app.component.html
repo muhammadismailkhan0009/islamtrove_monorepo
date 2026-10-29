@@ -1,0 +1,223 @@
+<div class="app-shell">
+  @if (sidebarOpen()) {
+    <button class="sidebar-backdrop" type="button" aria-label="Close Surah list" (click)="sidebarOpen.set(false)"></button>
+  }
+  <aside class="sidebar" [class.is-open]="sidebarOpen()">
+    <div class="brand">
+      <div class="brand-mark"><it-icon name="wave" [size]="23"></it-icon></div>
+      <div class="brand-label"><strong>Islam<span>Trove</span></strong><small>LISTEN WITH MEANING</small></div>
+      <button class="mobile-close quiet-button" type="button" aria-label="Close Surah list" (click)="sidebarOpen.set(false)"><it-icon name="close"></it-icon></button>
+    </div>
+
+    <div class="sidebar-section-title">YOUR LISTENING SPACE</div>
+    <div class="sidebar-current"><it-icon name="headphones" [size]="18"></it-icon><span>Audio studio</span><span class="current-dot"></span></div>
+    <button class="sidebar-settings-link" type="button" (click)="sidebarOpen.set(false); openSettings()"><it-icon name="settings" [size]="17"></it-icon>Listening settings<it-icon name="arrow" [size]="15"></it-icon></button>
+
+    <div class="catalog-header"><span>SELECT A SURAH</span><span>{{surahs.length}} Surahs</span></div>
+    <label class="surah-search"><it-icon name="search" [size]="17"></it-icon>
+      <input aria-label="Find a Surah" type="search" placeholder="Search Surahs" [value]="search()" (input)="setSearch($any($event.target).value)">
+    </label>
+    <nav aria-label="Surah selection" class="surah-list">
+      @for (surah of filteredSurahs(); track surah.id) {
+        <button class="surah-option" type="button" [class.selected]="selectedId() === surah.id" [attr.aria-pressed]="selectedId() === surah.id" (click)="selectSurah(surah)">
+          <span class="surah-index">{{surah.id}}</span>
+          <span class="surah-copy"><strong>{{surah.name}}</strong><small>{{surah.ayahCount}} Ayahs · {{surah.meaning}}</small></span>
+          @if (selectedId() === surah.id) { <it-icon name="check" [size]="15"></it-icon> }
+        </button>
+      } @empty { <p class="no-results">No Surah matches your search.</p> }
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="sidebar-helper"><it-icon name="info" [size]="17"></it-icon><p>Choose how you hear each Surah. Breakpoints group verses for a more natural translation flow.</p></div>
+      <small>ISLAMTROVE · AUDIO FIRST</small>
+    </div>
+  </aside>
+
+  <div class="content-column">
+    <header class="topbar">
+      <div class="breadcrumb"><button type="button" class="menu-button quiet-button" aria-label="Open Surah list" (click)="sidebarOpen.set(true)"><it-icon name="menu"></it-icon></button><span>ISLAMTROVE</span><span class="breadcrumb-separator">/</span><strong>LISTENING STUDIO</strong></div>
+      <div class="preview-status"><span></span> Design preview</div>
+    </header>
+
+    <main class="workspace">
+      <div class="page-heading">
+        <div><div class="eyebrow">PERSONAL QURAN LISTENING</div><h1>Listen. Read. Understand<span>.</span></h1><p>Hear connected passages in Arabic, then one or two translations. Keep the meaning in view while you listen.</p></div>
+        <div class="heading-actions"><button class="heading-configure" type="button" (click)="openSettings()"><it-icon name="settings" [size]="17"></it-icon>Listening settings</button><span class="auto-save-label"><it-icon name="check" [size]="14"></it-icon>Preferences saved automatically</span></div>
+      </div>
+
+      <section class="surah-banner" aria-label="Currently selected Surah">
+        <div class="banner-copy">
+          <div class="banner-eyebrow">NOW SELECTED <span>·</span> SURAH {{selectedSurah().id}}</div>
+          <h2>{{selectedSurah().name}}</h2>
+          <div class="banner-subtitle">{{selectedSurah().meaning}} <span>·</span> {{selectedSurah().ayahCount}} Ayahs <span>·</span> {{selectedSurah().revelation}}</div>
+        </div>
+        <div class="sound-art" aria-hidden="true">
+          <span style="--h:31px"></span><span style="--h:61px"></span><span style="--h:42px"></span><span style="--h:76px"></span><span style="--h:48px"></span><span style="--h:92px"></span><span style="--h:63px"></span><span style="--h:38px"></span><span style="--h:74px"></span><span style="--h:45px"></span><span style="--h:64px"></span><span style="--h:29px"></span>
+        </div>
+      </section>
+
+      <section class="listen-summary" aria-label="Current listening setup">
+        <span class="listen-summary-icon"><it-icon name="headphones" [size]="21"></it-icon></span>
+        <div class="listen-summary-copy"><span>YOUR LISTENING FLOW</span><strong>{{selectionSummary()}}</strong><small>{{passages().length}} {{passages().length === 1 ? 'passage' : 'passages'}} · {{listeningMode() === 'recitation' ? 'Arabic only' : dualTranslation() ? 'Translations paired by Ayah' : 'Translation after each Arabic passage'}}</small></div>
+        <button type="button" class="configure-button" (click)="openSettings()"><it-icon name="settings" [size]="17"></it-icon>Configure</button>
+      </section>
+      @if (passages().length > 1) {
+        <div class="passage-tabs" aria-label="Jump to passage"><span>PASSAGE</span>@for (passage of passages(); track passage.index) {
+          <button type="button" [class.active]="activeStage().passageIndex === passage.index" [attr.aria-label]="'Play passage, Ayahs ' + range(passage.start, passage.end)" (click)="playPassage(passage.index)"><it-icon name="play" [size]="13"></it-icon> Ayahs {{range(passage.start, passage.end)}}</button>
+        }</div>
+      }
+
+      <section class="reading-studio" aria-label="Quran verse reading preview">
+        <div class="reading-header">
+          <div><span class="micro-label">READING COMPANION</span><h3>Keep the words in view.</h3><p>Listen to the full passage, or tap the audio icon beside any Ayah or translation.</p></div>
+          <button type="button" class="reading-play-button" [disabled]="loading()" (click)="togglePlay()" [attr.aria-label]="isPlaying() && !activeClip() ? 'Pause passage playback' : 'Play passage sequence'">
+            <it-icon [name]="isPlaying() && !activeClip() ? 'pause' : 'play'" [size]="19"></it-icon>
+            {{isPlaying() && !activeClip() ? 'Pause' : loading() ? 'Loading audio…' : 'Play sequence'}}
+          </button>
+        </div>
+        <div class="reader-context"><div><span class="reader-kicker">CURRENT PASSAGE · {{selectedSurah().name}}</span><strong>Ayahs {{range(activePassage().start, activePassage().end)}}</strong></div><span class="reader-step">{{selectionSummary()}}</span></div>
+        @if (selectedId() !== 1 && selectedId() !== 9 && activePassage().start === 1) {
+          <div class="opening-bismillah" lang="ar" dir="rtl" aria-label="Bismillah opening recitation">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+        }
+        <div class="verse-list">
+          @if (verseLoading()) {
+            <div class="verse-empty">Loading Arabic and translated verses from QuranEnc…</div>
+          } @else if (verseError()) {
+            <div class="verse-empty" role="alert"><it-icon name="book" [size]="24"></it-icon>
+              <strong>Unable to load QuranEnc verse text.</strong><span>{{verseError()}}</span>
+              <button class="verse-audio-button" type="button" (click)="loadVerseText()">Retry loading verses</button>
+            </div>
+          } @else if (activePassageVerses().length === 0) {
+            <div class="verse-empty"><it-icon name="book" [size]="24"></it-icon>
+              <strong>Verse text is unavailable.</strong><span>The selected Surah returned no readable verses.</span>
+            </div>
+          } @else {
+            @for (verse of activePassageVerses(); track verse.ayah) {
+              <article class="verse-row" [class.is-playing-ayah]="isPlaying() && activeAyah() === verse.ayah" [attr.aria-label]="'Ayah ' + selectedSurah().id + ':' + verse.ayah">
+                <div class="verse-meta"><div class="verse-verse-tools"><span class="verse-num">{{selectedSurah().id}}:{{verse.ayah}}</span><button type="button" class="verse-audio-button" [class.is-playing]="isPlayingClip(verse.ayah, 'Arabic')" [attr.aria-label]="(isPlayingClip(verse.ayah, 'Arabic') ? 'Pause' : 'Play') + ' Arabic Ayah ' + verse.ayah" (click)="toggleClip(verse.ayah, 'Arabic')"><it-icon [name]="isPlayingClip(verse.ayah, 'Arabic') ? 'pause' : 'play'" [size]="14"></it-icon> Arabic</button></div><span class="verse-source">QuranEnc · Bubenheim &amp; Elyas / Rowwad / Junagarhi</span></div>
+                <p class="arabic-verse" lang="ar" dir="rtl">{{verse.arabic}}</p>
+                @for (language of visibleLanguages(); track language) {
+                  <div class="verse-translation" [class.is-german]="language === 'German'" [attr.lang]="language === 'German' ? 'de' : language === 'Urdu' ? 'ur' : 'en'" [attr.dir]="language === 'Urdu' ? 'rtl' : 'ltr'">
+                    <div class="translation-top"><span class="translation-tag">{{language}} <span>{{language === 'German' ? 'Bubenheim · Elyas' : language === 'English' ? 'Rowwad' : 'Junagarhi'}}</span></span><button type="button" class="verse-audio-button translation-audio-button" [class.is-playing]="isPlayingClip(verse.ayah, language)" [attr.aria-label]="(isPlayingClip(verse.ayah, language) ? 'Pause' : 'Play') + ' ' + language + ' translation of Ayah ' + verse.ayah" (click)="toggleClip(verse.ayah, language)"><it-icon [name]="isPlayingClip(verse.ayah, language) ? 'pause' : 'play'" [size]="14"></it-icon> Listen</button></div>
+                    <p>{{verse.translations[language] || 'Translation unavailable in this design sample.'}}</p>
+                  </div>
+                }
+              </article>
+            }
+          }
+        </div>
+        @if (playbackError()) {<div role="alert" class="reading-audio-error"><it-icon name="info" [size]="16"></it-icon>{{playbackError()}}</div>}
+        <div class="reading-footer"><it-icon name="info" [size]="15"></it-icon>Arabic audio is scheduled without inter-file gaps when downloads can be decoded. Source recordings may contain natural pauses.</div>
+      </section>
+
+
+    </main>
+  </div>
+
+
+  <dialog #settingsDialog class="settings-dialog" aria-labelledby="settings-title" (click)="closeOnBackdrop($event)">
+    <div class="settings-surface">
+      <header class="settings-heading"><div><span class="micro-label">PERSONALIZE YOUR LISTENING</span><h2 id="settings-title">Listening settings</h2><p>Change your audio order, visible translations, and passage boundaries.</p></div><button class="settings-close" type="button" aria-label="Close listening settings" (click)="closeSettings()"><it-icon name="close" [size]="20"></it-icon></button></header>
+      <div class="settings-scroll">
+      <div class="section-title"><span class="section-number">01</span><div><h3>Build your listening flow</h3><p>Recite in Arabic, then hear the meaning in your preferred order.</p></div></div>
+      <div class="mode-options" role="group" aria-label="Listening mode">
+        <button type="button" class="mode-option" [class.active]="listeningMode() === 'recitation'" [attr.aria-pressed]="listeningMode() === 'recitation'" (click)="setListeningMode('recitation')">
+          <span class="mode-icon"><it-icon name="volume" [size]="24"></it-icon></span>
+          <span class="mode-text"><strong>Arabic recitation</strong><small>Arabic audio with the verse text on screen.</small></span>
+          <span class="mode-radio"><it-icon name="check" [size]="13"></it-icon></span>
+        </button>
+        <button type="button" class="mode-option" [class.active]="listeningMode() === 'both'" [attr.aria-pressed]="listeningMode() === 'both'" (click)="setListeningMode('both')">
+          <span class="mode-icon"><it-icon name="languages" [size]="24"></it-icon></span>
+          <span class="mode-text"><strong>Arabic + translations</strong><small>Hear one translation per passage, or pair two by Ayah.</small></span>
+          <span class="mode-radio"><it-icon name="check" [size]="13"></it-icon></span>
+        </button>
+      </div>
+
+      <div class="fixed-reciter"><it-icon name="volume" [size]="17"></it-icon><div><span>RECITER</span><strong>Muhammad Siddiq Al-Minshawi · Mujawwad (192 kbps)</strong></div></div>
+
+      @if (listeningMode() === 'both') {
+        <section class="language-builder" aria-label="Translation playback setup">
+          <div class="language-builder-header"><div><span class="micro-label">QUICK LISTENING PRESETS</span><h4>Make German feel familiar.</h4><p>Hear a familiar meaning first, then German — or practise recalling German on its own.</p></div></div>
+          <div class="study-presets" role="group" aria-label="Learning presets">
+            <button type="button" class="study-preset" [class.selected]="dualTranslation() && translationLanguage() === 'English' && secondTranslation() === 'German'" [attr.aria-pressed]="dualTranslation() && translationLanguage() === 'English' && secondTranslation() === 'German'" (click)="selectStudyPreset('guided')">
+              <span class="preset-symbol"><it-icon name="layers" [size]="19"></it-icon></span><span><strong>Guided listening</strong><small>English → German</small></span><it-icon name="arrow" [size]="15"></it-icon>
+            </button>
+            <button type="button" class="study-preset" [class.selected]="!dualTranslation() && translationLanguage() === 'German'" [attr.aria-pressed]="!dualTranslation() && translationLanguage() === 'German'" (click)="selectStudyPreset('immersion')">
+              <span class="preset-symbol"><it-icon name="headphones" [size]="19"></it-icon></span><span><strong>German immersion</strong><small>Recall meaning without a prompt</small></span><it-icon name="arrow" [size]="15"></it-icon>
+            </button>
+          </div>
+          <div class="builder-divider"></div>
+          <div class="translation-builder-heading"><div><strong>Spoken translation sequence</strong><span>Choose any language for each step. Arabic always plays first.</span></div><label class="switch-setting"><input type="checkbox" [checked]="dualTranslation()" (change)="setDualTranslation($any($event.target).checked)"><span>Two translations</span></label></div>
+          <div class="translation-steps">
+            <div class="translation-step"><span class="step-index">01</span><div class="step-selector"><label for="first-translation">FIRST TRANSLATION</label><select id="first-translation" [value]="translationLanguage()" (change)="setPrimaryLanguage($any($event.target).value)">@for (language of supportedLanguages; track language) {<option [value]="language">{{language}}</option>}</select></div></div>
+            @if (dualTranslation()) {
+              <span class="step-arrow"><it-icon name="arrow" [size]="20"></it-icon></span>
+              <div class="translation-step secondary-step"><span class="step-index">02</span><div class="step-selector"><label for="second-translation">SECOND TRANSLATION</label><select id="second-translation" [value]="secondTranslation()" (change)="setSecondaryLanguage($any($event.target).value)">@for (language of supportedLanguages; track language) {<option [value]="language" [disabled]="language === translationLanguage()">{{language}}</option>}</select></div></div>
+            }
+          </div>
+          <div class="sequence-strip" aria-label="Preview of audio playback order"><span class="sequence-caption">{{dualTranslation() ? 'AFTER ARABIC GROUP · EACH AYAH' : 'AFTER ARABIC GROUP'}}</span><span class="sequence-chip arabic-chip">Arabic passage</span><it-icon name="arrow" [size]="15"></it-icon>@for (language of spokenLanguages(); track $index) {<span class="sequence-chip" [class.german-chip]="language === 'German'">{{language}}</span>@if (!$last) {<it-icon name="arrow" [size]="15"></it-icon>}}@if (dualTranslation()) {<span class="sequence-caption">· then next Ayah</span>}</div>
+          @if (dualTranslation() || spokenLanguages().includes('German')) {<div class="design-note"><it-icon name="info" [size]="16"></it-icon><span><strong>Audio preview enabled:</strong> translations are fetched by Ayah, while Arabic plays from one timestamped Surah recording.</span></div>}
+        </section>
+      }
+
+
+        @if (listeningMode() === 'both') {
+          <section class="display-settings"><span class="micro-label">ON-SCREEN TRANSLATIONS</span><h3>What would you like to read?</h3><p>Arabic stays visible. Choose either translation or both; playback order will not change.</p>
+          @if (listeningMode() === 'both') {
+            <div class="display-options" role="group" aria-label="Translations shown on screen">
+              <span>ON SCREEN</span>
+              <button type="button" [class.selected]="!dualTranslation() || displayChoice() === 'first'" [attr.aria-pressed]="!dualTranslation() || displayChoice() === 'first'" (click)="setDisplayChoice('first')">{{translationLanguage()}}</button>
+              @if (dualTranslation()) {
+                <button type="button" [class.selected]="displayChoice() === 'second'" [attr.aria-pressed]="displayChoice() === 'second'" (click)="setDisplayChoice('second')">{{secondTranslation()}}</button>
+                <button type="button" [class.selected]="displayChoice() === 'both'" [attr.aria-pressed]="displayChoice() === 'both'" (click)="setDisplayChoice('both')">Both</button>
+              }
+            </div>
+          }
+          </section>
+        }
+      @if (true) {
+        <div class="section-title break-title"><span class="section-number">03</span><div><h3>Set passage boundaries</h3><p>Tap an Ayah number to set where the next listening passage begins.</p></div></div>
+
+        <div class="editing-layout">
+          <section class="editor-card" aria-label="Breakpoints editor">
+            <div class="editor-top">
+              <div><strong>Ayah breakpoints</strong><span>Choose where each passage ends</span></div>
+              <div class="preset-buttons">
+                <button type="button" [class.active]="isWholeSurah()" (click)="setPreset('whole')">End only</button>
+                <button type="button" [class.active]="isEveryAyah()" (click)="setPreset('each')">Each Ayah</button>
+                @if (selectedId() === 18) {
+                  <button type="button" (click)="applySuggestedBreakpoints()">Al-Kahf groups</button>
+                }
+              </div>
+            </div>
+            <div class="ayah-grid" aria-label="Ayah numbers">
+              @for (ayah of ayahs(); track ayah) {
+                <button class="ayah-chip" type="button" [class.is-break]="isBoundary(ayah)" [class.is-final]="ayah === selectedSurah().ayahCount" [disabled]="ayah === selectedSurah().ayahCount" [attr.aria-label]="'Ayah ' + ayah + (isBoundary(ayah) ? ', translation breakpoint' : ', add translation breakpoint')" [attr.aria-pressed]="isBoundary(ayah)" (click)="toggleBreakpoint(ayah)">
+                  <span class="ayah-chip-number">{{ayah}}</span>
+                  <span class="ayah-chip-marker"><it-icon [name]="isBoundary(ayah) ? 'check' : 'plus'" [size]="12"></it-icon></span>
+                </button>
+              }
+            </div>
+            <div class="editor-hint"><it-icon name="info" [size]="16"></it-icon><span>Highlighted numbers mark passage boundaries. The final Ayah is always included.</span></div>
+          </section>
+
+          <section class="flow-card" aria-label="Playback sequence">
+            <div class="flow-header"><div><span class="flow-kicker">PLAYBACK ORDER</span><strong>{{passages().length}} {{passages().length === 1 ? 'passage' : 'passages'}}</strong></div><it-icon name="layers" [size]="21"></it-icon></div>
+            <div class="passage-list">
+              @for (passage of passages(); track passage.index) {
+                <button class="passage-item" type="button" [class.selected]="activeStage().passageIndex === passage.index" (click)="playPassage(passage.index)">
+                  <span class="passage-index">{{passage.index + 1}}</span>
+                  <span class="passage-description"><strong>Ayahs {{range(passage.start, passage.end)}}</strong><small><span>Arabic</span>@if (listeningMode() === 'both') {<it-icon name="arrow" [size]="13"></it-icon>@for (language of spokenLanguages(); track language) { <span>{{language}}</span> }}</small></span>
+                  <it-icon name="play" [size]="16"></it-icon>
+                </button>
+              }
+            </div>
+            <div class="flow-footer"><it-icon name="check" [size]="16"></it-icon>{{queue().length}} stages · ready to preview</div>
+          </section>
+        </div>
+      }
+      </div>
+      <footer class="settings-footer"><span>Changes are saved automatically on this device.</span><button type="button" class="settings-done" (click)="closeSettings()">Done</button></footer>
+    </div>
+  </dialog>
+
+</div>

@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "prepare": [
+    {
+      "command": "npm",
+      "args": [
+        "install"
+      ]
+    }
+  ],
+  "start": {
+    "command": "npm",
+    "args": [
+      "run",
+      "start",
+      "--",
+      "--host",
+      "{{host}}",
+      "--port",
+      "{{port}}"
+    ]
+  },
+  "readiness": {
+    "type": "http",
+    "path": "/",
+    "timeoutMs": 180000
+  }
+}

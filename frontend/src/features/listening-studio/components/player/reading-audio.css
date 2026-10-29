@@ -1,0 +1,26 @@
+/* Inline listening controls; large MP3s use native progressive streaming. */
+.content-column{padding-bottom:22px}
+.workspace{padding-bottom:40px}
+.reading-header{align-items:center}
+.reading-play-button{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#246d4b;color:#fff;border:1px solid #246d4b;border-radius:10px;padding:13px 19px;min-height:44px;font-size:12px;font-weight:800;white-space:nowrap;cursor:pointer;box-shadow:0 4px 12px #255a3b20}
+.reading-play-button:hover{background:#1c593e}
+.reading-play-button:disabled{opacity:.6;cursor:progress}
+.verse-verse-tools{display:inline-flex;align-items:center;flex-wrap:wrap;gap:11px}
+.verse-audio-button{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid #d6e5d9;background:#f4f9f4;color:#31734f;border-radius:7px;padding:7px 10px;font-size:10px;font-weight:800;cursor:pointer;min-height:31px}
+.verse-audio-button:hover{background:#e7f3e8;border-color:#a9cdb1}
+.verse-audio-button.is-playing{background:#2d7453;border-color:#2d7453;color:#fff}
+.translation-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px}
+.translation-top .translation-tag{flex:1;min-width:0}
+.verse-translation.is-german .translation-audio-button{background:#f6efe1;border-color:#e9ddc4;color:#816737}
+.verse-translation.is-german .translation-audio-button.is-playing{background:#9d7e45;color:#fff;border-color:#9d7e45}
+.reading-audio-error{display:flex;gap:10px;align-items:center;border-top:1px solid #f1d8d0;background:#fff6f2;padding:13px 25px;color:#a3412c;font-size:12px;line-height:1.5}
+@media(max-width:680px){
+  .reading-header{align-items:stretch}
+  .reading-play-button{width:100%}
+  .reading-audio-error{padding:12px 18px}
+  .content-column{padding-bottom:25px}
+}
+
+/* The introductory Bismillah is separate from numbered Quran Ayahs. */
+.opening-bismillah{padding:19px 18px 12px;text-align:center;color:#306649;background:#fcfdf9;
+  font-family:serif;font-size:25px;line-height:1.8;border-bottom:1px solid #e9f0e7}

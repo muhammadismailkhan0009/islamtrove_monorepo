@@ -1,0 +1,35 @@
+# Dependencies and generated artifacts
+node_modules/
+frontend/node_modules/
+frontend/.angular/
+frontend/dist/
+backend/.venv/
+backend/.pytest_cache/
+backend/.ruff_cache/
+backend/.pyright/
+backend/dist/
+__pycache__/
+*.pyc
+*.pyo
+.nx/
+# Environment and local-only secrets
+.env
+.env.*
+!.env.example
+frontend/.env*
+backend/.env
+*.log
+.DS_Store
+.idea/
+.vscode/
+# Serena state local to the developer
+.serena/project.local.yml
+.serena/cache/
+# Python and JavaScript test caches
+coverage/
+.pytest_cache/
+
+# IDE/MCP local runtime state
+.serena/
+frontend/.design/.cache/
+frontend/.design/.runtime/
