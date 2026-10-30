@@ -73,6 +73,14 @@ location / {
 }
 ```
 
+The administrator Origin check requires the original public scheme, host and
+port. Preserve `Host` and `X-Forwarded-Proto` in the host's HTTPS reverse proxy,
+as in the Nginx example above. The frontend container passes the original Host
+(including a non-standard port, if any) and HTTPS scheme to FastAPI. The Angular
+development proxy also preserves the browser-facing Host instead of rewriting
+it to `127.0.0.1:8000`. Do not disable Origin checks to work around a
+misconfigured reverse proxy.
+
 The app's internal Nginx passes the incoming HTTPS scheme through to Uvicorn, so the administrator session is issued as a **Secure cookie**. Service workers and persistent browser caching need HTTPS (or local `localhost`). Do not publicly expose backend port 8000 or publish internal Docker network ports.
 
 ## Woodpecker setup

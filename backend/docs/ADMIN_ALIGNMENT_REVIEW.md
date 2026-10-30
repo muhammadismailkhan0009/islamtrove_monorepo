@@ -42,6 +42,12 @@ strong password. Docker-host administrators can inspect container environments.
 | `POST /api/admin/ayahs/correct` | Save edited Ayah start | Admin session + CSRF token |
 | POST /api/admin/blocks/verify | Bulk verify individually unreviewed Ayahs in a recitation passage | Admin session + CSRF token |
 
+For "Origin not authorized for administration" errors, make sure the public
+Host and `X-Forwarded-Proto` survive all reverse proxies and the Angular
+development proxy preserves its browser-facing Host (`changeOrigin: false`).
+Same-origin enforcement stays enabled; the app never accepts arbitrary
+cross-site admin requests.
+
 The admin cookie is HttpOnly and SameSite=Strict, scoped to `/api/admin`; the CSRF token is kept only in the frontend adapter's memory and must be sent on **each write**. Sessions expire after 30 minutes or upon backend process restart. Invalid codes are rate-limited (5 failures per 15-minute window per client IP). Administrator write/login requests are restricted to the same origin as the request Host and scheme; remote HTTP admin authentication is blocked, so remote deployment requires HTTPS. For local Design Canvas development only, cross-origin GET requests from localhost/127.0.0.1 ports are permitted by a hardcoded CORS rule; cross-origin administrator POST requests are not permitted. The backend compares the submitted code against the secret environment value using a constant-time comparison; the password is never returned to the browser.
 
 ## Data and invariants

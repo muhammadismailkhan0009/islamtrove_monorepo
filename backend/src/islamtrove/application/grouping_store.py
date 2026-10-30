@@ -56,10 +56,17 @@ class GroupingStore:
             if last != count:
                 raise GroupingConflict(f"Grouping for Surah {surah} must end on Ayah {count}")
 
-    def publish(self, groupings: list[dict], expected_revision: int) -> dict[str, Any]:
+    def publish_surah(self, grouping: dict, expected_revision: int) -> dict[str, Any]:
+        """Upsert one complete Surah grouping, preserving every other published Surah."""
         current = self.read()
         if expected_revision != current["revision"]:
             raise GroupingConflict("Published groupings changed. Reload before publishing.")
+        self._validate([grouping])
+        groupings = [
+            existing for existing in current["groupings"]
+            if existing["surahId"] != grouping["surahId"]
+        ]
+        groupings.append(grouping)
         self._validate(groupings)
         updated = {
             "schemaVersion": 1, "revision": expected_revision + 1,

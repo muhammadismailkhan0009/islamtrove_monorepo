@@ -20,13 +20,13 @@ export const productionGroupingLibraryAdapter: GroupingLibraryPort = {
       { credentials: 'same-origin', cache: 'no-store' }));
   },
   authenticate: authenticateAdmin,
-  async publish(expectedRevision, groupings) {
+  async publish(expectedRevision, grouping) {
     const csrf = getAdminCsrfToken();
     if (!csrf) throw new Error('Admin session expired; sign in again.');
-    return await body<GroupingDocument>(await fetch('/api/admin/groupings', {
+    return await body<GroupingDocument>(await fetch('/api/admin/groupings/surahs/' + grouping.surahId, {
       method:'POST', credentials:'same-origin', cache:'no-store',
       headers:{ 'Content-Type':'application/json', 'X-CSRF-Token':csrf },
-      body:JSON.stringify({expectedRevision, groupings})
+      body:JSON.stringify({expectedRevision, boundaries:grouping.boundaries})
     }));
   }
 };

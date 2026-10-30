@@ -29,8 +29,9 @@ Open **Grouping library** from the listening summary or Listening Settings.
 Choose **My local groupings** to use your browser's private breakpoints, or
 **Published groupings** to listen using the server's read-only boundaries.
 Copy a published grouping into local before editing it. A single
-**Publish all groupings** action submits the complete local collection with
-the same protected administrator code used for Ayah alignment reviews.
+**Publish this Surah** action submits only the selected Surah's full passage
+grouping with the same protected administrator code used for Ayah alignment reviews.
+Other published Surahs and locally saved review boundaries are untouched.
 Server-published boundaries persist independently of visitors' local data.
 See [Grouping Library API, security, and persistence](docs/GROUPINGS.md).
 

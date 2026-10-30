@@ -1,4 +1,4 @@
-"""Published grouping catalog and all-or-nothing authenticated administration."""
+"""Published grouping catalog and single-Surah administration regression tests."""
 
 from pathlib import Path
 
@@ -19,66 +19,97 @@ def app_client(tmp_path: Path) -> TestClient:
     )
 
 
-def test_groupings_publish_validated_atomic_persistent_and_csrf_protected(tmp_path: Path) -> None:
-    groups = [
-        {"surahId": 18, "boundaries": [10, 26, 110]},
-        {"surahId": 55, "boundaries": [15, 78]},
-    ]
-    route = "/api/admin/groupings"
+def test_surah_publication_preserves_other_surahs_and_survives_restart(tmp_path: Path) -> None:
+    route = "/api/admin/groupings/surahs"
+    first = {"expectedRevision": 0, "boundaries": [10, 26, 110]}
+    verification_only = {"surahId": 55, "boundaries": [15, 78]}
     with app_client(tmp_path) as client:
         original = client.get("/api/quran/groupings")
         assert original.status_code == 200
         assert original.json() == {"schemaVersion": 1, "revision": 0, "groupings": []}
         assert original.headers["cache-control"] == "no-store"
-        denied = client.post(route, json={"expectedRevision": 0, "groupings": groups})
-        assert denied.status_code == 401
+
+        assert client.post(f"{route}/18", json=first).status_code == 401
         login = client.post("/api/admin/verify", json={"code": CODE})
         assert login.status_code == 200
         csrf = login.json()["csrfToken"]
-        no_csrf = client.post(route, json={"expectedRevision": 0, "groupings": groups})
-        assert no_csrf.status_code == 403
         headers = {"x-csrf-token": csrf}
-        cross_origin = client.post(
-            route, json={"expectedRevision": 0, "groupings": groups},
+        assert client.post(f"{route}/18", json=first).status_code == 403
+        assert client.post(
+            f"{route}/18", json=first,
             headers={**headers, "origin": "https://attacker.example"},
-        )
-        assert cross_origin.status_code == 403
-        published = client.post(route, json={"expectedRevision": 0, "groupings": groups},
-                                headers=headers)
-        assert published.status_code == 200, published.text
-        assert published.json()["revision"] == 1
-        assert published.json()["groupings"] == groups
+        ).status_code == 403
+
+        first_result = client.post(f"{route}/18", json=first, headers=headers)
+        assert first_result.status_code == 200, first_result.text
+        assert first_result.json()["revision"] == 1
+        assert first_result.json()["groupings"] == [
+            {"surahId": 18, "boundaries": first["boundaries"]}
+        ]
         assert (tmp_path / "groupings.json").is_file()
 
-        invalid_groups = [
-            [{"surahId": 18, "boundaries": [26, 10, 110]}],
-            [{"surahId": 18, "boundaries": [10, 26]}],
-            [{"surahId": 18, "boundaries": [110, 110]}],
-            [{"surahId": 18, "boundaries": [False, 110]}],
-            [{"surahId": 55, "boundaries": [15, 78]}] * 2,
-            [{"surahId": 114, "boundaries": [1, 7]}],  # An-Nas has six Ayahs
-        ]
-        for invalid in invalid_groups:
-            result = client.post(route, json={"expectedRevision": 1, "groupings": invalid},
-                                 headers=headers)
-            assert result.status_code in (409, 422), result.text
-            assert client.get("/api/quran/groupings").json()["groupings"] == groups
+        second = client.post(
+            f"{route}/55",
+            json={"expectedRevision": 1, "boundaries": verification_only["boundaries"]},
+            headers=headers,
+        )
+        assert second.status_code == 200, second.text
+        assert second.json()["revision"] == 2
+        assert len(second.json()["groupings"]) == 2
 
-        stale = client.post(route, json={"expectedRevision": 0, "groupings": []},
-                            headers=headers)
+        updated = client.post(
+            f"{route}/18",
+            json={"expectedRevision": 2, "boundaries": [20, 110]},
+            headers=headers,
+        )
+        assert updated.status_code == 200, updated.text
+        assert updated.json()["revision"] == 3
+        assert updated.json()["groupings"] == [
+            {"surahId": 18, "boundaries": [20, 110]},
+            verification_only,
+        ]
+        assert client.get("/api/quran/groupings").json()["groupings"][1] == verification_only
+
+        # The deprecated bulk-write endpoint cannot erase the published catalog.
+        assert client.post(
+            "/api/admin/groupings", json={"expectedRevision": 3, "groupings": []},
+            headers=headers,
+        ).status_code in (404, 405)
+        assert client.get("/api/quran/groupings").json()["revision"] == 3
+
+        invalid_boundaries = [
+            [26, 10, 110],
+            [10, 26],
+            [110, 110],
+            [False, 110],
+            [111],
+            [],
+        ]
+        for invalid in invalid_boundaries:
+            result = client.post(
+                f"{route}/18",
+                json={"expectedRevision": 3, "boundaries": invalid},
+                headers=headers,
+            )
+            assert result.status_code in (409, 422), result.text
+            assert client.get("/api/quran/groupings").json()["groupings"][1] == verification_only
+        impossible = client.post(
+            f"{route}/114", json={"expectedRevision": 3, "boundaries": [1, 7]},
+            headers=headers,
+        )
+        assert impossible.status_code == 409
+
+        stale = client.post(
+            f"{route}/18", json={"expectedRevision": 2, "boundaries": [110]},
+            headers=headers,
+        )
         assert stale.status_code == 409
-        assert client.get("/api/quran/groupings").json()["revision"] == 1
-        emptied = client.post(route, json={"expectedRevision": 1, "groupings": []},
-                              headers=headers)
-        assert emptied.status_code == 200
-        assert emptied.json()["groupings"] == []
 
     with app_client(tmp_path) as restarted:
         result = restarted.get("/api/quran/groupings")
-        assert result.json()["revision"] == 2
-        assert result.json()["groupings"] == []
-        denied = restarted.post(route, json={"expectedRevision": 2, "groupings": groups})
-        assert denied.status_code == 401
+        assert result.json()["revision"] == 3
+        assert result.json()["groupings"][1] == verification_only
+        assert restarted.post(f"{route}/18", json=first).status_code == 401
 
 
 def test_corrupted_grouping_file_is_not_silently_replaced(tmp_path: Path) -> None:

@@ -5,6 +5,7 @@ import secrets
 import time
 from collections import defaultdict
 from dataclasses import dataclass
+from urllib.parse import urlsplit
 
 from fastapi import APIRouter, HTTPException, Path, Request, Response
 from pydantic import BaseModel, Field
@@ -57,15 +58,37 @@ class AdminSessions:
             raise HTTPException(status_code=403, detail="Invalid review CSRF token")
 
 
+def _canonical_origin(value: str) -> tuple[str, str, int] | None:
+    """Compare actual origins, allowing equivalent explicit default ports."""
+    try:
+        parsed = urlsplit(value)
+        if (
+            parsed.scheme not in ("http", "https")
+            or not parsed.hostname
+            or parsed.username is not None
+            or parsed.password is not None
+            or parsed.path
+            or parsed.query
+            or parsed.fragment
+        ):
+            return None
+        port = parsed.port or (443 if parsed.scheme == "https" else 80)
+        return (parsed.scheme, parsed.hostname.lower(), port)
+    except ValueError:
+        return None
+
+
 def enforce_origin(request: Request) -> None:
     origin = request.headers.get("origin")
     if not origin:
         return
-    # The frontend and API share one host: enforce same-origin without a
-    # deploy-time CORS allowlist or separate API domain. Behind HTTPS, the
-    # trusted reverse proxy forwards the original scheme and Host.
+    # The frontend/Angular dev proxy must forward the original Host, not
+    # rewrite it to the internal backend hostname. In production Nginx also
+    # forwards the public host/port and HTTPS scheme to trusted Uvicorn.
     expected = f"{request.url.scheme}://{request.url.netloc}"
-    if origin != expected:
+    actual_origin = _canonical_origin(origin)
+    expected_origin = _canonical_origin(expected)
+    if actual_origin is None or expected_origin is None or actual_origin != expected_origin:
         raise HTTPException(status_code=403, detail="Origin not authorized for administration")
 
 

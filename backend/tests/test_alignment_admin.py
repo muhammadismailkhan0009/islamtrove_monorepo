@@ -161,6 +161,36 @@ def test_origin_policy_accepts_matching_host_and_denies_cross_origin(tmp_path: P
                                  headers={"Origin": "http://islamtrove.com"})
         assert downgraded.status_code == 403
 
+    # Angular's dev proxy must preserve the browser-facing Host (localhost:4200),
+    # rather than forwarding the backend's internal 127.0.0.1:8000 Host.
+    with TestClient(create_app(settings=settings), base_url="http://localhost:4200") as dev:
+        allowed_dev = dev.post(
+            "/api/admin/verify", json={"code": CODE}, headers={"Origin": "http://localhost:4200"}
+        )
+        assert allowed_dev.status_code == 200
+        denied_dev = dev.post(
+            "/api/admin/verify", json={"code": CODE}, headers={"Origin": "http://localhost:8000"}
+        )
+        assert denied_dev.status_code == 403
+
+    # Explicit standard HTTPS ports are equivalent to the canonical Origin.
+    with TestClient(create_app(settings=settings), base_url="https://islamtrove.com:443") as prod:
+        standard_port = prod.post(
+            "/api/admin/verify", json={"code": CODE},
+            headers={"Origin": "https://islamtrove.com"},
+        )
+        assert standard_port.status_code == 200
+        for illegal_origin in (
+            "https://islamtrove.com.evil.example",
+            "https://islamtrove.com:444",
+            "https://islamtrove.com@evil.example",
+        ):
+            denied = prod.post(
+                "/api/admin/verify", json={"code": CODE},
+                headers={"Origin": illegal_origin},
+            )
+            assert denied.status_code == 403
+
 
 def test_wrong_code_is_rate_limited_and_no_config_rejects_login(tmp_path: Path) -> None:
     settings = Settings(admin_code=CODE, review_data_dir=str(tmp_path))

@@ -473,7 +473,7 @@ export class AppComponent implements OnDestroy {
     }
     if (this.groupingsDesignPreview) {
       const route = new URLSearchParams(window.location.search).get('groups-demo');
-      if (route === 'server' || route === 'success') this.groupingSource.set('server');
+      this.groupingSource.set(route === 'server' || route === 'success' ? 'server' : 'local');
     }
     if (this.sharedListeningLink) {
       // Deep-link parameters override local preferences for this visit only.
@@ -493,7 +493,7 @@ export class AppComponent implements OnDestroy {
       this.listeningMode.set('both');
     }
     effect(() => {
-      if (this.sharedLinkDesignPreview || this.sharedListeningLink) return;
+      if (this.sharedLinkDesignPreview || this.sharedListeningLink || this.groupingsDesignPreview) return;
       // Never persist link overrides to this browser's own preferences.
       const settings = {
         groupingSource: this.groupingSource(),

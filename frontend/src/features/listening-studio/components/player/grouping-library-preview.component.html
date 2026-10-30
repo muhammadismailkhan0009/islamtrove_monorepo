@@ -31,7 +31,7 @@
 
   @if (published()) {
     <div class="group-success" role="status"><it-icon name="check" [size]="19"></it-icon>
-      <div><strong>All local groupings published</strong><p>{{server().length}} Surahs were published together. Your local copies remain unchanged.</p></div>
+      <div><strong>{{publishedSurahName()}} grouping published</strong><p>Only this Surah was updated on the server. Every other published Surah and all local groupings are unchanged.</p></div>
     </div>
   }
   @if (copied()) {
@@ -45,8 +45,8 @@
       <div class="group-section-label"><span>{{source() === 'local' ? 'YOUR SURAH GROUPINGS' : 'PUBLISHED ON SERVER'}}</span><span>{{available().length}} entries</span></div>
       <div class="group-surah-items" role="group" aria-label="Available Surah groupings">
         @for (group of available(); track group.surah) {
-          <button type="button" class="group-surah-entry" [class.active]="current().surah === group.surah"
-            [attr.aria-pressed]="current().surah === group.surah" (click)="chooseSurah(group.surah)">
+          <button type="button" class="group-surah-entry" [class.active]="current()?.surah === group.surah"
+            [attr.aria-pressed]="current()?.surah === group.surah" (click)="chooseSurah(group.surah)">
             <span class="group-surah-index">{{group.surah}}</span>
             <span class="group-surah-copy"><strong>{{group.name}}</strong><small>{{group.total}} Ayahs · {{group.boundaries.length}} passages</small></span>
             <it-icon name="arrow" [size]="17"></it-icon>
@@ -90,19 +90,19 @@
     <div class="group-publish-section">
       <div class="group-publish-text">
         <span class="group-publish-icon"><it-icon name="globe" [size]="21"></it-icon></span>
-        <div><strong>Publish all my local groupings</strong>
-          <p>Send the entire collection: <b>{{local().length}} Surahs</b> and <b>{{totalPassages()}} passages</b>. Existing published versions will be replaced. No per-passage submissions.</p>
+        <div><strong>Publish {{current()?.name || 'selected Surah'}} grouping</strong>
+          <p>Publish all <b>{{current()?.boundaries?.length || 0}} passages</b> for this Surah only. Other published Surahs will not be changed.</p>
         </div>
       </div>
-      <button type="button" class="group-publish-button" [disabled]="!local().length || busy()" (click)="openBulkPublish()">
-        <it-icon name="arrow" [size]="17"></it-icon> Publish all groupings
+      <button type="button" class="group-publish-button" [disabled]="!current() || busy()" (click)="openSurahPublish()">
+        <it-icon name="arrow" [size]="17"></it-icon> Publish this Surah
       </button>
     </div>
 
     @if (unlockOpen()) {
-      <form class="group-admin-panel" (submit)="$event.preventDefault(); submitAllGroupings()">
+      <form class="group-admin-panel" (submit)="$event.preventDefault(); submitSurahGrouping()">
         <div class="group-admin-panel-heading"><it-icon name="lock" [size]="20"></it-icon>
-          <div><strong>Administrator approval</strong><small>One submission publishes the complete local collection.</small></div>
+          <div><strong>Publish {{publishingGroup()?.name}} only</strong><small>Confirm publication of this Surah's complete grouping. Other Surahs remain unchanged.</small></div>
         </div>
         <label for="group-admin-code">Administrator code</label>
         <div class="group-admin-controls">
@@ -113,7 +113,7 @@
         </div>
         @if (adminError()) { <p class="group-admin-error" role="alert">{{adminError()}}</p> }
         @if (previewOnly) { <small class="group-admin-hint">Design Canvas only · Demo code: <strong>2468</strong> · No production data is changed.</small> }
-        @else { <small class="group-admin-hint">Protected using the existing administrator login. Entire collection replaces the published set.</small> }
+        @else { <small class="group-admin-hint">Protected using the existing administrator login. Only this Surah will be updated on the server.</small> }
       </form>
     }
   } @else {

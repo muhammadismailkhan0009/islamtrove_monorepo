@@ -13,6 +13,6 @@ export interface GroupingLibraryPort {
   readonly previewOnly: boolean;
   list(): Promise<GroupingDocument>;
   authenticate(code: string): Promise<{authorized: boolean; message?: string}>;
-  publish(expectedRevision: number, groupings: SurahGrouping[]): Promise<GroupingDocument>;
+  publish(expectedRevision: number, grouping: SurahGrouping): Promise<GroupingDocument>;
 }
 export const GROUPING_LIBRARY = new InjectionToken<GroupingLibraryPort>('GroupingLibraryPort');

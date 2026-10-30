@@ -35,25 +35,27 @@ The two collections are independent:
 
 If nothing is published, returns revision 0 and an empty array.
 
-`POST /api/admin/groupings`: replaces the **entire** published collection
-atomically (not one passage or one Surah at a time):
+`POST /api/admin/groupings/surahs/{surahId}`: upserts the **one selected
+Surah's full grouping**. Other published Surahs remain unchanged, including
+those with independent review/verification boundaries saved locally.
 
 ```json
 {
   "expectedRevision": 3,
-  "groupings": [
-    {"surahId": 18, "boundaries": [10, 26, 44, 59, 70, 82, 98, 110]}
-  ]
+  "boundaries": [10, 26, 44, 59, 70, 82, 98, 110]
 }
 ```
 
+The Surah number comes from the URL path, and the body contains only that
+Surah's complete list of passage boundaries—not the whole local collection.
+The UI clearly identifies which local Surah is selected before requesting
+administrator confirmation. The old whole-catalog write endpoint was removed.
+
 Requires the existing `POST /api/admin/verify` administrator login,
-HttpOnly same-site admin session cookie and `X-CSRF-Token` plus same-origin
-enforcement. This endpoint is not accessible without authorization.
-A stale revision or structurally invalid grouping returns HTTP 409; input
-schema errors return 422. On success, returns the entire new document with
-revision incremented by one. Publishing an empty list intentionally empties
-the catalog (UI disallows this accidental operation).
+HttpOnly same-site admin session cookie, `X-CSRF-Token`, and same-origin
+enforcement. A stale revision or invalid grouping returns HTTP 409; invalid
+input schema returns 422. On success, the endpoint returns the full updated
+catalog with its revision incremented by one.
 
 Validation checks valid Surah IDs, unique Surahs, strictly increasing integer
 breakpoints within each Surah's authoritative Ayah count, and mandatory final
@@ -78,7 +80,7 @@ repository push.
 
 The Angular feature uses a typed `GROUPING_LIBRARY` application port.
 The production adapter uses same-origin `/api`; the Design Canvas mock
-adapter simulates load/login/bulk publication in memory, with demonstration
+adapter simulates load/login/single-Surah publication in memory, with demonstration
 code `2468` that is **not valid on the real backend**.
 
 Design Canvas preview routes remain available:

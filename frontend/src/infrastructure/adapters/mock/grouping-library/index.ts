@@ -16,12 +16,15 @@ export const mockGroupingLibraryAdapter: GroupingLibraryPort = {
     admin = code === '2468';
     return { authorized: admin, message: admin ? undefined : 'Use demo code 2468.' };
   },
-  async publish(expectedRevision, groupings) {
+  async publish(expectedRevision, grouping) {
     if (!admin) throw new Error('Not authorized in this mock preview');
     if (document.revision !== expectedRevision) throw new Error('Published groupings changed');
     document = {
       schemaVersion:1, revision:document.revision+1,
-      groupings:structuredClone(groupings)
+      groupings:structuredClone([
+        ...document.groupings.filter(item => item.surahId !== grouping.surahId),
+        grouping
+      ]).sort((a,b) => a.surahId - b.surahId)
     };
     return structuredClone(document);
   }

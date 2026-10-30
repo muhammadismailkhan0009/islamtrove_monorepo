@@ -41,6 +41,9 @@ export class GroupingLibraryPreviewComponent {
   readonly published = signal(this.previewOnly &&
     new URLSearchParams(window.location.search).get('groups-demo') === 'success');
   readonly copied = signal(false);
+  readonly publishingSurahId = signal<number | null>(null);
+  readonly publishedSurahName = signal(this.previewOnly &&
+    new URLSearchParams(window.location.search).get('groups-demo') === 'success' ? 'Al-Kahf' : '');
 
   private readonly named = (group: SurahGrouping): GroupingRecord | null => {
     const surah = this.catalog().find(item => item.id === group.surahId);
@@ -53,18 +56,19 @@ export class GroupingLibraryPreviewComponent {
     this.serverDocument().groupings.map(this.named).filter((x): x is GroupingRecord => !!x));
   readonly available = computed(() => this.source() === 'local' ? this.local() : this.server());
   readonly current = computed(() => this.available().find(g => g.surah === this.selectedSurah())
-    ?? this.available().find(g => g.surah === this.activeSurah()) ?? this.available()[0] ?? null);
+    ?? this.available().find(g => g.surah === this.activeSurah()) ?? null);
+  readonly publishingGroup = computed(() =>
+    this.local().find(group => group.surah === this.publishingSurahId()) ?? null);
   readonly passages = computed(() => {
     const current = this.current();
     return current ? createPassages(current.boundaries, current.total) : [];
   });
-  readonly totalPassages = computed(() => this.local().reduce(
-    (sum, group) => sum + group.boundaries.length, 0));
 
   chooseSource(value: GroupSource): void {
     this.sourceChange.emit(value);
     this.selectedSurah.set(null);
     this.unlockOpen.set(false);
+    this.publishingSurahId.set(null);
     this.copied.set(false);
     this.published.set(false);
   }
@@ -72,7 +76,10 @@ export class GroupingLibraryPreviewComponent {
     this.selectedSurah.set(surah);
     this.copied.set(false);
   }
-  openBulkPublish(): void {
+  openSurahPublish(): void {
+    const selected = this.current();
+    if (!selected || this.source() !== 'local') return;
+    this.publishingSurahId.set(selected.surah);
     this.adminCode.set('');
     this.adminError.set('');
     this.unlockOpen.set(true);
@@ -80,13 +87,15 @@ export class GroupingLibraryPreviewComponent {
   }
   cancelPublish(): void {
     this.unlockOpen.set(false);
+    this.publishingSurahId.set(null);
     this.adminCode.set('');
     this.adminError.set('');
   }
-  async submitAllGroupings(): Promise<void> {
+  async submitSurahGrouping(): Promise<void> {
     if (this.busy()) return;
-    if (!this.local().length) {
-      this.adminError.set('Create at least one local grouping before publishing.'); return;
+    const selected = this.publishingGroup();
+    if (!selected) {
+      this.adminError.set('Select a local Surah grouping before publishing.'); return;
     }
     this.busy.set(true);
     this.adminError.set('');
@@ -94,11 +103,13 @@ export class GroupingLibraryPreviewComponent {
       const session = await this.port.authenticate(this.adminCode());
       if (!session.authorized) throw new Error(session.message || 'Administrator code not accepted');
       const doc = await this.port.publish(this.serverDocument().revision,
-        this.local().map(group => ({surahId:group.surah, boundaries:[...group.boundaries]})));
+        {surahId:selected.surah, boundaries:[...selected.boundaries]});
       this.publishedDocument.emit(doc);
       this.sourceChange.emit('server');
-      this.selectedSurah.set(null);
+      this.selectedSurah.set(selected.surah);
       this.unlockOpen.set(false);
+      this.publishingSurahId.set(null);
+      this.publishedSurahName.set(selected.name);
       this.published.set(true);
       this.copied.set(false);
     } catch (error) {
