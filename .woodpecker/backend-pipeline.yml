@@ -34,6 +34,15 @@ steps:
           exit 1
         fi
       - docker network inspect islamtrove_private >/dev/null 2>&1 || docker network create islamtrove_private
+      # -v creates the directory on the Docker host, not inside the CI runner.
+      - >-
+        docker run --rm
+        --user 0:0
+        --network none
+        --entrypoint /bin/sh
+        -v /srv/islamtrove/review-data:/data/reviews
+        islamtrove_backend:$CI_COMMIT_SHA
+        -ec 'chown 10001:10001 /data/reviews && chmod 0750 /data/reviews'
       - docker rm -f islamtrove_backend || true
       - >-
         docker run -d

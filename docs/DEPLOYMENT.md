@@ -18,7 +18,13 @@ Only approved review JSON files should be synced back to Git manually, from the 
 
 Docker and a Woodpecker agent with authorized Docker-socket access are required. **Treat Docker-socket access as host-root-equivalent and restrict who can modify pipeline files or trigger deployment.** Do not enable these pipelines for untrusted pull requests. Pipelines run only on pushes to `main`.
 
-On the **Docker host**, provision the persistent review directory:
+The backend pipeline automatically creates `/srv/islamtrove/review-data` on the
+**Docker host** before replacing the running backend. A temporary container uses
+the built backend image as root to set directory ownership to UID/GID 10001 and
+mode 0750, without changing existing files. The application still runs as UID
+10001. Creating the path inside the CI runner would not prepare the Docker host.
+
+For manual provisioning on the **Docker host**, use:
 
 ```sh
 sudo install -d -m 0750 -o 10001 -g 10001 /srv/islamtrove/review-data
