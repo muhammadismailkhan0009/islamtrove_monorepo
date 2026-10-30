@@ -44,7 +44,7 @@ The Design Canvas structural validator returned `valid: true` with 0 issues, 3 r
 
 ## Dual translation UI (design preview)
 
-The Listening Studio now previews Arabic→first translation→optional second translation, configurable language order, guided German shadowing, German-only immersion, and independent on-screen Arabic/translation visibility. The `verse-preview` port reads sourced five-Surah QuranEnc mock text; its production adapter reserves `GET /api/quran/surahs/{id}/verses`, which the backend does not yet implement. German/dual-language playback **works in the mock Design Canvas preview** by composing separate per-language requests and playing the resulting provider MP3 URLs. Full production-backend German and dual-language support remains pending. See `../docs/DUAL_TRANSLATION_UI_HANDOFF.md` for the implementation checklist.
+The Listening Studio(feature) now previews Arabic→first translation→optional second translation, configurable language order, guided German shadowing, German-only immersion, and independent on-screen Arabic/translation visibility. The `verse-preview` port reads sourced five-Surah QuranEnc mock text; its production adapter reserves `GET /api/quran/surahs/{id}/verses`, which the backend does not yet implement. German/dual-language playback **works in the mock Design Canvas preview** by composing separate per-language requests and playing the resulting provider MP3 URLs. Full production-backend German and dual-language support remains pending. See `../docs/DUAL_TRANSLATION_UI_HANDOFF.md` for the implementation checklist.
 
 ## Phase-aware browser-memory audio cache (October 29, 2026)
 
