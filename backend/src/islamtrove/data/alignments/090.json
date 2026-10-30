@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "surahId": 90,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/090.mp3",
+  "audioSha256": "4b31de22bfccf17e8b9270e7bcb9df7e2e86b560c93168be16888bfb61d91388",
+  "audioBytes": 3581695,
+  "audioDurationMs": 223817,
+  "endMs": 223817,
+  "sourceAyahCount": 20,
+  "alignmentResolutionMs": 200,
+  "source": "QUL original CDN MP3; reference EveryAyah faster individual clips",
+  "method": "offline-global-DTW-four-speech-features",
+  "validationStatus": "experimental-cross-recording",
+  "reviewRequired": true,
+  "reviewAyahs": [
+    {
+      "ayah": 1,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 2,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 3,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 4,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 5,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 6,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 7,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 8,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 9,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 10,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 11,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 12,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 13,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 14,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 15,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 16,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 17,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 18,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 19,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 20,
+      "kind": "large-recording-duration-difference"
+    }
+  ],
+  "featureAgreementSecondsByAyah": [
+    0.0,
+    0.2,
+    0.2,
+    1.2,
+    0.6,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.2,
+    1.1,
+    0.2,
+    0.0,
+    0.2,
+    0.2
+  ],
+  "dtwCosts": {
+    "mfcc": 0.17921073860356815,
+    "mfcc-delta": 0.21479868339848834,
+    "mel": 0.0941436059688393,
+    "chroma": 0.23090262021032237
+  },
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 5400
+    },
+    {
+      "ayah": 2,
+      "fromMs": 5400,
+      "toMs": 13000
+    },
+    {
+      "ayah": 3,
+      "fromMs": 13000,
+      "toMs": 21200
+    },
+    {
+      "ayah": 4,
+      "fromMs": 21200,
+      "toMs": 47000
+    },
+    {
+      "ayah": 5,
+      "fromMs": 47000,
+      "toMs": 57200
+    },
+    {
+      "ayah": 6,
+      "fromMs": 57200,
+      "toMs": 67400
+    },
+    {
+      "ayah": 7,
+      "fromMs": 67400,
+      "toMs": 76000
+    },
+    {
+      "ayah": 8,
+      "fromMs": 76000,
+      "toMs": 85000
+    },
+    {
+      "ayah": 9,
+      "fromMs": 85000,
+      "toMs": 90800
+    },
+    {
+      "ayah": 10,
+      "fromMs": 90800,
+      "toMs": 96800
+    },
+    {
+      "ayah": 11,
+      "fromMs": 96800,
+      "toMs": 103200
+    },
+    {
+      "ayah": 12,
+      "fromMs": 103200,
+      "toMs": 112000
+    },
+    {
+      "ayah": 13,
+      "fromMs": 112000,
+      "toMs": 115600
+    },
+    {
+      "ayah": 14,
+      "fromMs": 115600,
+      "toMs": 126000
+    },
+    {
+      "ayah": 15,
+      "fromMs": 126000,
+      "toMs": 136800
+    },
+    {
+      "ayah": 16,
+      "fromMs": 136800,
+      "toMs": 163600
+    },
+    {
+      "ayah": 17,
+      "fromMs": 163600,
+      "toMs": 187600
+    },
+    {
+      "ayah": 18,
+      "fromMs": 187600,
+      "toMs": 201600
+    },
+    {
+      "ayah": 19,
+      "fromMs": 201600,
+      "toMs": 215400
+    },
+    {
+      "ayah": 20,
+      "fromMs": 215400,
+      "toMs": 223817
+    }
+  ]
+}

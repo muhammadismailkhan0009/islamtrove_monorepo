@@ -10,7 +10,7 @@ from islamtrove.main import create_app
 
 
 def _surah(number: int) -> dict[str, object]:
-    count = 7 if number == 1 else 4 if number == 112 else 3
+    count = 286 if number == 2 else 7 if number == 1 else 4 if number == 112 else 3
     return {
         "number": number,
         "name": "الفاتحة" if number == 1 else "سورة",
@@ -35,10 +35,17 @@ def _reply(request: httpx.Request) -> httpx.Response:
             "number": surah_id,
             "numberOfAyahs": count,
             "ayahs": [
-                {
-                    "numberInSurah": i,
-                    "audio": f"https://cdn.islamic.network/quran/audio/128/{edition}/{i}.mp3",
-                }
+                (
+                    {
+                        "numberInSurah": i,
+                        "text": f"Arabic verse {surah_id}:{i}",
+                    }
+                    if edition == "quran-uthmani"
+                    else {
+                        "numberInSurah": i,
+                        "audio": f"https://cdn.islamic.network/quran/audio/128/{edition}/{i}.mp3",
+                    }
+                )
                 for i in range(1, count + 1)
             ],
         }

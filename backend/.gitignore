@@ -7,3 +7,4 @@
 .env
 .coverage
 dist/
+.admin-review-code

@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "surahId": 94,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/094.mp3",
+  "audioSha256": "6048eb8e542e3482bc2c070e2cd15fd988e6c6f3fe53729c74c2fcb96df5f415",
+  "audioBytes": 1721777,
+  "audioDurationMs": 107572,
+  "endMs": 107572,
+  "sourceAyahCount": 8,
+  "alignmentResolutionMs": 200,
+  "source": "QUL original CDN MP3; reference EveryAyah faster individual clips",
+  "method": "offline-global-DTW-four-speech-features",
+  "validationStatus": "experimental-cross-recording",
+  "reviewRequired": true,
+  "reviewAyahs": [
+    {
+      "ayah": 2,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 24.4,
+      "mfccDisagreementSeconds": 0.2
+    },
+    {
+      "ayah": 2,
+      "kind": "large-duration-ratio",
+      "ratio": 4.45
+    },
+    {
+      "ayah": 3,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 53.6,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 3,
+      "kind": "large-duration-ratio",
+      "ratio": 4.73
+    },
+    {
+      "ayah": 4,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 36.6,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 5,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 21.0,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 6,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 19.6,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 7,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 16.8,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 1,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 2,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 3,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 4,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 5,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 6,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 7,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 8,
+      "kind": "large-recording-duration-difference"
+    }
+  ],
+  "featureAgreementSecondsByAyah": [
+    0.0,
+    24.4,
+    53.6,
+    36.6,
+    21.0,
+    19.6,
+    16.8,
+    0.0
+  ],
+  "dtwCosts": {
+    "mfcc": 0.40107827473404584,
+    "mfcc-delta": 0.4797968349816716,
+    "mel": 0.25412796184612224,
+    "chroma": 0.4182511465425821
+  },
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 31400
+    },
+    {
+      "ayah": 2,
+      "fromMs": 31400,
+      "toMs": 65200
+    },
+    {
+      "ayah": 3,
+      "fromMs": 65200,
+      "toMs": 70600
+    },
+    {
+      "ayah": 4,
+      "fromMs": 70600,
+      "toMs": 77800
+    },
+    {
+      "ayah": 5,
+      "fromMs": 77800,
+      "toMs": 86200
+    },
+    {
+      "ayah": 6,
+      "fromMs": 86200,
+      "toMs": 94400
+    },
+    {
+      "ayah": 7,
+      "fromMs": 94400,
+      "toMs": 101400
+    },
+    {
+      "ayah": 8,
+      "fromMs": 101400,
+      "toMs": 107572
+    }
+  ]
+}

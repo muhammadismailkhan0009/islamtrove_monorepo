@@ -1,0 +1,54 @@
+# Mirrors mcp-registry: independent main-branch Docker-socket deployment.
+when:
+  - event: push
+    branch: main
+    path:
+      include:
+        - backend/**
+        - .dockerignore
+        - .woodpecker/backend-pipeline.yml
+      ignore_message: "[ALL]"
+      on_empty: false
+
+steps:
+  - name: build IslamTrove backend image
+    image: docker:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      - DOCKER_BUILDKIT=1 docker build -f backend/Dockerfile -t islamtrove_backend:$CI_COMMIT_SHA .
+
+  - name: deploy IslamTrove backend
+    image: docker:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    when:
+      - status: success
+    environment:
+      ISLAMTROVE_ADMIN_CODE:
+        from_secret: ISLAMTROVE_ADMIN_CODE
+    commands:
+      - |
+        if [ -z "$${ISLAMTROVE_ADMIN_CODE}" ]; then
+          echo "Missing ISLAMTROVE_ADMIN_CODE Woodpecker secret" >&2
+          exit 1
+        fi
+      - docker network inspect islamtrove_private >/dev/null 2>&1 || docker network create islamtrove_private
+      - docker rm -f islamtrove_backend || true
+      - >-
+        docker run -d
+        --name islamtrove_backend
+        --network islamtrove_private
+        --restart unless-stopped
+        --cap-drop ALL
+        --security-opt no-new-privileges
+        --read-only
+        --tmpfs /tmp:rw,noexec,nosuid,size=64m
+        --mount type=bind,source=/srv/islamtrove/review-data,target=/data/reviews
+        -e ISLAMTROVE_ADMIN_CODE
+        islamtrove_backend:$CI_COMMIT_SHA
+      - >-
+        docker images --format "{{.Repository}}:{{.Tag}}"
+        | grep '^islamtrove_backend:'
+        | grep -Fvx "islamtrove_backend:$CI_COMMIT_SHA"
+        | xargs -r docker rmi -f

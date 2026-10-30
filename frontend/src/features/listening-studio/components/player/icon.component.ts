@@ -1,10 +1,13 @@
 import { Component, Input } from '@angular/core';
 
 const ICON_PATHS: Record<string, string> = {
+  globe: 'M12 2a10 10 0 1 0 0 20a10 10 0 0 0 0-20ZM2 12h20M12 2c-3 3-4 6-4 10s1 7 4 10M12 2c3 3 4 6 4 10s-1 7-4 10',
+  lock: 'M5 11h14v10H5V11ZM8 11V7a4 4 0 0 1 8 0v4',
   book: 'M4 19.5A2.5 2.5 0 0 1 6.5 17H20 M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z',
   headphones: 'M3 14v-3a9 9 0 0 1 18 0v3 M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-5Zm18 0h-3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-5Z',
   search: 'm21 21-4.35-4.35 M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z',
   play: 'm8 5 11 7-11 7V5Z',
+  share: 'M18 8a3 3 0 1 0-3-3 M6 15a3 3 0 1 0-3-3 M18 22a3 3 0 1 0-3-3 M8.5 13.5l7 5 M8.5 10.5l7-5',
   pause: 'M8 5v14 M16 5v14',
   back: 'M5 5v14 M19 5 8 12l11 7V5Z',
   forward: 'M19 5v14 M5 5l11 7-11 7V5Z',

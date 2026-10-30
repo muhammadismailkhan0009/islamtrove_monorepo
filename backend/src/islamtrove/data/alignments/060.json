@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "surahId": 60,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/060.mp3",
+  "audioSha256": "92995c86046c7b1488daea746ee73b1b800ec6347bddd467f2e96ec9e74b65d3",
+  "audioBytes": 15767249,
+  "audioDurationMs": 985416,
+  "endMs": 985416,
+  "sourceAyahCount": 13,
+  "alignmentResolutionMs": 267,
+  "source": "QUL original CDN MP3; reference EveryAyah faster individual clips",
+  "method": "offline-global-DTW-four-speech-features",
+  "validationStatus": "experimental-cross-recording",
+  "reviewRequired": true,
+  "reviewAyahs": [],
+  "featureAgreementSecondsByAyah": [
+    0.0,
+    0.27,
+    0.27,
+    0.0,
+    0.27,
+    0.0,
+    0.53,
+    0.27,
+    0.0,
+    0.27,
+    0.27,
+    0.0,
+    0.0
+  ],
+  "dtwCosts": {
+    "mfcc": 0.07679235604041441,
+    "mfcc-delta": 0.07328914515537559,
+    "mel": 0.0564423424643335,
+    "chroma": 0.14648065412320405
+  },
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 158375
+    },
+    {
+      "ayah": 2,
+      "fromMs": 158375,
+      "toMs": 211700
+    },
+    {
+      "ayah": 3,
+      "fromMs": 211700,
+      "toMs": 243162
+    },
+    {
+      "ayah": 4,
+      "fromMs": 243162,
+      "toMs": 379674
+    },
+    {
+      "ayah": 5,
+      "fromMs": 379674,
+      "toMs": 435399
+    },
+    {
+      "ayah": 6,
+      "fromMs": 435399,
+      "toMs": 472993
+    },
+    {
+      "ayah": 7,
+      "fromMs": 472993,
+      "toMs": 510054
+    },
+    {
+      "ayah": 8,
+      "fromMs": 510054,
+      "toMs": 565778
+    },
+    {
+      "ayah": 9,
+      "fromMs": 565778,
+      "toMs": 626569
+    },
+    {
+      "ayah": 10,
+      "fromMs": 626569,
+      "toMs": 772146
+    },
+    {
+      "ayah": 11,
+      "fromMs": 772146,
+      "toMs": 818805
+    },
+    {
+      "ayah": 12,
+      "fromMs": 818805,
+      "toMs": 930788
+    },
+    {
+      "ayah": 13,
+      "fromMs": 930788,
+      "toMs": 985416
+    }
+  ]
+}

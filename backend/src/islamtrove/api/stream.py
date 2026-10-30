@@ -14,6 +14,32 @@ from fastapi.responses import Response, StreamingResponse
 
 router = APIRouter(prefix="/api/quran", tags=["Quran"])
 
+# Exact, SHA-versioned Assabile URL; no arbitrary Assabile URLs are proxied.
+ANBIYA_AUDIO_URL = (
+    "https://media.assabile.com/assabile/recitations_7892537823/mp3/"
+    "mohamed-seddik-el-menchaoui/"
+    "mohamed-seddik-el-menchaoui-021-al-anbiya-23449-6566.mp3"
+    "?v=2c10e77e5f62"
+)
+_ANBIYA_ETAG = '"5c76dfc0-1ad89bd"'
+_ANBIYA_SIZE = 28_150_205
+
+
+def _check_anbiya_identity(url: str, response: httpx.Response, *, head: bool) -> None:
+    """Reject a changed provider asset: timestamps apply to exactly this MP3."""
+    if url != ANBIYA_AUDIO_URL:
+        return
+    if response.headers.get("ETag") != _ANBIYA_ETAG:
+        raise HTTPException(status_code=502, detail="Assabile recording version has changed")
+    if head or response.status_code == 200:
+        if response.headers.get("Content-Length") != str(_ANBIYA_SIZE):
+            raise HTTPException(status_code=502, detail="Assabile recording size has changed")
+    else:
+        content_range = response.headers.get("Content-Range", "")
+        if not content_range.endswith(f"/{_ANBIYA_SIZE}"):
+            raise HTTPException(status_code=502, detail="Assabile recording size has changed")
+
+
 _QUL_MP3 = re.compile(
     r"^/quran/surah/minshawy/mujawwad/mp3/(?:00[1-9]|0[1-9]\d|10\d|11[0-4])\.mp3$"
 )
@@ -22,6 +48,8 @@ _MIME = {"audio/mpeg", "audio/mp3", "application/octet-stream", "binary/octet-st
 
 
 def approved_stream_url(url: str) -> bool:
+    if url == ANBIYA_AUDIO_URL:
+        return True
     try:
         parts = urlsplit(url)
         return (
@@ -59,6 +87,7 @@ async def stream_metadata(
                 raise HTTPException(
                     status_code=502, detail="Audio source returned non-audio metadata"
                 )
+            _check_anbiya_identity(url, upstream, head=True)
             headers = {"Accept-Ranges": "bytes", "Cache-Control": "no-store"}
             for name in ("Content-Length", "ETag", "Last-Modified"):
                 if upstream.headers.get(name):
@@ -110,6 +139,7 @@ async def stream_recitation(
         mime = upstream.headers.get("content-type", "").split(";")[0].strip().lower()
         if mime not in _MIME:
             raise HTTPException(status_code=502, detail="Audio source returned non-audio bytes")
+        _check_anbiya_identity(url, upstream, head=False)
         headers = {
             "Accept-Ranges": "bytes",
             "Cache-Control": "no-store",
@@ -141,10 +171,16 @@ async def stream_recitation(
     async def chunks():
         try:
             assert upstream is not None
-            async for part in upstream.aiter_raw(chunk_size=64 * 1024):
-                if await request.is_disconnected():
-                    break
-                yield part
+            # Mock transports (and some providers) return an already-buffered
+            # response. Don't iterate its consumed stream a second time.
+            # Real upstream audio remains chunk-streamed without buffering.
+            if upstream.is_stream_consumed:
+                yield upstream.content
+            else:
+                async for part in upstream.aiter_raw(chunk_size=64 * 1024):
+                    if await request.is_disconnected():
+                        break
+                    yield part
         finally:
             if upstream is not None:
                 await upstream.aclose()

@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 1,
+  "surahId": 89,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/089.mp3",
+  "audioSha256": "a1ee9c519e48d63a63577e69fd4457f0ea9d77e8cac665a363c6d625086e7080",
+  "audioBytes": 6108491,
+  "audioDurationMs": 381744,
+  "endMs": 381744,
+  "sourceAyahCount": 30,
+  "alignmentResolutionMs": 200,
+  "source": "QUL original CDN MP3; reference EveryAyah faster individual clips",
+  "method": "offline-global-DTW-four-speech-features",
+  "validationStatus": "experimental-cross-recording",
+  "reviewRequired": true,
+  "reviewAyahs": [
+    {
+      "ayah": 30,
+      "kind": "low-confidence-interpolated-boundary"
+    },
+    {
+      "ayah": 3,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 7.8,
+      "mfccDisagreementSeconds": 1.0
+    },
+    {
+      "ayah": 4,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 15.2,
+      "mfccDisagreementSeconds": 1.0
+    },
+    {
+      "ayah": 5,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 20.6,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 6,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 27.0,
+      "mfccDisagreementSeconds": 0.4
+    },
+    {
+      "ayah": 7,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 31.0,
+      "mfccDisagreementSeconds": 0.4
+    },
+    {
+      "ayah": 8,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 31.8,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 9,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 38.0,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 10,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 6.2,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 10,
+      "kind": "large-duration-ratio",
+      "ratio": 3.19
+    },
+    {
+      "ayah": 17,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 26.4,
+      "mfccDisagreementSeconds": 8.5
+    },
+    {
+      "ayah": 24,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 7.0,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 25,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 3.6,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 26,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 6.2,
+      "mfccDisagreementSeconds": 0.2
+    },
+    {
+      "ayah": 27,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 14.4,
+      "mfccDisagreementSeconds": 0.2
+    },
+    {
+      "ayah": 28,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 18.2,
+      "mfccDisagreementSeconds": 0.2
+    },
+    {
+      "ayah": 29,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 11.4,
+      "mfccDisagreementSeconds": 0.2
+    },
+    {
+      "ayah": 30,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 4.25,
+      "mfccDisagreementSeconds": 0.25
+    }
+  ],
+  "featureAgreementSecondsByAyah": [
+    0.0,
+    1.0,
+    7.8,
+    15.2,
+    20.6,
+    27.0,
+    31.0,
+    31.8,
+    38.0,
+    6.2,
+    0.2,
+    0.0,
+    1.3,
+    0.2,
+    0.4,
+    1.2,
+    26.4,
+    1.0,
+    1.8,
+    1.2,
+    1.4,
+    0.0,
+    1.2,
+    7.0,
+    3.6,
+    6.2,
+    14.4,
+    18.2,
+    11.4,
+    4.25
+  ],
+  "dtwCosts": {
+    "mfcc": 0.5563388523393591,
+    "mfcc-delta": 0.6408420071807529,
+    "mel": 0.27749128473481727,
+    "chroma": 0.492282124902282
+  },
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 3200
+    },
+    {
+      "ayah": 2,
+      "fromMs": 3200,
+      "toMs": 11200
+    },
+    {
+      "ayah": 3,
+      "fromMs": 11200,
+      "toMs": 18600
+    },
+    {
+      "ayah": 4,
+      "fromMs": 18600,
+      "toMs": 26000
+    },
+    {
+      "ayah": 5,
+      "fromMs": 26000,
+      "toMs": 33600
+    },
+    {
+      "ayah": 6,
+      "fromMs": 33600,
+      "toMs": 45800
+    },
+    {
+      "ayah": 7,
+      "fromMs": 45800,
+      "toMs": 50200
+    },
+    {
+      "ayah": 8,
+      "fromMs": 50200,
+      "toMs": 60400
+    },
+    {
+      "ayah": 9,
+      "fromMs": 60400,
+      "toMs": 95600
+    },
+    {
+      "ayah": 10,
+      "fromMs": 95600,
+      "toMs": 106400
+    },
+    {
+      "ayah": 11,
+      "fromMs": 106400,
+      "toMs": 111400
+    },
+    {
+      "ayah": 12,
+      "fromMs": 111400,
+      "toMs": 118300
+    },
+    {
+      "ayah": 13,
+      "fromMs": 118300,
+      "toMs": 124800
+    },
+    {
+      "ayah": 14,
+      "fromMs": 124800,
+      "toMs": 134000
+    },
+    {
+      "ayah": 15,
+      "fromMs": 134000,
+      "toMs": 161400
+    },
+    {
+      "ayah": 16,
+      "fromMs": 161400,
+      "toMs": 194300
+    },
+    {
+      "ayah": 17,
+      "fromMs": 194300,
+      "toMs": 227000
+    },
+    {
+      "ayah": 18,
+      "fromMs": 227000,
+      "toMs": 241800
+    },
+    {
+      "ayah": 19,
+      "fromMs": 241800,
+      "toMs": 254200
+    },
+    {
+      "ayah": 20,
+      "fromMs": 254200,
+      "toMs": 264200
+    },
+    {
+      "ayah": 21,
+      "fromMs": 264200,
+      "toMs": 277200
+    },
+    {
+      "ayah": 22,
+      "fromMs": 277200,
+      "toMs": 287600
+    },
+    {
+      "ayah": 23,
+      "fromMs": 287600,
+      "toMs": 335600
+    },
+    {
+      "ayah": 24,
+      "fromMs": 335600,
+      "toMs": 344000
+    },
+    {
+      "ayah": 25,
+      "fromMs": 344000,
+      "toMs": 357400
+    },
+    {
+      "ayah": 26,
+      "fromMs": 357400,
+      "toMs": 368200
+    },
+    {
+      "ayah": 27,
+      "fromMs": 368200,
+      "toMs": 376200
+    },
+    {
+      "ayah": 28,
+      "fromMs": 376200,
+      "toMs": 379400
+    },
+    {
+      "ayah": 29,
+      "fromMs": 379400,
+      "toMs": 379850
+    },
+    {
+      "ayah": 30,
+      "fromMs": 379850,
+      "toMs": 381744
+    }
+  ]
+}

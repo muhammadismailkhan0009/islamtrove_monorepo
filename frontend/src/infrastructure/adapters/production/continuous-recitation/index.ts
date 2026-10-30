@@ -2,10 +2,11 @@ import { type ContinuousRecitationPort, parseQulRecitation } from '../../../../a
 const pending = new Map<number, Promise<ReturnType<typeof parseQulRecitation>>>();
 
 export const productionContinuousRecitationAdapter: ContinuousRecitationPort = {
+  invalidate(surahId) { pending.delete(surahId); },
   getSurah(surahId, expectedAyahCount) {
     let task = pending.get(surahId);
     if (!task) {
-      task = fetch(`/api/quran/surahs/${surahId}/continuous-recitation`)
+      task = fetch(`/api/quran/surahs/${surahId}/continuous-recitation`, {cache:'no-store'})
         .then(response => { if (!response.ok) throw new Error('Continuous recitation unavailable'); return response.json(); })
         .then(body => {
           if (!body || !Array.isArray(body.timings)) throw new Error('Invalid QUL timing payload');

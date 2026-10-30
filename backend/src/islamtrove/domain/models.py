@@ -38,6 +38,17 @@ class SurahAudio(BaseModel):
     translation: AudioChoice | None
     recitation: list[AyahAudio]
     translationAudio: list[AyahAudio]
+    # Explicit omissions; the client must not treat missing audio as corrupted data.
+    unavailableTranslationAyahs: list[int] = Field(default_factory=list)
+
+
+class TranslationAudioManifest(BaseModel):
+    """A spoken-language resource, independent of any Arabic reciter."""
+
+    surahId: int = Field(ge=1, le=114)
+    language: AudioChoice
+    audio: list[AyahAudio]
+    unavailableAyahs: list[int] = Field(default_factory=list)
 
 
 # Only editions confirmed to provide verse-by-verse audio are exposed.

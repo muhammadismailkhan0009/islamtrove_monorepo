@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "surahId": 113,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/113.mp3",
+  "audioSha256": "e305b69064be7e8a44bd8dedffcb1b1147a537fcef0274677bd8be56cf05f66a",
+  "audioBytes": 611678,
+  "audioDurationMs": 38191,
+  "endMs": 38191,
+  "sourceAyahCount": 5,
+  "alignmentResolutionMs": 200,
+  "source": "QUL original CDN MP3; reference EveryAyah faster individual clips",
+  "method": "offline-global-DTW-four-speech-features",
+  "validationStatus": "experimental-cross-recording",
+  "reviewRequired": true,
+  "reviewAyahs": [],
+  "featureAgreementSecondsByAyah": [
+    0.0,
+    0.0,
+    0.0,
+    0.2,
+    0.2
+  ],
+  "dtwCosts": {
+    "mfcc": 0.14328543493879875,
+    "mfcc-delta": 0.12646769094090832,
+    "mel": 0.09479229399365789,
+    "chroma": 0.3089107234246673
+  },
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 5200
+    },
+    {
+      "ayah": 2,
+      "fromMs": 5200,
+      "toMs": 9400
+    },
+    {
+      "ayah": 3,
+      "fromMs": 9400,
+      "toMs": 18800
+    },
+    {
+      "ayah": 4,
+      "fromMs": 18800,
+      "toMs": 29200
+    },
+    {
+      "ayah": 5,
+      "fromMs": 29200,
+      "toMs": 38191
+    }
+  ]
+}

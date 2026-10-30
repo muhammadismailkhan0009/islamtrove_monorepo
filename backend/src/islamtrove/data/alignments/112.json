@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "surahId": 112,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/112.mp3",
+  "audioSha256": "7277c6581c1306c5ba04c0ff50e611028b5b9132d4b8506d2ee6580464c2fae7",
+  "audioBytes": 1645646,
+  "audioDurationMs": 102816,
+  "endMs": 102816,
+  "sourceAyahCount": 4,
+  "alignmentResolutionMs": 200,
+  "source": "QUL original CDN MP3; reference EveryAyah faster individual clips",
+  "method": "offline-global-DTW-four-speech-features",
+  "validationStatus": "experimental-cross-recording",
+  "reviewRequired": true,
+  "reviewAyahs": [
+    {
+      "ayah": 3,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 22.4,
+      "mfccDisagreementSeconds": 15.0
+    },
+    {
+      "ayah": 4,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 66.2,
+      "mfccDisagreementSeconds": 66.2
+    },
+    {
+      "ayah": 1,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 2,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 3,
+      "kind": "large-recording-duration-difference"
+    },
+    {
+      "ayah": 4,
+      "kind": "large-recording-duration-difference"
+    }
+  ],
+  "featureAgreementSecondsByAyah": [
+    0.0,
+    0.0,
+    22.4,
+    66.2
+  ],
+  "dtwCosts": {
+    "mfcc": 0.5931525363794808,
+    "mfcc-delta": 0.6861675991269859,
+    "mel": 0.4399617857287562,
+    "chroma": 0.5685065388599218
+  },
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 4200
+    },
+    {
+      "ayah": 2,
+      "fromMs": 4200,
+      "toMs": 8200
+    },
+    {
+      "ayah": 3,
+      "fromMs": 8200,
+      "toMs": 20600
+    },
+    {
+      "ayah": 4,
+      "fromMs": 20600,
+      "toMs": 102816
+    }
+  ]
+}

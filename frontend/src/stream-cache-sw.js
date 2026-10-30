@@ -137,6 +137,8 @@ function contentRange(header) {
   return { start, end, total };
 }
 
+const ANBIYA_AUDIO_URL = 'https://media.assabile.com/assabile/recitations_7892537823/mp3/mohamed-seddik-el-menchaoui/mohamed-seddik-el-menchaoui-021-al-anbiya-23449-6566.mp3?v=2c10e77e5f62';
+
 async function fetchChunk(audioURL, start, signal) {
   const id = audioURL + '#' + start;
   const cached = await readCached(id);
@@ -173,7 +175,8 @@ async function fetchChunk(audioURL, start, signal) {
 async function handleStream(request) {
   const url = new URL(request.url);
   const audioURL = url.searchParams.get('url');
-  if (!audioURL || !/^https:\/\/audio-cdn\.tarteel\.ai\/quran\/surah\/minshawy\/mujawwad\/mp3\/\d{3}\.mp3$/.test(audioURL)) {
+  if (!audioURL || !(audioURL === ANBIYA_AUDIO_URL ||
+      /^https:\/\/audio-cdn\.tarteel\.ai\/quran\/surah\/minshawy\/mujawwad\/mp3\/\d{3}\.mp3$/.test(audioURL))) {
     return fetch(request);
   }
   const rangeText = request.headers.get('Range');

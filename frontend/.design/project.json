@@ -51,6 +51,123 @@
       "frameworkBindingPaths": [
         "src/main.ts"
       ]
+    },
+    {
+      "id": "dacec26d-c0e6-4638-901f-f3bcc6a87d6e",
+      "name": "Admin Review Preview · 02 Admin access",
+      "routeHint": "/?review-demo=access",
+      "regions": [],
+      "rootFeatureId": "listening-studio",
+      "implementationRoots": [
+        "src/features/listening-studio"
+      ],
+      "frameworkBindingPaths": [
+        "src/main.ts"
+      ]
+    },
+    {
+      "id": "9e585335-b8b9-4167-a2fb-570a587fb33b",
+      "name": "Admin Review Preview · 01 Flagged Ayah grid",
+      "routeHint": "/?review-demo=grid",
+      "regions": [],
+      "rootFeatureId": "listening-studio",
+      "implementationRoots": [
+        "src/features/listening-studio"
+      ],
+      "frameworkBindingPaths": [
+        "src/main.ts"
+      ]
+    },
+    {
+      "id": "64e44ae9-15ad-4635-a7dc-49663421570f",
+      "name": "Admin Review Preview · 03 Timestamp correction",
+      "routeHint": "/?review-demo=correction",
+      "regions": [],
+      "rootFeatureId": "listening-studio",
+      "implementationRoots": [
+        "src/features/listening-studio"
+      ],
+      "frameworkBindingPaths": [
+        "src/main.ts"
+      ]
+    },
+    {
+      "id": "7ce43ba5-7c84-4d30-8ec8-928dae3483ca",
+      "name": "Admin Review Preview · 04 Confirmed success",
+      "routeHint": "/?review-demo=saved",
+      "regions": [],
+      "rootFeatureId": "listening-studio",
+      "implementationRoots": [
+        "src/features/listening-studio"
+      ],
+      "frameworkBindingPaths": [
+        "src/main.ts"
+      ]
+    },
+    {
+      "id": "10a0c15d-7e3e-42cb-a90a-8bb88e13e982",
+      "name": "Shared Listening Link · Autoplay Blocked",
+      "routeHint": "/?link-demo=blocked",
+      "regions": [],
+      "rootFeatureId": "listening-studio",
+      "implementationRoots": [
+        "src/features/listening-studio"
+      ],
+      "frameworkBindingPaths": [
+        "src/main.ts"
+      ]
+    },
+    {
+      "id": "00565cde-ceab-4813-9f3e-d5918a7bfcf0",
+      "name": "Grouping Library · Local groupings",
+      "routeHint": "/?groups-demo=local",
+      "regions": [],
+      "rootFeatureId": "listening-studio",
+      "implementationRoots": [
+        "src/features/listening-studio"
+      ],
+      "frameworkBindingPaths": [
+        "src/main.ts"
+      ]
+    },
+    {
+      "id": "30b960e5-864c-4128-ab87-4a95b9b524e7",
+      "name": "Grouping Library · Published server groupings",
+      "routeHint": "/?groups-demo=server",
+      "regions": [],
+      "rootFeatureId": "listening-studio",
+      "implementationRoots": [
+        "src/features/listening-studio"
+      ],
+      "frameworkBindingPaths": [
+        "src/main.ts"
+      ]
+    },
+    {
+      "id": "1e0c31e5-92ea-4778-a8bd-92b8d3fd57df",
+      "name": "Grouping Library · Admin publishing",
+      "routeHint": "/?groups-demo=publish",
+      "regions": [],
+      "rootFeatureId": "listening-studio",
+      "implementationRoots": [
+        "src/features/listening-studio"
+      ],
+      "frameworkBindingPaths": [
+        "src/main.ts"
+      ]
+    },
+    {
+      "id": "4534bbb5-e7df-4b11-b24a-7c5d788b7c7a",
+      "name": "Grouping Library · Published success",
+      "routeHint": "/?groups-demo=success",
+      "regions": [],
+      "rootFeatureId": "listening-studio",
+      "implementationRoots": [
+        "src/features/listening-studio"
+      ],
+      "frameworkBindingPaths": [
+        "src/main.ts"
+      ]
     }
   ],
   "designDirections": [
@@ -90,7 +207,7 @@
     {
       "id": "audio-media",
       "name": "Audio Media",
-      "description": "Resolve recitation and spoken-translation audio per Ayah",
+      "description": "Legacy combined audio contract retained for compatibility; the listening studio now uses QUL continuous recitation and independent translation-audio ports.",
       "operations": {
         "getSurahAudio": {
           "description": "Resolve chosen reciter and translation for an entire Surah, preserving Ayah indexes"
@@ -151,6 +268,38 @@
       "implementationRoots": [
         "src/application/ports/streaming-source"
       ]
+    },
+    {
+      "id": "translation-audio",
+      "name": "Independent Spoken Translation Audio",
+      "description": "Resolve a single translated spoken language for a Surah, without requiring Arabic audio. A failure only skips the affected translation.",
+      "operations": {
+        "getSurah": {
+          "description": "Fetch language-specific Ayah media and explicitly unavailable Ayahs on demand"
+        }
+      },
+      "implementationRoots": [
+        "src/application/ports/translation-audio"
+      ]
+    },
+    {
+      "id": "alignment-review",
+      "name": "Admin Ayah Alignment Review",
+      "operations": {
+        "list": {
+          "description": "Read per-Surah timing review flags and verified outcomes"
+        },
+        "authenticate": {
+          "description": "Authenticate a reviewer (design preview mock only; real backend pending)"
+        },
+        "submit": {
+          "description": "Submit Ayah timing verification or boundary correction (design preview mock only)"
+        }
+      },
+      "description": "Mock-only admin authorization and audio boundary verification UI prototype. Production adapter is disabled until the backend review service is implemented.",
+      "implementationRoots": [
+        "src/application/ports/alignment-review"
+      ]
     }
   ],
   "scenarios": [],
@@ -195,6 +344,266 @@
         "height": 844
       },
       "resourcePath": "/"
+    },
+    {
+      "id": "58e25cf4-a3d4-4997-8253-dbc66a2026e1",
+      "name": "Alignment Review · 02 Admin access",
+      "target": {
+        "type": "page",
+        "id": "dacec26d-c0e6-4638-901f-f3bcc6a87d6e"
+      },
+      "designDirectionId": "default",
+      "resourcePath": "/?review-demo=access",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "canvas": {
+        "x": 3600,
+        "y": 80,
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "id": "143d0d5b-93ef-496a-a9e0-a14cb69b12ea",
+      "name": "Alignment Review · 01 Flagged Ayah grid",
+      "target": {
+        "type": "page",
+        "id": "9e585335-b8b9-4167-a2fb-570a587fb33b"
+      },
+      "designDirectionId": "default",
+      "resourcePath": "/?review-demo=grid",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "canvas": {
+        "x": 2100,
+        "y": 80,
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "id": "589cb8c0-5833-461a-94a8-54fc32a14c5f",
+      "name": "Alignment Review · 03 Timestamp correction",
+      "target": {
+        "type": "page",
+        "id": "64e44ae9-15ad-4635-a7dc-49663421570f"
+      },
+      "designDirectionId": "default",
+      "resourcePath": "/?review-demo=correction",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "canvas": {
+        "x": 5100,
+        "y": 80,
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "id": "f78d4e22-ca20-4140-be58-97e6a666846e",
+      "name": "Alignment Review · 04 Confirmed success",
+      "target": {
+        "type": "page",
+        "id": "7ce43ba5-7c84-4d30-8ec8-928dae3483ca"
+      },
+      "designDirectionId": "default",
+      "resourcePath": "/?review-demo=saved",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "canvas": {
+        "x": 6600,
+        "y": 80,
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "id": "bbacc84b-0dbd-4b27-91d9-99c278590c93",
+      "name": "Alignment Review · 05 Mobile correction",
+      "target": {
+        "type": "page",
+        "id": "64e44ae9-15ad-4635-a7dc-49663421570f"
+      },
+      "designDirectionId": "default",
+      "resourcePath": "/?review-demo=correction",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "canvas": {
+        "x": 6600,
+        "y": 1110,
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "id": "fe2b7ef8-7148-47f4-b99d-09c3ed18faa8",
+      "name": "Shared Link · Autoplay blocked · Mobile",
+      "target": {
+        "type": "page",
+        "id": "10a0c15d-7e3e-42cb-a90a-8bb88e13e982"
+      },
+      "designDirectionId": "default",
+      "resourcePath": "/?link-demo=blocked",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "canvas": {
+        "x": 9810,
+        "y": 80,
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "id": "38d6cca9-41d3-4126-b73f-ee6c8eca9994",
+      "name": "Shared Link · Autoplay blocked · Desktop",
+      "target": {
+        "type": "page",
+        "id": "10a0c15d-7e3e-42cb-a90a-8bb88e13e982"
+      },
+      "designDirectionId": "default",
+      "resourcePath": "/?link-demo=blocked",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "canvas": {
+        "x": 8250,
+        "y": 80,
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "id": "5742798d-97ee-4af2-a022-a519112bb1fc",
+      "name": "Grouping Library · Local · Desktop",
+      "target": {
+        "type": "page",
+        "id": "00565cde-ceab-4813-9f3e-d5918a7bfcf0"
+      },
+      "designDirectionId": "default",
+      "resourcePath": "/?groups-demo=local",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "canvas": {
+        "x": 10380,
+        "y": 80,
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "id": "821a88a7-1871-4e18-9034-d5a319a4d833",
+      "name": "Grouping Library · Server · Desktop",
+      "target": {
+        "type": "page",
+        "id": "30b960e5-864c-4128-ab87-4a95b9b524e7"
+      },
+      "designDirectionId": "default",
+      "resourcePath": "/?groups-demo=server",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "canvas": {
+        "x": 11890,
+        "y": 80,
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "id": "141d7889-90e2-4b4e-8c64-bff264ae23e0",
+      "name": "Grouping Library · Admin publish · Desktop",
+      "target": {
+        "type": "page",
+        "id": "1e0c31e5-92ea-4778-a8bd-92b8d3fd57df"
+      },
+      "designDirectionId": "default",
+      "resourcePath": "/?groups-demo=publish",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "canvas": {
+        "x": 13400,
+        "y": 80,
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "id": "ed0f63a3-0fe9-470e-a1bf-943e08daa708",
+      "name": "Grouping Library · Published success · Desktop",
+      "target": {
+        "type": "page",
+        "id": "4534bbb5-e7df-4b11-b24a-7c5d788b7c7a"
+      },
+      "designDirectionId": "default",
+      "resourcePath": "/?groups-demo=success",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "canvas": {
+        "x": 14910,
+        "y": 80,
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "id": "c45131a0-80dd-4c6c-a66c-86a7b93bfc50",
+      "name": "Grouping Library · Local · Mobile",
+      "target": {
+        "type": "page",
+        "id": "00565cde-ceab-4813-9f3e-d5918a7bfcf0"
+      },
+      "designDirectionId": "default",
+      "resourcePath": "/?groups-demo=local",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "canvas": {
+        "x": 10700,
+        "y": 1120,
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "id": "f908cb4e-cbc6-44cf-8d6b-79bb53b47f08",
+      "name": "Grouping Library · Server · Mobile",
+      "target": {
+        "type": "page",
+        "id": "30b960e5-864c-4128-ab87-4a95b9b524e7"
+      },
+      "designDirectionId": "default",
+      "resourcePath": "/?groups-demo=server",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "canvas": {
+        "x": 11340,
+        "y": 1120,
+        "width": 390,
+        "height": 844
+      }
     }
   ],
   "sourceArchitecture": {
@@ -215,7 +624,9 @@
         "verse-preview",
         "media-cache",
         "continuous-recitation",
-        "streaming-source"
+        "streaming-source",
+        "translation-audio",
+        "alignment-review"
       ],
       "implementationRoots": [
         "src/features/listening-studio"
@@ -389,6 +800,54 @@
       "kind": "production",
       "implementationRoots": [
         "src/infrastructure/adapters/production/streaming-source"
+      ]
+    },
+    {
+      "id": "mock-translation-audio",
+      "name": "Mock Translation Audio Adapter",
+      "capabilityId": "translation-audio",
+      "portIds": [
+        "translation-audio"
+      ],
+      "kind": "mock",
+      "implementationRoots": [
+        "src/infrastructure/adapters/mock/translation-audio"
+      ]
+    },
+    {
+      "id": "production-translation-audio",
+      "name": "Production Translation Audio Adapter",
+      "capabilityId": "translation-audio",
+      "portIds": [
+        "translation-audio"
+      ],
+      "kind": "production",
+      "implementationRoots": [
+        "src/infrastructure/adapters/production/translation-audio"
+      ]
+    },
+    {
+      "id": "mock-alignment-review",
+      "name": "Design Preview Alignment Review Adapter",
+      "capabilityId": "alignment-review",
+      "portIds": [
+        "alignment-review"
+      ],
+      "kind": "mock",
+      "implementationRoots": [
+        "src/infrastructure/adapters/mock/alignment-review"
+      ]
+    },
+    {
+      "id": "production-alignment-review",
+      "name": "Disabled Production Alignment Review Adapter",
+      "capabilityId": "alignment-review",
+      "portIds": [
+        "alignment-review"
+      ],
+      "kind": "production",
+      "implementationRoots": [
+        "src/infrastructure/adapters/production/alignment-review"
       ]
     }
   ]

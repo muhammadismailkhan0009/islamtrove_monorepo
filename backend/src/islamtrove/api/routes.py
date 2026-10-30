@@ -5,7 +5,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, Path, Query, Request, Response
 
 from islamtrove.application.quran_service import QuranService
-from islamtrove.domain.models import AudioOptions, Surah, SurahAudio
+from islamtrove.domain.models import AudioOptions, Surah, SurahAudio, TranslationAudioManifest
 
 router = APIRouter(prefix="/api/quran", tags=["Quran"])
 
@@ -32,7 +32,19 @@ async def get_audio_options(
     return service.options()
 
 
-@router.get("/surahs/{surah_id}/audio", response_model=SurahAudio)
+@router.get("/surahs/{surah_id}/translation-audio", response_model=TranslationAudioManifest)
+async def get_translation_audio(
+    response: Response,
+    service: Annotated[QuranService, Depends(get_service)],
+    surah_id: Annotated[int, Path(ge=1, le=114)],
+    language: Annotated[str, Query(min_length=2)],
+) -> TranslationAudioManifest:
+    """An independent spoken-language manifest. No Arabic audio is fetched."""
+    response.headers["Cache-Control"] = "public, max-age=3600"
+    return await service.translation_audio(surah_id, language)
+
+
+@router.get("/surahs/{surah_id}/audio", response_model=SurahAudio, deprecated=True)
 async def get_surah_audio(
     response: Response,
     service: Annotated[QuranService, Depends(get_service)],

@@ -15,6 +15,8 @@ export interface SurahAudio {
   translation: AudioEdition | null;
   recitation: AyahAudio[];
   translationAudio: AyahAudio[];
+  /** Ayahs for which the selected spoken translation has no audio recording. */
+  unavailableTranslationAyahs?: number[];
 }
 
 /** Resolve individual Ayah audio references for playback. */

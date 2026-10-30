@@ -112,14 +112,64 @@ export function createAudioTracks(
     if (!payload || payload.surahId !== surahId) {
       throw new Error('Selected translation audio is unavailable');
     }
-    const collection = payload.translationAudio;
+    // Translation arrays are keyed by the real Ayah number, not by offset:
+    // Al-Baqarah's German edition has no audio for 2:283–286.
+    const available = new Map(payload.translationAudio.map(item => [item.ayah, item]));
+    if (available.size !== payload.translationAudio.length) {
+      throw new Error('Translation manifest contains duplicate Ayah numbers');
+    }
+    const unavailable = new Set(payload.unavailableTranslationAyahs ?? []);
     for (let ayah = stage.start; ayah <= stage.end; ayah++) {
-      const item = collection[ayah - 1];
-      if (!item || item.ayah !== ayah || !item.url.startsWith('https://')) {
-        throw new Error('An Ayah audio file is missing or invalid');
+      const item = available.get(ayah);
+      if (!item) {
+        if (unavailable.has(ayah)) continue;
+        throw new Error(`Translation recording for Ayah ${ayah} is missing`);
+      }
+      if (unavailable.has(ayah) || !item.url.startsWith('https://')) {
+        throw new Error(`Invalid translation recording for Ayah ${ayah}`);
       }
       tracks.push({ stage: index, ayah, url: item.url, phase: stage.mode, passageIndex: stage.passageIndex });
     }
   });
+  return tracks;
+}
+
+/** Compose Arabic and translation tracks without fetching translation manifests.
+ * Lazy resolvers are invoked only at the translation stage. A missing German,
+ * Urdu or English MP3 cannot prevent the continuous Arabic recording starting.
+ * The queue's existing translation pairing and passage boundaries are kept.
+ */
+export function createIndependentAudioTracks(
+  queue: readonly AudioStage[], surahId: number,
+  continuous: ContinuousRecitation,
+  resolveTranslation: (language: string, ayah: number) => Promise<string | null>
+): PlaybackTrack[] {
+  if (continuous.surahId !== surahId) throw new Error('Continuous recording belongs to another Surah');
+  const tracks: PlaybackTrack[] = [];
+  for (let stageIndex = 0; stageIndex < queue.length; stageIndex++) {
+    const stage = queue[stageIndex];
+    if (stage.mode === 'arabic') {
+      const first = continuous.timings[stage.start - 1];
+      const last = continuous.timings[stage.end - 1];
+      if (!first || !last || first.ayah !== stage.start || last.ayah !== stage.end ||
+          last.toMs > continuous.endMs) throw new Error('Missing QUL passage timestamps');
+      tracks.push({
+        stage: stageIndex, ayah: stage.start, url: continuous.audioUrl,
+        phase: 'arabic', passageIndex: stage.passageIndex,
+        startSeconds: first.fromMs / 1000, endSeconds: last.toMs / 1000,
+        recordingEndSeconds: continuous.endMs / 1000,
+        ayahTimings: continuous.timings.slice(stage.start - 1, stage.end)
+      });
+      continue;
+    }
+    if (!stage.language) throw new Error('Translation stage has no language');
+    for (let ayah = stage.start; ayah <= stage.end; ayah++) {
+      const language = stage.language;
+      tracks.push({stage: stageIndex, ayah, url: '', phase:'translation',
+        passageIndex: stage.passageIndex, language,
+        resolveUrl: () => resolveTranslation(language, ayah)
+      });
+    }
+  }
   return tracks;
 }

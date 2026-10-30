@@ -1,0 +1,3146 @@
+{
+  "schemaVersion": 1,
+  "surahId": 2,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/002.mp3",
+  "audioSha256": "89671b53bc907e332fb5de0a4373b7ea8a37e0a0184913fde2339c5f406f00ab",
+  "audioBytes": 293331661,
+  "audioDurationMs": 18333192,
+  "endMs": 18333192,
+  "sourceAyahCount": 286,
+  "alignmentResolutionMs": 2000,
+  "source": "QUL original CDN MP3; reference EveryAyah faster individual clips",
+  "method": "offline-global-DTW-four-speech-features",
+  "validationStatus": "experimental-cross-recording",
+  "reviewRequired": true,
+  "reviewAyahs": [
+    {
+      "ayah": 24,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 4.0,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 26,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 30,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 4.0,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 32,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 8.0,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 38,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 43,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 46,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 49,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 4.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 53,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 4.0,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 56,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 6.0,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 57,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 59,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 110,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 111,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 119,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 120,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 121,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 125,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 128,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 131,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 133,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 136,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 146,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 5.0,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 182,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 8.0,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 183,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 12.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 184,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 5.0,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 187,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 8.0,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 194,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 4.0,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 198,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 201,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 203,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 204,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 205,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 206,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 209,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 210,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 16.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 264,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 266,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 267,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 269,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 274,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 277,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 280,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.0,
+      "mfccDisagreementSeconds": 2.0
+    },
+    {
+      "ayah": 1,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 2,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 3,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 4,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 5,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 6,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 7,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 8,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 9,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 10,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 11,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 12,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 13,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 14,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 15,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 16,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 17,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 18,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 19,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 20,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 21,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 22,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 23,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 24,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 25,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 26,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 27,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 28,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 29,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 30,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 31,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 32,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 33,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 34,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 35,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 36,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 37,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 38,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 39,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 40,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 41,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 42,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 43,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 44,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 45,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 46,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 47,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 48,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 49,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 50,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 51,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 52,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 53,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 54,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 55,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 56,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 57,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 58,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 59,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 60,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 61,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 62,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 63,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 64,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 65,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 66,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 67,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 68,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 69,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 70,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 71,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 72,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 73,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 74,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 75,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 76,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 77,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 78,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 79,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 80,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 81,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 82,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 83,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 84,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 85,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 86,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 87,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 88,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 89,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 90,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 91,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 92,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 93,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 94,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 95,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 96,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 97,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 98,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 99,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 100,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 101,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 102,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 103,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 104,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 105,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 106,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 107,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 108,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 109,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 110,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 111,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 112,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 113,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 114,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 115,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 116,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 117,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 118,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 119,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 120,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 121,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 122,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 123,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 124,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 125,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 126,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 127,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 128,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 129,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 130,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 131,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 132,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 133,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 134,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 135,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 136,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 137,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 138,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 139,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 140,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 141,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 142,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 143,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 144,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 145,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 146,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 147,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 148,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 149,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 150,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 151,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 152,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 153,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 154,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 155,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 156,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 157,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 158,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 159,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 160,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 161,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 162,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 163,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 164,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 165,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 166,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 167,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 168,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 169,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 170,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 171,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 172,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 173,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 174,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 175,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 176,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 177,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 178,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 179,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 180,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 181,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 182,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 183,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 184,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 185,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 186,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 187,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 188,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 189,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 190,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 191,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 192,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 193,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 194,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 195,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 196,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 197,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 198,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 199,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 200,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 201,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 202,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 203,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 204,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 205,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 206,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 207,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 208,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 209,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 210,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 211,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 212,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 213,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 214,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 215,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 216,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 217,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 218,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 219,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 220,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 221,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 222,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 223,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 224,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 225,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 226,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 227,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 228,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 229,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 230,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 231,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 232,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 233,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 234,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 235,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 236,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 237,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 238,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 239,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 240,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 241,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 242,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 243,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 244,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 245,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 246,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 247,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 248,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 249,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 250,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 251,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 252,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 253,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 254,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 255,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 256,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 257,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 258,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 259,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 260,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 261,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 262,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 263,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 264,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 265,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 266,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 267,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 268,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 269,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 270,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 271,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 272,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 273,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 274,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 275,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 276,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 277,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 278,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 279,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 280,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 281,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 282,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 283,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 284,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 285,
+      "kind": "coarse-long-surah-timing"
+    },
+    {
+      "ayah": 286,
+      "kind": "coarse-long-surah-timing"
+    }
+  ],
+  "featureAgreementSecondsByAyah": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    2.0,
+    2.0,
+    2.0,
+    0.0,
+    0.0,
+    4.0,
+    2.0,
+    2.0,
+    0.0,
+    2.0,
+    1.0,
+    4.0,
+    0.0,
+    8.0,
+    1.0,
+    1.0,
+    2.0,
+    1.0,
+    3.0,
+    2.0,
+    3.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.0,
+    2.0,
+    4.0,
+    2.0,
+    2.0,
+    0.0,
+    4.0,
+    0.0,
+    2.0,
+    6.0,
+    2.0,
+    0.0,
+    2.0,
+    2.0,
+    3.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.0,
+    2.0,
+    0.0,
+    0.0,
+    2.0,
+    2.0,
+    0.0,
+    0.0,
+    2.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    2.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    2.0,
+    0.0,
+    3.0,
+    2.0,
+    0.0,
+    0.0,
+    2.0,
+    0.0,
+    2.0,
+    2.0,
+    2.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    2.0,
+    1.0,
+    2.0,
+    2.0,
+    2.0,
+    1.0,
+    2.0,
+    1.0,
+    2.0,
+    0.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    1.0,
+    0.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    1.0,
+    2.0,
+    2.0,
+    1.0,
+    2.0,
+    2.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    2.0,
+    1.0,
+    2.0,
+    0.0,
+    5.0,
+    0.0,
+    2.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    2.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    2.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    2.0,
+    2.0,
+    3.0,
+    8.0,
+    12.0,
+    5.0,
+    0.0,
+    0.0,
+    8.0,
+    0.0,
+    2.0,
+    0.0,
+    2.0,
+    1.0,
+    3.0,
+    4.0,
+    0.0,
+    2.0,
+    2.0,
+    2.0,
+    0.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    1.0,
+    0.0,
+    2.0,
+    16.0,
+    0.0,
+    0.0,
+    2.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    2.0,
+    2.0,
+    0.0,
+    2.0,
+    0.0,
+    1.0,
+    2.0,
+    2.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    2.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    2.0,
+    0.0,
+    0.0,
+    2.0,
+    0.0,
+    2.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    3.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    3.0,
+    0.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    1.0,
+    1.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.0,
+    1.0,
+    2.0,
+    0.0
+  ],
+  "dtwCosts": {
+    "mfcc": 0.3337880682711738,
+    "mfcc-delta": 0.3624489087576752,
+    "mel": 0.17694965041465546,
+    "chroma": 0.46954240919287743
+  },
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 8000
+    },
+    {
+      "ayah": 2,
+      "fromMs": 8000,
+      "toMs": 32000
+    },
+    {
+      "ayah": 3,
+      "fromMs": 32000,
+      "toMs": 60000
+    },
+    {
+      "ayah": 4,
+      "fromMs": 60000,
+      "toMs": 92000
+    },
+    {
+      "ayah": 5,
+      "fromMs": 92000,
+      "toMs": 120000
+    },
+    {
+      "ayah": 6,
+      "fromMs": 120000,
+      "toMs": 152000
+    },
+    {
+      "ayah": 7,
+      "fromMs": 152000,
+      "toMs": 190000
+    },
+    {
+      "ayah": 8,
+      "fromMs": 190000,
+      "toMs": 220000
+    },
+    {
+      "ayah": 9,
+      "fromMs": 220000,
+      "toMs": 252000
+    },
+    {
+      "ayah": 10,
+      "fromMs": 252000,
+      "toMs": 290000
+    },
+    {
+      "ayah": 11,
+      "fromMs": 290000,
+      "toMs": 314000
+    },
+    {
+      "ayah": 12,
+      "fromMs": 314000,
+      "toMs": 330000
+    },
+    {
+      "ayah": 13,
+      "fromMs": 330000,
+      "toMs": 382000
+    },
+    {
+      "ayah": 14,
+      "fromMs": 382000,
+      "toMs": 432000
+    },
+    {
+      "ayah": 15,
+      "fromMs": 432000,
+      "toMs": 454000
+    },
+    {
+      "ayah": 16,
+      "fromMs": 454000,
+      "toMs": 486000
+    },
+    {
+      "ayah": 17,
+      "fromMs": 486000,
+      "toMs": 536000
+    },
+    {
+      "ayah": 18,
+      "fromMs": 536000,
+      "toMs": 556000
+    },
+    {
+      "ayah": 19,
+      "fromMs": 556000,
+      "toMs": 626000
+    },
+    {
+      "ayah": 20,
+      "fromMs": 626000,
+      "toMs": 694000
+    },
+    {
+      "ayah": 21,
+      "fromMs": 694000,
+      "toMs": 724000
+    },
+    {
+      "ayah": 22,
+      "fromMs": 724000,
+      "toMs": 812000
+    },
+    {
+      "ayah": 23,
+      "fromMs": 812000,
+      "toMs": 872000
+    },
+    {
+      "ayah": 24,
+      "fromMs": 872000,
+      "toMs": 914000
+    },
+    {
+      "ayah": 25,
+      "fromMs": 914000,
+      "toMs": 1006000
+    },
+    {
+      "ayah": 26,
+      "fromMs": 1006000,
+      "toMs": 1100000
+    },
+    {
+      "ayah": 27,
+      "fromMs": 1100000,
+      "toMs": 1162000
+    },
+    {
+      "ayah": 28,
+      "fromMs": 1162000,
+      "toMs": 1200000
+    },
+    {
+      "ayah": 29,
+      "fromMs": 1200000,
+      "toMs": 1266000
+    },
+    {
+      "ayah": 30,
+      "fromMs": 1266000,
+      "toMs": 1350000
+    },
+    {
+      "ayah": 31,
+      "fromMs": 1350000,
+      "toMs": 1426000
+    },
+    {
+      "ayah": 32,
+      "fromMs": 1426000,
+      "toMs": 1454000
+    },
+    {
+      "ayah": 33,
+      "fromMs": 1454000,
+      "toMs": 1540000
+    },
+    {
+      "ayah": 34,
+      "fromMs": 1540000,
+      "toMs": 1590000
+    },
+    {
+      "ayah": 35,
+      "fromMs": 1590000,
+      "toMs": 1646000
+    },
+    {
+      "ayah": 36,
+      "fromMs": 1646000,
+      "toMs": 1698000
+    },
+    {
+      "ayah": 37,
+      "fromMs": 1698000,
+      "toMs": 1736000
+    },
+    {
+      "ayah": 38,
+      "fromMs": 1736000,
+      "toMs": 1804000
+    },
+    {
+      "ayah": 39,
+      "fromMs": 1804000,
+      "toMs": 1832000
+    },
+    {
+      "ayah": 40,
+      "fromMs": 1832000,
+      "toMs": 1888000
+    },
+    {
+      "ayah": 41,
+      "fromMs": 1888000,
+      "toMs": 1948000
+    },
+    {
+      "ayah": 42,
+      "fromMs": 1948000,
+      "toMs": 1972000
+    },
+    {
+      "ayah": 43,
+      "fromMs": 1972000,
+      "toMs": 1994000
+    },
+    {
+      "ayah": 44,
+      "fromMs": 1994000,
+      "toMs": 2030000
+    },
+    {
+      "ayah": 45,
+      "fromMs": 2030000,
+      "toMs": 2056000
+    },
+    {
+      "ayah": 46,
+      "fromMs": 2056000,
+      "toMs": 2086000
+    },
+    {
+      "ayah": 47,
+      "fromMs": 2086000,
+      "toMs": 2120000
+    },
+    {
+      "ayah": 48,
+      "fromMs": 2120000,
+      "toMs": 2172000
+    },
+    {
+      "ayah": 49,
+      "fromMs": 2172000,
+      "toMs": 2248000
+    },
+    {
+      "ayah": 50,
+      "fromMs": 2248000,
+      "toMs": 2286000
+    },
+    {
+      "ayah": 51,
+      "fromMs": 2286000,
+      "toMs": 2322000
+    },
+    {
+      "ayah": 52,
+      "fromMs": 2322000,
+      "toMs": 2350000
+    },
+    {
+      "ayah": 53,
+      "fromMs": 2350000,
+      "toMs": 2372000
+    },
+    {
+      "ayah": 54,
+      "fromMs": 2372000,
+      "toMs": 2454000
+    },
+    {
+      "ayah": 55,
+      "fromMs": 2454000,
+      "toMs": 2488000
+    },
+    {
+      "ayah": 56,
+      "fromMs": 2488000,
+      "toMs": 2514000
+    },
+    {
+      "ayah": 57,
+      "fromMs": 2514000,
+      "toMs": 2572000
+    },
+    {
+      "ayah": 58,
+      "fromMs": 2572000,
+      "toMs": 2632000
+    },
+    {
+      "ayah": 59,
+      "fromMs": 2632000,
+      "toMs": 2692000
+    },
+    {
+      "ayah": 60,
+      "fromMs": 2692000,
+      "toMs": 2748000
+    },
+    {
+      "ayah": 61,
+      "fromMs": 2748000,
+      "toMs": 2922000
+    },
+    {
+      "ayah": 62,
+      "fromMs": 2922000,
+      "toMs": 3010000
+    },
+    {
+      "ayah": 63,
+      "fromMs": 3010000,
+      "toMs": 3062000
+    },
+    {
+      "ayah": 64,
+      "fromMs": 3062000,
+      "toMs": 3098000
+    },
+    {
+      "ayah": 65,
+      "fromMs": 3098000,
+      "toMs": 3128000
+    },
+    {
+      "ayah": 66,
+      "fromMs": 3128000,
+      "toMs": 3156000
+    },
+    {
+      "ayah": 67,
+      "fromMs": 3156000,
+      "toMs": 3206000
+    },
+    {
+      "ayah": 68,
+      "fromMs": 3206000,
+      "toMs": 3274000
+    },
+    {
+      "ayah": 69,
+      "fromMs": 3274000,
+      "toMs": 3324000
+    },
+    {
+      "ayah": 70,
+      "fromMs": 3324000,
+      "toMs": 3374000
+    },
+    {
+      "ayah": 71,
+      "fromMs": 3374000,
+      "toMs": 3430000
+    },
+    {
+      "ayah": 72,
+      "fromMs": 3430000,
+      "toMs": 3458000
+    },
+    {
+      "ayah": 73,
+      "fromMs": 3458000,
+      "toMs": 3496000
+    },
+    {
+      "ayah": 74,
+      "fromMs": 3496000,
+      "toMs": 3592000
+    },
+    {
+      "ayah": 75,
+      "fromMs": 3592000,
+      "toMs": 3658000
+    },
+    {
+      "ayah": 76,
+      "fromMs": 3658000,
+      "toMs": 3760000
+    },
+    {
+      "ayah": 77,
+      "fromMs": 3760000,
+      "toMs": 3784000
+    },
+    {
+      "ayah": 78,
+      "fromMs": 3784000,
+      "toMs": 3816000
+    },
+    {
+      "ayah": 79,
+      "fromMs": 3816000,
+      "toMs": 3900000
+    },
+    {
+      "ayah": 80,
+      "fromMs": 3900000,
+      "toMs": 3958000
+    },
+    {
+      "ayah": 81,
+      "fromMs": 3958000,
+      "toMs": 4012000
+    },
+    {
+      "ayah": 82,
+      "fromMs": 4012000,
+      "toMs": 4044000
+    },
+    {
+      "ayah": 83,
+      "fromMs": 4044000,
+      "toMs": 4186000
+    },
+    {
+      "ayah": 84,
+      "fromMs": 4186000,
+      "toMs": 4248000
+    },
+    {
+      "ayah": 85,
+      "fromMs": 4248000,
+      "toMs": 4412000
+    },
+    {
+      "ayah": 86,
+      "fromMs": 4412000,
+      "toMs": 4460000
+    },
+    {
+      "ayah": 87,
+      "fromMs": 4460000,
+      "toMs": 4566000
+    },
+    {
+      "ayah": 88,
+      "fromMs": 4566000,
+      "toMs": 4594000
+    },
+    {
+      "ayah": 89,
+      "fromMs": 4594000,
+      "toMs": 4676000
+    },
+    {
+      "ayah": 90,
+      "fromMs": 4676000,
+      "toMs": 4770000
+    },
+    {
+      "ayah": 91,
+      "fromMs": 4770000,
+      "toMs": 4860000
+    },
+    {
+      "ayah": 92,
+      "fromMs": 4860000,
+      "toMs": 4908000
+    },
+    {
+      "ayah": 93,
+      "fromMs": 4908000,
+      "toMs": 4986000
+    },
+    {
+      "ayah": 94,
+      "fromMs": 4986000,
+      "toMs": 5028000
+    },
+    {
+      "ayah": 95,
+      "fromMs": 5028000,
+      "toMs": 5058000
+    },
+    {
+      "ayah": 96,
+      "fromMs": 5058000,
+      "toMs": 5124000
+    },
+    {
+      "ayah": 97,
+      "fromMs": 5124000,
+      "toMs": 5192000
+    },
+    {
+      "ayah": 98,
+      "fromMs": 5192000,
+      "toMs": 5236000
+    },
+    {
+      "ayah": 99,
+      "fromMs": 5236000,
+      "toMs": 5268000
+    },
+    {
+      "ayah": 100,
+      "fromMs": 5268000,
+      "toMs": 5296000
+    },
+    {
+      "ayah": 101,
+      "fromMs": 5296000,
+      "toMs": 5364000
+    },
+    {
+      "ayah": 102,
+      "fromMs": 5364000,
+      "toMs": 5562000
+    },
+    {
+      "ayah": 103,
+      "fromMs": 5562000,
+      "toMs": 5592000
+    },
+    {
+      "ayah": 104,
+      "fromMs": 5592000,
+      "toMs": 5632000
+    },
+    {
+      "ayah": 105,
+      "fromMs": 5632000,
+      "toMs": 5690000
+    },
+    {
+      "ayah": 106,
+      "fromMs": 5690000,
+      "toMs": 5740000
+    },
+    {
+      "ayah": 107,
+      "fromMs": 5740000,
+      "toMs": 5780000
+    },
+    {
+      "ayah": 108,
+      "fromMs": 5780000,
+      "toMs": 5832000
+    },
+    {
+      "ayah": 109,
+      "fromMs": 5832000,
+      "toMs": 5924000
+    },
+    {
+      "ayah": 110,
+      "fromMs": 5924000,
+      "toMs": 5986000
+    },
+    {
+      "ayah": 111,
+      "fromMs": 5986000,
+      "toMs": 6044000
+    },
+    {
+      "ayah": 112,
+      "fromMs": 6044000,
+      "toMs": 6086000
+    },
+    {
+      "ayah": 113,
+      "fromMs": 6086000,
+      "toMs": 6184000
+    },
+    {
+      "ayah": 114,
+      "fromMs": 6184000,
+      "toMs": 6260000
+    },
+    {
+      "ayah": 115,
+      "fromMs": 6260000,
+      "toMs": 6310000
+    },
+    {
+      "ayah": 116,
+      "fromMs": 6310000,
+      "toMs": 6344000
+    },
+    {
+      "ayah": 117,
+      "fromMs": 6344000,
+      "toMs": 6374000
+    },
+    {
+      "ayah": 118,
+      "fromMs": 6374000,
+      "toMs": 6444000
+    },
+    {
+      "ayah": 119,
+      "fromMs": 6444000,
+      "toMs": 6476000
+    },
+    {
+      "ayah": 120,
+      "fromMs": 6476000,
+      "toMs": 6556000
+    },
+    {
+      "ayah": 121,
+      "fromMs": 6556000,
+      "toMs": 6608000
+    },
+    {
+      "ayah": 122,
+      "fromMs": 6608000,
+      "toMs": 6640000
+    },
+    {
+      "ayah": 123,
+      "fromMs": 6640000,
+      "toMs": 6690000
+    },
+    {
+      "ayah": 124,
+      "fromMs": 6690000,
+      "toMs": 6750000
+    },
+    {
+      "ayah": 125,
+      "fromMs": 6750000,
+      "toMs": 6820000
+    },
+    {
+      "ayah": 126,
+      "fromMs": 6820000,
+      "toMs": 6902000
+    },
+    {
+      "ayah": 127,
+      "fromMs": 6902000,
+      "toMs": 6936000
+    },
+    {
+      "ayah": 128,
+      "fromMs": 6936000,
+      "toMs": 6990000
+    },
+    {
+      "ayah": 129,
+      "fromMs": 6990000,
+      "toMs": 7040000
+    },
+    {
+      "ayah": 130,
+      "fromMs": 7040000,
+      "toMs": 7082000
+    },
+    {
+      "ayah": 131,
+      "fromMs": 7082000,
+      "toMs": 7102000
+    },
+    {
+      "ayah": 132,
+      "fromMs": 7102000,
+      "toMs": 7160000
+    },
+    {
+      "ayah": 133,
+      "fromMs": 7160000,
+      "toMs": 7240000
+    },
+    {
+      "ayah": 134,
+      "fromMs": 7240000,
+      "toMs": 7274000
+    },
+    {
+      "ayah": 135,
+      "fromMs": 7274000,
+      "toMs": 7328000
+    },
+    {
+      "ayah": 136,
+      "fromMs": 7328000,
+      "toMs": 7440000
+    },
+    {
+      "ayah": 137,
+      "fromMs": 7440000,
+      "toMs": 7512000
+    },
+    {
+      "ayah": 138,
+      "fromMs": 7512000,
+      "toMs": 7538000
+    },
+    {
+      "ayah": 139,
+      "fromMs": 7538000,
+      "toMs": 7600000
+    },
+    {
+      "ayah": 140,
+      "fromMs": 7600000,
+      "toMs": 7686000
+    },
+    {
+      "ayah": 141,
+      "fromMs": 7686000,
+      "toMs": 7720000
+    },
+    {
+      "ayah": 142,
+      "fromMs": 7720000,
+      "toMs": 7788000
+    },
+    {
+      "ayah": 143,
+      "fromMs": 7788000,
+      "toMs": 7930000
+    },
+    {
+      "ayah": 144,
+      "fromMs": 7930000,
+      "toMs": 8028000
+    },
+    {
+      "ayah": 145,
+      "fromMs": 8028000,
+      "toMs": 8112000
+    },
+    {
+      "ayah": 146,
+      "fromMs": 8112000,
+      "toMs": 8162000
+    },
+    {
+      "ayah": 147,
+      "fromMs": 8162000,
+      "toMs": 8180000
+    },
+    {
+      "ayah": 148,
+      "fromMs": 8180000,
+      "toMs": 8276000
+    },
+    {
+      "ayah": 149,
+      "fromMs": 8276000,
+      "toMs": 8320000
+    },
+    {
+      "ayah": 150,
+      "fromMs": 8320000,
+      "toMs": 8406000
+    },
+    {
+      "ayah": 151,
+      "fromMs": 8406000,
+      "toMs": 8464000
+    },
+    {
+      "ayah": 152,
+      "fromMs": 8464000,
+      "toMs": 8488000
+    },
+    {
+      "ayah": 153,
+      "fromMs": 8488000,
+      "toMs": 8514000
+    },
+    {
+      "ayah": 154,
+      "fromMs": 8514000,
+      "toMs": 8550000
+    },
+    {
+      "ayah": 155,
+      "fromMs": 8550000,
+      "toMs": 8596000
+    },
+    {
+      "ayah": 156,
+      "fromMs": 8596000,
+      "toMs": 8622000
+    },
+    {
+      "ayah": 157,
+      "fromMs": 8622000,
+      "toMs": 8676000
+    },
+    {
+      "ayah": 158,
+      "fromMs": 8676000,
+      "toMs": 8740000
+    },
+    {
+      "ayah": 159,
+      "fromMs": 8740000,
+      "toMs": 8806000
+    },
+    {
+      "ayah": 160,
+      "fromMs": 8806000,
+      "toMs": 8834000
+    },
+    {
+      "ayah": 161,
+      "fromMs": 8834000,
+      "toMs": 8890000
+    },
+    {
+      "ayah": 162,
+      "fromMs": 8890000,
+      "toMs": 8912000
+    },
+    {
+      "ayah": 163,
+      "fromMs": 8912000,
+      "toMs": 8936000
+    },
+    {
+      "ayah": 164,
+      "fromMs": 8936000,
+      "toMs": 9090000
+    },
+    {
+      "ayah": 165,
+      "fromMs": 9090000,
+      "toMs": 9164000
+    },
+    {
+      "ayah": 166,
+      "fromMs": 9164000,
+      "toMs": 9192000
+    },
+    {
+      "ayah": 167,
+      "fromMs": 9192000,
+      "toMs": 9246000
+    },
+    {
+      "ayah": 168,
+      "fromMs": 9246000,
+      "toMs": 9298000
+    },
+    {
+      "ayah": 169,
+      "fromMs": 9298000,
+      "toMs": 9330000
+    },
+    {
+      "ayah": 170,
+      "fromMs": 9330000,
+      "toMs": 9382000
+    },
+    {
+      "ayah": 171,
+      "fromMs": 9382000,
+      "toMs": 9424000
+    },
+    {
+      "ayah": 172,
+      "fromMs": 9424000,
+      "toMs": 9456000
+    },
+    {
+      "ayah": 173,
+      "fromMs": 9456000,
+      "toMs": 9512000
+    },
+    {
+      "ayah": 174,
+      "fromMs": 9512000,
+      "toMs": 9588000
+    },
+    {
+      "ayah": 175,
+      "fromMs": 9588000,
+      "toMs": 9618000
+    },
+    {
+      "ayah": 176,
+      "fromMs": 9618000,
+      "toMs": 9650000
+    },
+    {
+      "ayah": 177,
+      "fromMs": 9650000,
+      "toMs": 9804000
+    },
+    {
+      "ayah": 178,
+      "fromMs": 9804000,
+      "toMs": 9896000
+    },
+    {
+      "ayah": 179,
+      "fromMs": 9896000,
+      "toMs": 9918000
+    },
+    {
+      "ayah": 180,
+      "fromMs": 9918000,
+      "toMs": 9970000
+    },
+    {
+      "ayah": 181,
+      "fromMs": 9970000,
+      "toMs": 10008000
+    },
+    {
+      "ayah": 182,
+      "fromMs": 10008000,
+      "toMs": 10044000
+    },
+    {
+      "ayah": 183,
+      "fromMs": 10044000,
+      "toMs": 10092000
+    },
+    {
+      "ayah": 184,
+      "fromMs": 10092000,
+      "toMs": 10172000
+    },
+    {
+      "ayah": 185,
+      "fromMs": 10172000,
+      "toMs": 10286000
+    },
+    {
+      "ayah": 186,
+      "fromMs": 10286000,
+      "toMs": 10392000
+    },
+    {
+      "ayah": 187,
+      "fromMs": 10392000,
+      "toMs": 10572000
+    },
+    {
+      "ayah": 188,
+      "fromMs": 10572000,
+      "toMs": 10638000
+    },
+    {
+      "ayah": 189,
+      "fromMs": 10638000,
+      "toMs": 10696000
+    },
+    {
+      "ayah": 190,
+      "fromMs": 10696000,
+      "toMs": 10724000
+    },
+    {
+      "ayah": 191,
+      "fromMs": 10724000,
+      "toMs": 10796000
+    },
+    {
+      "ayah": 192,
+      "fromMs": 10796000,
+      "toMs": 10810000
+    },
+    {
+      "ayah": 193,
+      "fromMs": 10810000,
+      "toMs": 10844000
+    },
+    {
+      "ayah": 194,
+      "fromMs": 10844000,
+      "toMs": 10898000
+    },
+    {
+      "ayah": 195,
+      "fromMs": 10898000,
+      "toMs": 10934000
+    },
+    {
+      "ayah": 196,
+      "fromMs": 10934000,
+      "toMs": 11100000
+    },
+    {
+      "ayah": 197,
+      "fromMs": 11100000,
+      "toMs": 11176000
+    },
+    {
+      "ayah": 198,
+      "fromMs": 11176000,
+      "toMs": 11250000
+    },
+    {
+      "ayah": 199,
+      "fromMs": 11250000,
+      "toMs": 11280000
+    },
+    {
+      "ayah": 200,
+      "fromMs": 11280000,
+      "toMs": 11332000
+    },
+    {
+      "ayah": 201,
+      "fromMs": 11332000,
+      "toMs": 11366000
+    },
+    {
+      "ayah": 202,
+      "fromMs": 11366000,
+      "toMs": 11392000
+    },
+    {
+      "ayah": 203,
+      "fromMs": 11392000,
+      "toMs": 11462000
+    },
+    {
+      "ayah": 204,
+      "fromMs": 11462000,
+      "toMs": 11496000
+    },
+    {
+      "ayah": 205,
+      "fromMs": 11496000,
+      "toMs": 11530000
+    },
+    {
+      "ayah": 206,
+      "fromMs": 11530000,
+      "toMs": 11560000
+    },
+    {
+      "ayah": 207,
+      "fromMs": 11560000,
+      "toMs": 11588000
+    },
+    {
+      "ayah": 208,
+      "fromMs": 11588000,
+      "toMs": 11636000
+    },
+    {
+      "ayah": 209,
+      "fromMs": 11636000,
+      "toMs": 11666000
+    },
+    {
+      "ayah": 210,
+      "fromMs": 11666000,
+      "toMs": 11710000
+    },
+    {
+      "ayah": 211,
+      "fromMs": 11710000,
+      "toMs": 11760000
+    },
+    {
+      "ayah": 212,
+      "fromMs": 11760000,
+      "toMs": 11870000
+    },
+    {
+      "ayah": 213,
+      "fromMs": 11870000,
+      "toMs": 11992000
+    },
+    {
+      "ayah": 214,
+      "fromMs": 11992000,
+      "toMs": 12070000
+    },
+    {
+      "ayah": 215,
+      "fromMs": 12070000,
+      "toMs": 12136000
+    },
+    {
+      "ayah": 216,
+      "fromMs": 12136000,
+      "toMs": 12214000
+    },
+    {
+      "ayah": 217,
+      "fromMs": 12214000,
+      "toMs": 12370000
+    },
+    {
+      "ayah": 218,
+      "fromMs": 12370000,
+      "toMs": 12418000
+    },
+    {
+      "ayah": 219,
+      "fromMs": 12418000,
+      "toMs": 12496000
+    },
+    {
+      "ayah": 220,
+      "fromMs": 12496000,
+      "toMs": 12572000
+    },
+    {
+      "ayah": 221,
+      "fromMs": 12572000,
+      "toMs": 12702000
+    },
+    {
+      "ayah": 222,
+      "fromMs": 12702000,
+      "toMs": 12794000
+    },
+    {
+      "ayah": 223,
+      "fromMs": 12794000,
+      "toMs": 12846000
+    },
+    {
+      "ayah": 224,
+      "fromMs": 12846000,
+      "toMs": 12934000
+    },
+    {
+      "ayah": 225,
+      "fromMs": 12934000,
+      "toMs": 12978000
+    },
+    {
+      "ayah": 226,
+      "fromMs": 12978000,
+      "toMs": 13012000
+    },
+    {
+      "ayah": 227,
+      "fromMs": 13012000,
+      "toMs": 13034000
+    },
+    {
+      "ayah": 228,
+      "fromMs": 13034000,
+      "toMs": 13150000
+    },
+    {
+      "ayah": 229,
+      "fromMs": 13150000,
+      "toMs": 13268000
+    },
+    {
+      "ayah": 230,
+      "fromMs": 13268000,
+      "toMs": 13352000
+    },
+    {
+      "ayah": 231,
+      "fromMs": 13352000,
+      "toMs": 13490000
+    },
+    {
+      "ayah": 232,
+      "fromMs": 13490000,
+      "toMs": 13598000
+    },
+    {
+      "ayah": 233,
+      "fromMs": 13598000,
+      "toMs": 13782000
+    },
+    {
+      "ayah": 234,
+      "fromMs": 13782000,
+      "toMs": 13864000
+    },
+    {
+      "ayah": 235,
+      "fromMs": 13864000,
+      "toMs": 13992000
+    },
+    {
+      "ayah": 236,
+      "fromMs": 13992000,
+      "toMs": 14068000
+    },
+    {
+      "ayah": 237,
+      "fromMs": 14068000,
+      "toMs": 14184000
+    },
+    {
+      "ayah": 238,
+      "fromMs": 14184000,
+      "toMs": 14210000
+    },
+    {
+      "ayah": 239,
+      "fromMs": 14210000,
+      "toMs": 14254000
+    },
+    {
+      "ayah": 240,
+      "fromMs": 14254000,
+      "toMs": 14326000
+    },
+    {
+      "ayah": 241,
+      "fromMs": 14326000,
+      "toMs": 14348000
+    },
+    {
+      "ayah": 242,
+      "fromMs": 14348000,
+      "toMs": 14366000
+    },
+    {
+      "ayah": 243,
+      "fromMs": 14366000,
+      "toMs": 14432000
+    },
+    {
+      "ayah": 244,
+      "fromMs": 14432000,
+      "toMs": 14456000
+    },
+    {
+      "ayah": 245,
+      "fromMs": 14456000,
+      "toMs": 14500000
+    },
+    {
+      "ayah": 246,
+      "fromMs": 14500000,
+      "toMs": 14654000
+    },
+    {
+      "ayah": 247,
+      "fromMs": 14654000,
+      "toMs": 14756000
+    },
+    {
+      "ayah": 248,
+      "fromMs": 14756000,
+      "toMs": 14832000
+    },
+    {
+      "ayah": 249,
+      "fromMs": 14832000,
+      "toMs": 15012000
+    },
+    {
+      "ayah": 250,
+      "fromMs": 15012000,
+      "toMs": 15068000
+    },
+    {
+      "ayah": 251,
+      "fromMs": 15068000,
+      "toMs": 15148000
+    },
+    {
+      "ayah": 252,
+      "fromMs": 15148000,
+      "toMs": 15174000
+    },
+    {
+      "ayah": 253,
+      "fromMs": 15174000,
+      "toMs": 15310000
+    },
+    {
+      "ayah": 254,
+      "fromMs": 15310000,
+      "toMs": 15378000
+    },
+    {
+      "ayah": 255,
+      "fromMs": 15378000,
+      "toMs": 15492000
+    },
+    {
+      "ayah": 256,
+      "fromMs": 15492000,
+      "toMs": 15574000
+    },
+    {
+      "ayah": 257,
+      "fromMs": 15574000,
+      "toMs": 15656000
+    },
+    {
+      "ayah": 258,
+      "fromMs": 15656000,
+      "toMs": 15766000
+    },
+    {
+      "ayah": 259,
+      "fromMs": 15766000,
+      "toMs": 15960000
+    },
+    {
+      "ayah": 260,
+      "fromMs": 15960000,
+      "toMs": 16144000
+    },
+    {
+      "ayah": 261,
+      "fromMs": 16144000,
+      "toMs": 16222000
+    },
+    {
+      "ayah": 262,
+      "fromMs": 16222000,
+      "toMs": 16282000
+    },
+    {
+      "ayah": 263,
+      "fromMs": 16282000,
+      "toMs": 16348000
+    },
+    {
+      "ayah": 264,
+      "fromMs": 16348000,
+      "toMs": 16466000
+    },
+    {
+      "ayah": 265,
+      "fromMs": 16466000,
+      "toMs": 16564000
+    },
+    {
+      "ayah": 266,
+      "fromMs": 16564000,
+      "toMs": 16670000
+    },
+    {
+      "ayah": 267,
+      "fromMs": 16670000,
+      "toMs": 16750000
+    },
+    {
+      "ayah": 268,
+      "fromMs": 16750000,
+      "toMs": 16792000
+    },
+    {
+      "ayah": 269,
+      "fromMs": 16792000,
+      "toMs": 16838000
+    },
+    {
+      "ayah": 270,
+      "fromMs": 16838000,
+      "toMs": 16878000
+    },
+    {
+      "ayah": 271,
+      "fromMs": 16878000,
+      "toMs": 16938000
+    },
+    {
+      "ayah": 272,
+      "fromMs": 16938000,
+      "toMs": 17018000
+    },
+    {
+      "ayah": 273,
+      "fromMs": 17018000,
+      "toMs": 17132000
+    },
+    {
+      "ayah": 274,
+      "fromMs": 17132000,
+      "toMs": 17187000
+    },
+    {
+      "ayah": 275,
+      "fromMs": 17187000,
+      "toMs": 17298000
+    },
+    {
+      "ayah": 276,
+      "fromMs": 17298000,
+      "toMs": 17344000
+    },
+    {
+      "ayah": 277,
+      "fromMs": 17344000,
+      "toMs": 17404000
+    },
+    {
+      "ayah": 278,
+      "fromMs": 17404000,
+      "toMs": 17432000
+    },
+    {
+      "ayah": 279,
+      "fromMs": 17432000,
+      "toMs": 17472000
+    },
+    {
+      "ayah": 280,
+      "fromMs": 17472000,
+      "toMs": 17512000
+    },
+    {
+      "ayah": 281,
+      "fromMs": 17512000,
+      "toMs": 17544000
+    },
+    {
+      "ayah": 282,
+      "fromMs": 17544000,
+      "toMs": 17934000
+    },
+    {
+      "ayah": 283,
+      "fromMs": 17934000,
+      "toMs": 18028000
+    },
+    {
+      "ayah": 284,
+      "fromMs": 18028000,
+      "toMs": 18158000
+    },
+    {
+      "ayah": 285,
+      "fromMs": 18158000,
+      "toMs": 18228000
+    },
+    {
+      "ayah": 286,
+      "fromMs": 18228000,
+      "toMs": 18333192
+    }
+  ]
+}

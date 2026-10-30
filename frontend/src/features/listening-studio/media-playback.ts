@@ -16,6 +16,9 @@ export interface PlaybackTrack {
   endSeconds?: number;
   recordingEndSeconds?: number;
   ayahTimings?: AyahTime[];
+  /** Only translated tracks need a lazy recording URL. */
+  language?: string;
+  resolveUrl?: () => Promise<string | null>;
 }
 export interface PlayerCallbacks {
   onTrack: (track: PlaybackTrack) => void;
@@ -23,6 +26,7 @@ export interface PlayerCallbacks {
   onPlaying: (playing: boolean) => void;
   onFinished: () => void;
   onError: (message?: string) => void;
+  onTranslationWarning?: (message: string) => void;
 }
 interface Scheduled { source: AudioBufferSourceNode; gain: GainNode; start: number; end: number; offset: number }
 /** Gapless Web Audio for short clips; progressive native MP3 streaming for long Surahs. */
@@ -60,7 +64,23 @@ export class BufferedAudioPlayer {
   }
   private async load(index: number): Promise<PreparedAudio> {
     const track = this.tracks[index];
-    const preceding = this.decoded.get(index - 1);
+    if (track.phase === 'translation' && track.resolveUrl) {
+      const resolved = await track.resolveUrl();
+      if (this.disposed) throw new Error('Player disposed');
+      if (!resolved || !resolved.startsWith('https://')) {
+        throw new Error(`${track.language ?? 'Spoken'} translation missing at Ayah ${track.ayah}`);
+      }
+      track.url = resolved;
+      track.resolveUrl = undefined;
+    }
+    let preceding = this.decoded.get(index - 1);
+    // Consecutive passages share one Arabic MP3: if the preceding passage
+    // is still being prepared, reuse its Promise instead of fetching and
+    // decoding the entire recording a second time.
+    if (!preceding && this.tracks[index - 1]?.url === track.url &&
+        this.prepared.has(index - 1)) {
+      preceding = await this.prepared.get(index - 1);
+    }
     const result = track.startSeconds !== undefined && this.continuousStreams.has(track.url)
       ? this.continuousStreams.get(track.url)!
       : preceding?.kind === 'buffer' && this.tracks[index - 1]?.url === track.url
@@ -129,7 +149,11 @@ export class BufferedAudioPlayer {
     if (!this.samePhase(index, index + 1)) return;
     const current = this.scheduled.get(index);
     if (!current) return;
-    const next = await this.prepare(index + 1);
+    // Preparing the *next* translation must not stop the current recording.
+    // The normal advancement path handles a missing translation independently.
+    let next: PreparedAudio;
+    try { next = await this.prepare(index + 1); }
+    catch { return; }
     if (this.disposed || token !== this.token || this.position !== index) return;
     if (next.kind !== 'buffer') {
       if (this.tracks[index].phase === 'intro' && next.kind === 'element') {
@@ -184,7 +208,12 @@ export class BufferedAudioPlayer {
     };
     audio.onerror = () => {
       if (!this.disposed && token === this.token && this.position === index) {
-        this.fail('Cannot decode or stream this MP3 (media error ' + (audio.error?.code ?? '?') + ').');
+        const reason = 'Cannot decode or stream this MP3 (media error ' + (audio.error?.code ?? '?') + ').';
+        if (this.tracks[index].phase === 'translation') {
+          this.skipTranslation(index, reason);
+        } else {
+          this.fail(reason);
+        }
       }
     };
   }
@@ -197,7 +226,8 @@ export class BufferedAudioPlayer {
       const nextPromise = this.samePhase(this.position, this.position + 1)
         ? this.prepare(this.position + 1) : null;
       const current = await currentPromise;
-      if (nextPromise) await nextPromise;
+      // Never wait for or fail due to preloading another translation track.
+      if (nextPromise) void nextPromise.catch(() => {});
       if (this.disposed || token !== this.token) return;
       await this.context.resume();
       if (this.disposed || token !== this.token) return;
@@ -222,7 +252,12 @@ export class BufferedAudioPlayer {
     } catch (error) {
       if (!this.disposed && token === this.token) {
         const detail = error instanceof Error ? error.message : 'Unknown media error';
-        this.fail('Unable to prepare this recording: ' + detail);
+        const track = this.tracks[this.position];
+        if (track.phase === 'translation') {
+          this.skipTranslation(this.position, detail);
+        } else {
+          this.fail('Unable to prepare this recording: ' + detail);
+        }
       }
     }
   }
@@ -267,6 +302,15 @@ export class BufferedAudioPlayer {
       this.callbacks.onPlaying(false);
       void this.play();
     }
+  }
+  private skipTranslation(index: number, reason: string): void {
+    if (this.disposed || this.position !== index) return;
+    // Optional spoken audio must never terminate the Quran recitation.
+    this.prepared.delete(index);
+    this.callbacks.onTranslationWarning?.(reason);
+    const prepared = this.decoded.get(index);
+    if (prepared?.kind === 'element') prepared.audio.pause();
+    this.advance();
   }
   private fail(message: string): void {
     this.pause();

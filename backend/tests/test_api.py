@@ -100,7 +100,7 @@ def test_provider_http_failure_returns_503() -> None:
     with TestClient(create_app(transport=httpx.MockTransport(failing))) as test_client:
         response = test_client.get("/api/quran/surahs")
         assert response.status_code == 503
-        assert response.json() == {"detail": "Quran provider unavailable"}
+        assert response.json() == {"detail": "Quran audio provider is temporarily unavailable"}
 
 
 def test_bad_provider_shape_returns_502() -> None:

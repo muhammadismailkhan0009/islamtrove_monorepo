@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "surahId": 61,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/061.mp3",
+  "audioSha256": "48afa75fb7f48a78a7c0f63deb874fda0548b012edeb1e2be8b1122723921c91",
+  "audioBytes": 9461578,
+  "audioDurationMs": 591312,
+  "endMs": 591312,
+  "sourceAyahCount": 14,
+  "alignmentResolutionMs": 200,
+  "source": "QUL original CDN MP3; reference EveryAyah faster individual clips",
+  "method": "offline-global-DTW-four-speech-features",
+  "validationStatus": "experimental-cross-recording",
+  "reviewRequired": true,
+  "reviewAyahs": [],
+  "featureAgreementSecondsByAyah": [
+    0.0,
+    1.2,
+    0.4,
+    0.2,
+    0.6,
+    0.0,
+    0.2,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.8,
+    0.2,
+    0.2
+  ],
+  "dtwCosts": {
+    "mfcc": 0.07787249971828203,
+    "mfcc-delta": 0.07190153424184098,
+    "mel": 0.049624199321462684,
+    "chroma": 0.44087439427060576
+  },
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 14200
+    },
+    {
+      "ayah": 2,
+      "fromMs": 14200,
+      "toMs": 32600
+    },
+    {
+      "ayah": 3,
+      "fromMs": 32600,
+      "toMs": 49200
+    },
+    {
+      "ayah": 4,
+      "fromMs": 49200,
+      "toMs": 76200
+    },
+    {
+      "ayah": 5,
+      "fromMs": 76200,
+      "toMs": 165600
+    },
+    {
+      "ayah": 6,
+      "fromMs": 165600,
+      "toMs": 237000
+    },
+    {
+      "ayah": 7,
+      "fromMs": 237000,
+      "toMs": 267800
+    },
+    {
+      "ayah": 8,
+      "fromMs": 267800,
+      "toMs": 292800
+    },
+    {
+      "ayah": 9,
+      "fromMs": 292800,
+      "toMs": 321000
+    },
+    {
+      "ayah": 10,
+      "fromMs": 321000,
+      "toMs": 365000
+    },
+    {
+      "ayah": 11,
+      "fromMs": 365000,
+      "toMs": 412000
+    },
+    {
+      "ayah": 12,
+      "fromMs": 412000,
+      "toMs": 456400
+    },
+    {
+      "ayah": 13,
+      "fromMs": 456400,
+      "toMs": 502600
+    },
+    {
+      "ayah": 14,
+      "fromMs": 502600,
+      "toMs": 591312
+    }
+  ]
+}

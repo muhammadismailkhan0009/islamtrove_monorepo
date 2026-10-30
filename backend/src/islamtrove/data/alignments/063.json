@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "surahId": 63,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/063.mp3",
+  "audioSha256": "7f4350f0fef7d73dcd16db33cf96a37769266e265c1f726a9a4a8a2f399906dd",
+  "audioBytes": 7430267,
+  "audioDurationMs": 464353,
+  "endMs": 464353,
+  "sourceAyahCount": 11,
+  "alignmentResolutionMs": 200,
+  "source": "QUL original CDN MP3; reference EveryAyah faster individual clips",
+  "method": "offline-global-DTW-four-speech-features",
+  "validationStatus": "experimental-cross-recording",
+  "reviewRequired": true,
+  "reviewAyahs": [],
+  "featureAgreementSecondsByAyah": [
+    0.0,
+    0.8,
+    0.6,
+    0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.5,
+    0.0,
+    0.0,
+    0.5
+  ],
+  "dtwCosts": {
+    "mfcc": 0.10207847791403246,
+    "mfcc-delta": 0.0999885637530173,
+    "mel": 0.06131817698322261,
+    "chroma": 0.2405317708174003
+  },
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 35000
+    },
+    {
+      "ayah": 2,
+      "fromMs": 35000,
+      "toMs": 69000
+    },
+    {
+      "ayah": 3,
+      "fromMs": 69000,
+      "toMs": 89200
+    },
+    {
+      "ayah": 4,
+      "fromMs": 89200,
+      "toMs": 142800
+    },
+    {
+      "ayah": 5,
+      "fromMs": 142800,
+      "toMs": 172600
+    },
+    {
+      "ayah": 6,
+      "fromMs": 172600,
+      "toMs": 207600
+    },
+    {
+      "ayah": 7,
+      "fromMs": 207600,
+      "toMs": 254400
+    },
+    {
+      "ayah": 8,
+      "fromMs": 254400,
+      "toMs": 299800
+    },
+    {
+      "ayah": 9,
+      "fromMs": 299800,
+      "toMs": 384200
+    },
+    {
+      "ayah": 10,
+      "fromMs": 384200,
+      "toMs": 436600
+    },
+    {
+      "ayah": 11,
+      "fromMs": 436600,
+      "toMs": 464353
+    }
+  ]
+}

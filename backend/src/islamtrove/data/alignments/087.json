@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "surahId": 87,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/087.mp3",
+  "audioSha256": "72ca3309180b3e623c291c26a95579aef810c410bd61e27b9bb87e7f4df2ec05",
+  "audioBytes": 2558112,
+  "audioDurationMs": 159843,
+  "endMs": 159843,
+  "sourceAyahCount": 19,
+  "alignmentResolutionMs": 200,
+  "source": "QUL original CDN MP3; reference EveryAyah faster individual clips",
+  "method": "offline-global-DTW-four-speech-features",
+  "validationStatus": "experimental-cross-recording",
+  "reviewRequired": true,
+  "reviewAyahs": [],
+  "featureAgreementSecondsByAyah": [
+    0.0,
+    0.4,
+    0.0,
+    0.0,
+    0.0,
+    0.6,
+    0.2,
+    0.4,
+    0.2,
+    0.3,
+    0.0,
+    0.2,
+    0.0,
+    0.4,
+    0.0,
+    0.2,
+    0.2,
+    0.0,
+    0.0
+  ],
+  "dtwCosts": {
+    "mfcc": 0.13322381686779333,
+    "mfcc-delta": 0.12222848090409537,
+    "mel": 0.07903180020077973,
+    "chroma": 0.44798576527856154
+  },
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 4400
+    },
+    {
+      "ayah": 2,
+      "fromMs": 4400,
+      "toMs": 8800
+    },
+    {
+      "ayah": 3,
+      "fromMs": 8800,
+      "toMs": 16000
+    },
+    {
+      "ayah": 4,
+      "fromMs": 16000,
+      "toMs": 23600
+    },
+    {
+      "ayah": 5,
+      "fromMs": 23600,
+      "toMs": 34000
+    },
+    {
+      "ayah": 6,
+      "fromMs": 34000,
+      "toMs": 41600
+    },
+    {
+      "ayah": 7,
+      "fromMs": 41600,
+      "toMs": 63600
+    },
+    {
+      "ayah": 8,
+      "fromMs": 63600,
+      "toMs": 70400
+    },
+    {
+      "ayah": 9,
+      "fromMs": 70400,
+      "toMs": 79800
+    },
+    {
+      "ayah": 10,
+      "fromMs": 79800,
+      "toMs": 86600
+    },
+    {
+      "ayah": 11,
+      "fromMs": 86600,
+      "toMs": 92000
+    },
+    {
+      "ayah": 12,
+      "fromMs": 92000,
+      "toMs": 98800
+    },
+    {
+      "ayah": 13,
+      "fromMs": 98800,
+      "toMs": 110200
+    },
+    {
+      "ayah": 14,
+      "fromMs": 110200,
+      "toMs": 118000
+    },
+    {
+      "ayah": 15,
+      "fromMs": 118000,
+      "toMs": 127200
+    },
+    {
+      "ayah": 16,
+      "fromMs": 127200,
+      "toMs": 134600
+    },
+    {
+      "ayah": 17,
+      "fromMs": 134600,
+      "toMs": 143000
+    },
+    {
+      "ayah": 18,
+      "fromMs": 143000,
+      "toMs": 151800
+    },
+    {
+      "ayah": 19,
+      "fromMs": 151800,
+      "toMs": 159843
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "surahId": 114,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/114.mp3",
+  "audioSha256": "bf539794d839b25b3741f5bc3e97e074e6506d9336ab3fa134cf43c9dd4810a5",
+  "audioBytes": 653472,
+  "audioDurationMs": 40803,
+  "source": "EveryAyah 192kbps individual clips matched to QUL continuous MP3",
+  "method": "normalized-waveform-correlation-3000hz",
+  "confidenceByAyah": [
+    0.9892,
+    0.9372,
+    0.9973,
+    0.597,
+    0.7965,
+    0.9534
+  ],
+  "confirmationByAyah": [
+    0.9899,
+    0.9312,
+    0.9976,
+    0.6762,
+    0.7624,
+    0.9439
+  ],
+  "alignmentAnomalies": [],
+  "validationStatus": "automatically-verified",
+  "endMs": 40327,
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 5611
+    },
+    {
+      "ayah": 2,
+      "fromMs": 5611,
+      "toMs": 8824
+    },
+    {
+      "ayah": 3,
+      "fromMs": 8824,
+      "toMs": 15616
+    },
+    {
+      "ayah": 4,
+      "fromMs": 15616,
+      "toMs": 24654
+    },
+    {
+      "ayah": 5,
+      "fromMs": 24654,
+      "toMs": 32517
+    },
+    {
+      "ayah": 6,
+      "fromMs": 32517,
+      "toMs": 40327
+    }
+  ]
+}

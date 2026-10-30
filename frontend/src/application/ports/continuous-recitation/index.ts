@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 
-/** QUL times are absolute milliseconds within ONE continuous Surah recording. */
+/** Source-verified times are absolute milliseconds within ONE continuous recording. */
 export interface AyahTime {
   ayah: number;
   fromMs: number;
@@ -15,11 +15,14 @@ export interface ContinuousRecitation {
 }
 export interface ContinuousRecitationPort {
   getSurah(surahId: number, expectedAyahCount: number): Promise<ContinuousRecitation>;
+  invalidate?(surahId: number): void;
 }
+export const ANBIYA_AUDIO_URL = 'https://media.assabile.com/assabile/recitations_7892537823/mp3/mohamed-seddik-el-menchaoui/mohamed-seddik-el-menchaoui-021-al-anbiya-23449-6566.mp3?v=2c10e77e5f62';
+
 export const CONTINUOUS_RECITATION =
   new InjectionToken<ContinuousRecitationPort>('ContinuousRecitationPort');
 
-/** Do not invent or interpolate missing Ayah boundaries. */
+/** Never invent/interpolate missing boundaries: validate the API's corrected times. */
 export function parseQulRecitation(
   surahId: number, expectedAyahCount: number, payload: unknown
 ): ContinuousRecitation {
@@ -30,9 +33,11 @@ export function parseQulRecitation(
   }
   const response = payload as { audio?: { url?: unknown }; segments?: Record<string, unknown> };
   const audioUrl = response.audio?.url;
-  if (typeof audioUrl !== 'string' ||
-      !/^https:\/\/audio-cdn\.tarteel\.ai\/quran\/surah\/minshawy\/mujawwad\/mp3\/\d{3}\.mp3$/.test(audioUrl) ||
-      !audioUrl.endsWith('/' + String(surahId).padStart(3, '0') + '.mp3')) {
+  if (typeof audioUrl !== 'string' || !(
+      (surahId === 21 && audioUrl === ANBIYA_AUDIO_URL) ||
+      (surahId !== 21 && /^https:\/\/audio-cdn\.tarteel\.ai\/quran\/surah\/minshawy\/mujawwad\/mp3\/\d{3}\.mp3$/.test(audioUrl) &&
+       audioUrl.endsWith('/' + String(surahId).padStart(3, '0') + '.mp3'))
+  )) {
     throw new Error('Invalid continuous recitation audio URL');
   }
   const segments = response.segments;

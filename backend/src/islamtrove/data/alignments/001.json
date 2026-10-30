@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "surahId": 1,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://everyayah.com/data/Minshawy_Mujawwad_192kbps/PageMp3s/Page001.mp3",
+  "audioSha256": "1e5391594c30d5864a5289a7f8fed907f483bf873a3d70da65a84b39c12066c3",
+  "audioBytes": 2095356,
+  "audioDurationMs": 130960,
+  "source": "EveryAyah 192kbps individual clips matched to QUL continuous MP3",
+  "method": "normalized-waveform-correlation-3000hz",
+  "confidenceByAyah": [
+    1.0,
+    0.8993,
+    0.9996,
+    0.9823,
+    0.9874,
+    0.8665,
+    0.726
+  ],
+  "confirmationByAyah": [
+    1.0,
+    0.9552,
+    0.9997,
+    0.9824,
+    0.988,
+    0.909,
+    0.913
+  ],
+  "alignmentAnomalies": [],
+  "validationStatus": "automatically-verified",
+  "endMs": 130954,
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 13322
+    },
+    {
+      "ayah": 2,
+      "fromMs": 13322,
+      "toMs": 26384
+    },
+    {
+      "ayah": 3,
+      "fromMs": 26384,
+      "toMs": 44382
+    },
+    {
+      "ayah": 4,
+      "fromMs": 44382,
+      "toMs": 70322
+    },
+    {
+      "ayah": 5,
+      "fromMs": 70322,
+      "toMs": 85238
+    },
+    {
+      "ayah": 6,
+      "fromMs": 85238,
+      "toMs": 96104
+    },
+    {
+      "ayah": 7,
+      "fromMs": 96104,
+      "toMs": 130954
+    }
+  ]
+}

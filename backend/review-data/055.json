@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "surahId": 55,
+  "audioSha256": "63319d1ffefb95268b76d20c34d3c9c53dd6ce885dcf7223be7104ba27d0f971",
+  "reviews": {
+    "7": {
+      "status": "verified",
+      "reviewedBy": "Listening review (prior confirmation)",
+      "reviewedAt": "2026-10-29T00:00:00+00:00"
+    },
+    "15": {
+      "status": "verified",
+      "reviewedBy": "Listening review (prior confirmation)",
+      "reviewedAt": "2026-10-29T00:00:00+00:00"
+    },
+    "21": {
+      "status": "verified",
+      "reviewedBy": "Listening review (prior confirmation)",
+      "reviewedAt": "2026-10-29T00:00:00+00:00"
+    },
+    "22": {
+      "status": "verified",
+      "reviewedBy": "Listening review (prior confirmation)",
+      "reviewedAt": "2026-10-29T00:00:00+00:00"
+    },
+    "23": {
+      "status": "verified",
+      "reviewedBy": "Listening review (prior confirmation)",
+      "reviewedAt": "2026-10-29T00:00:00+00:00"
+    },
+    "24": {
+      "status": "verified",
+      "reviewedBy": "Listening review (prior confirmation)",
+      "reviewedAt": "2026-10-29T00:00:00+00:00"
+    },
+    "25": {
+      "status": "verified",
+      "reviewedBy": "Listening review (prior confirmation)",
+      "reviewedAt": "2026-10-29T00:00:00+00:00"
+    },
+    "26": {
+      "status": "verified",
+      "reviewedBy": "Listening review (prior confirmation)",
+      "reviewedAt": "2026-10-29T00:00:00+00:00"
+    },
+    "27": {
+      "status": "verified",
+      "reviewedBy": "Listening review (prior confirmation)",
+      "reviewedAt": "2026-10-29T00:00:00+00:00"
+    },
+    "40": {
+      "status": "verified",
+      "reviewedBy": "Listening review (prior confirmation)",
+      "reviewedAt": "2026-10-29T00:00:00+00:00"
+    },
+    "78": {
+      "status": "verified",
+      "reviewedBy": "Listening review (prior confirmation)",
+      "reviewedAt": "2026-10-29T00:00:00+00:00"
+    }
+  },
+  "audit": [
+    {
+      "operation": "import-prior-listening-confirmation",
+      "ayahs": [
+        7,
+        15,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        40,
+        78
+      ],
+      "at": "2026-10-29T00:00:00+00:00",
+      "reviewedBy": "Listening review"
+    }
+  ]
+}

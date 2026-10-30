@@ -22,7 +22,7 @@ function loadTypeScript(relativePath) {
   return module.exports;
 }
 
-const { createAudioQueue, createAudioTracks } = loadTypeScript('audio-plan.ts');
+const { createAudioQueue, createAudioTracks, createIndependentAudioTracks } = loadTypeScript('audio-plan.ts');
 const { BufferedAudioPlayer } = loadTypeScript('media-playback.ts');
 const { analyzeAudioEdges } = loadTypeScript('audio-boundaries.ts');
 const { parseQulRecitation } = loadTypeScript('../../application/ports/continuous-recitation/index.ts');
@@ -76,136 +76,72 @@ test('QUL timestamps define exact Arabic ranges; translations keep their sequenc
   assert.equal(tracks.length,5);
 });
 
-test('Al-Fatihah selects the verified continuous Page001 recording with QUL timestamps', () => {
-  const lengths = [13320, 13060, 18000, 25940, 14920, 10870, 34850];
-  let from = 0;
-  const segments = {};
-  lengths.forEach((duration, i) => {
-    segments['1:' + (i+1)] = {time_from:from,time_to:from+duration};
-    from += duration;
+test('Ar-Rahman uses corrected local timings for original CDN recording', () => {
+  const manifest = JSON.parse(fs.readFileSync(path.resolve(__dirname,
+    '../../backend/src/islamtrove/data/alignments/055.json'), 'utf8'));
+  const segments = Object.fromEntries(manifest.timings.map(item =>
+    [`55:${item.ayah}`, {time_from:item.fromMs,time_to:item.toMs}]));
+  const parsed = parseQulRecitation(55,78, {
+    audio:{url:manifest.audioUrl},segments
   });
-  assert.equal(from,130960);
-  const parsed = parseQulRecitation(1, 7, {
-    audio: {url: 'https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/001.mp3'},
-    segments
-  });
-  assert.equal(parsed.endMs,130960);
   assert.equal(parsed.audioUrl,
-    'https://everyayah.com/data/Minshawy_Mujawwad_192kbps/PageMp3s/Page001.mp3');
+    'https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/055.mp3');
+  assert.equal(parsed.timings.length,78);
+  assert.ok(parsed.timings[6].fromMs > 41000 && parsed.timings[6].fromMs < 46000);
+  assert.ok(parsed.endMs > 1262000 && parsed.endMs < 1263000);
+  const tracks=createIndependentAudioTracks(createAudioQueue('recitation',[7,78],78,[]),
+    55,parsed, async()=>{throw new Error('Arabic does not fetch translations')});
+  assert.equal(tracks.length,2);
+  assert.equal(tracks[0].endSeconds,parsed.timings[6].toMs/1000);
+  assert.equal(tracks[1].startSeconds,tracks[0].endSeconds);
+  assert.throws(()=>parseQulRecitation(54,78,{audio:{url:manifest.audioUrl},segments}),
+    /audio URL/);
 });
 
-test('recitation-only passages retain contiguous timestamps from one source', async () => {
-  const queue = createAudioQueue('recitation', [4,7], 7, []);
-  const times=[0,13320,26380,44380,70320,85240,96110,130960];
-  const continuous={surahId:1, audioUrl:'https://everyayah.com/data/Minshawy_Mujawwad_192kbps/PageMp3s/Page001.mp3',
-    endMs:130960, timings:times.slice(1).map((end,i)=>({ayah:i+1,fromMs:times[i],toMs:end}))};
-  const response={surahId:1,recitation:[],translationAudio:[]};
-  const tracks = createAudioTracks(queue,new Map([['',response]]),1,continuous);
-  assert.deepEqual(tracks.map(x=>[x.stage,x.startSeconds,x.endSeconds]),[
-    [0,0,70.32],[1,70.32,130.96]
-  ]);
-  const context = new FakeAudioContext();
-  context.decodeAudioData = async () => ({duration:130.952,length:6285696});
-  const blobs=[];
-  const player=new BufferedAudioPlayer(tracks,{
-    get:async url=>{blobs.push(url);return {blob:new Blob(['audio'],{type:'audio/mpeg'}),bytes:5}}},
-    {onTrack(){},onAyah(){},onPlaying(){},onFinished(){},onError(e){throw Error(e)}},context);
-  await player.play();
-  assert.equal(blobs.length,1);
-  assert.equal(context.nodes.length,2);
-  assert.equal(context.nodes[0].when + 70.32,context.nodes[1].when);
-  assert.equal(context.nodes[1].offset,70.32);
-  assert.equal(context.nodes[1].playDuration,60.64);
-  assert.strictEqual(context.nodes[0].buffer,context.nodes[1].buffer);
-  player.dispose();
+test('Al-Anbiya uses complete locally streamed MP3 with newly aligned Ayahs', () => {
+  const metadata = JSON.parse(fs.readFileSync(
+    path.resolve(__dirname, '../../backend/src/islamtrove/data/alignments/021.json'), 'utf8'));
+  const segments = Object.fromEntries(metadata.timings.map(item =>
+    ['21:' + item.ayah, {time_from:item.fromMs, time_to:item.toMs}]));
+  const timeline = parseQulRecitation(21,112,{audio:{url:metadata.audioUrl},segments});
+  assert.equal(timeline.audioUrl,
+    'https://media.assabile.com/assabile/recitations_7892537823/mp3/' +
+    'mohamed-seddik-el-menchaoui/' +
+    'mohamed-seddik-el-menchaoui-021-al-anbiya-23449-6566.mp3?v=' +
+    metadata.audioSha256.slice(0,12));
+  assert.equal(metadata.method, 'offline-global-DTW-four-speech-features');
+  assert.equal(timeline.endMs, 3517989);
+  assert.equal(timeline.timings[1].fromMs, 23772);
+  assert.equal(timeline.timings[111].toMs, timeline.endMs);
+  const tracks=createIndependentAudioTracks(createAudioQueue('recitation',[20,112],112,[]),
+    21,timeline,async()=>{throw Error('No translation needed')});
+  assert.equal(tracks[1].endSeconds,timeline.endMs/1000);
+  assert.throws(()=>parseQulRecitation(21,112,{
+    audio:{url:'https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/021.mp3'},
+    segments}), /audio URL/);
 });
 
-test('Al-Fatihah selects the verified continuous Page001 recording with QUL timestamps', () => {
-  const lengths = [13320, 13060, 18000, 25940, 14920, 10870, 34850];
-  let from = 0;
-  const segments = {};
-  lengths.forEach((duration, i) => {
-    segments['1:' + (i+1)] = {time_from:from,time_to:from+duration};
-    from += duration;
+test('Al-Kahf locally verified alignment governs highlighting and passage boundaries', () => {
+  const local = JSON.parse(fs.readFileSync(
+    path.resolve(__dirname, '../../backend/src/islamtrove/data/alignments/018.json'), 'utf8'));
+  const segments = Object.fromEntries(local.timings.map(item =>
+    [`18:${item.ayah}`, {time_from:item.fromMs,time_to:item.toMs}]));
+  const parsed = parseQulRecitation(18,110,{
+    audio:{url:local.audioUrl}, segments
   });
-  assert.equal(from,130960);
-  const parsed = parseQulRecitation(1, 7, {
-    audio: {url: 'https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/001.mp3'},
-    segments
+  assert.equal(parsed.timings.length, 110);
+  assert.equal(parsed.timings[23].ayah, 24);
+  assert.ok(parsed.timings[23].toMs > 1088000);
+  assert.equal(parsed.timings[24].fromMs, parsed.timings[23].toMs);
+  assert.ok(parsed.endMs > 4023000);
+  const queue = createAudioQueue('recitation',[24,110],110,[]);
+  const tracks = createIndependentAudioTracks(queue,18,parsed,async () => {
+    throw new Error('No translation data needed in Arabic-only playback');
   });
-  assert.equal(parsed.endMs,130960);
-  assert.equal(parsed.audioUrl,
-    'https://everyayah.com/data/Minshawy_Mujawwad_192kbps/PageMp3s/Page001.mp3');
-});
-
-test('recitation-only passages retain contiguous timestamps from one source', async () => {
-  const queue = createAudioQueue('recitation', [4,7], 7, []);
-  const times=[0,13320,26380,44380,70320,85240,96110,130960];
-  const continuous={surahId:1, audioUrl:'https://everyayah.com/data/Minshawy_Mujawwad_192kbps/PageMp3s/Page001.mp3',
-    endMs:130960, timings:times.slice(1).map((end,i)=>({ayah:i+1,fromMs:times[i],toMs:end}))};
-  const response={surahId:1,recitation:[],translationAudio:[]};
-  const tracks = createAudioTracks(queue,new Map([['',response]]),1,continuous);
-  assert.deepEqual(tracks.map(x=>[x.stage,x.startSeconds,x.endSeconds]),[
-    [0,0,70.32],[1,70.32,130.96]
-  ]);
-  const context = new FakeAudioContext();
-  context.decodeAudioData = async () => ({duration:130.952,length:6285696});
-  const blobs=[];
-  const player=new BufferedAudioPlayer(tracks,{
-    get:async url=>{blobs.push(url);return {blob:new Blob(['audio'],{type:'audio/mpeg'}),bytes:5}}},
-    {onTrack(){},onAyah(){},onPlaying(){},onFinished(){},onError(e){throw Error(e)}},context);
-  await player.play();
-  assert.equal(blobs.length,1);
-  assert.equal(context.nodes.length,2);
-  assert.equal(context.nodes[0].when + 70.32,context.nodes[1].when);
-  assert.equal(context.nodes[1].offset,70.32);
-  assert.equal(context.nodes[1].playDuration,60.64);
-  assert.strictEqual(context.nodes[0].buffer,context.nodes[1].buffer);
-  player.dispose();
-});
-
-test('Al-Fatihah selects the verified continuous Page001 recording with QUL timestamps', () => {
-  const lengths = [13320, 13060, 18000, 25940, 14920, 10870, 34850];
-  let from = 0;
-  const segments = {};
-  lengths.forEach((duration, i) => {
-    segments['1:' + (i+1)] = {time_from:from,time_to:from+duration};
-    from += duration;
-  });
-  assert.equal(from,130960);
-  const parsed = parseQulRecitation(1, 7, {
-    audio: {url: 'https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/001.mp3'},
-    segments
-  });
-  assert.equal(parsed.endMs,130960);
-  assert.equal(parsed.audioUrl,
-    'https://everyayah.com/data/Minshawy_Mujawwad_192kbps/PageMp3s/Page001.mp3');
-});
-
-test('recitation-only passages retain contiguous timestamps from one source', async () => {
-  const queue = createAudioQueue('recitation', [4,7], 7, []);
-  const times=[0,13320,26380,44380,70320,85240,96110,130960];
-  const continuous={surahId:1, audioUrl:'https://everyayah.com/data/Minshawy_Mujawwad_192kbps/PageMp3s/Page001.mp3',
-    endMs:130960, timings:times.slice(1).map((end,i)=>({ayah:i+1,fromMs:times[i],toMs:end}))};
-  const response={surahId:1,recitation:[],translationAudio:[]};
-  const tracks = createAudioTracks(queue,new Map([['',response]]),1,continuous);
-  assert.deepEqual(tracks.map(x=>[x.stage,x.startSeconds,x.endSeconds]),[
-    [0,0,70.32],[1,70.32,130.96]
-  ]);
-  const context = new FakeAudioContext();
-  context.decodeAudioData = async () => ({duration:130.952,length:6285696});
-  const blobs=[];
-  const player=new BufferedAudioPlayer(tracks,{
-    get:async url=>{blobs.push(url);return {blob:new Blob(['audio'],{type:'audio/mpeg'}),bytes:5}}},
-    {onTrack(){},onAyah(){},onPlaying(){},onFinished(){},onError(e){throw Error(e)}},context);
-  await player.play();
-  assert.equal(blobs.length,1);
-  assert.equal(context.nodes.length,2);
-  assert.equal(context.nodes[0].when + 70.32,context.nodes[1].when);
-  assert.equal(context.nodes[1].offset,70.32);
-  assert.equal(context.nodes[1].playDuration,60.64);
-  assert.strictEqual(context.nodes[0].buffer,context.nodes[1].buffer);
-  player.dispose();
+  assert.equal(tracks.length,2);
+  assert.equal(tracks[0].endSeconds,parsed.timings[23].toMs/1000);
+  assert.equal(tracks[1].startSeconds,tracks[0].endSeconds);
+  assert.equal(tracks[1].endSeconds,parsed.endMs/1000);
 });
 
 test('Al-Fatihah selects the verified continuous Page001 recording with QUL timestamps', () => {
@@ -247,9 +183,45 @@ test('recitation-only passages retain contiguous timestamps from one source', as
   assert.equal(context.nodes.length,2);
   assert.equal(context.nodes[0].when + 70.32,context.nodes[1].when);
   assert.equal(context.nodes[1].offset,70.32);
-  assert.equal(context.nodes[1].playDuration,60.64);
+  assert.ok(Math.abs(context.nodes[1].playDuration - 60.64) < 0.00001);
   assert.strictEqual(context.nodes[0].buffer,context.nodes[1].buffer);
   player.dispose();
+});
+
+test('Al-Baqarah sequence plays Arabic and available German without inventing last four MP3s', () => {
+  const queue = createAudioQueue('both', [280, 286], 286, ['German']);
+  const timings = Array.from({length:286}, (_,i)=>({ayah:i+1, fromMs:i*1500, toMs:(i+1)*1500}));
+  const continuous = {surahId:2, audioUrl:'https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/002.mp3',
+    endMs:429000, timings};
+  const available = Array.from({length:282}, (_,i)=>({ayah:i+1,url:'https://example.org/de/'+(i+1)+'.mp3'}));
+  const german = {surahId:2, recitation:[], translationAudio:available,
+    unavailableTranslationAyahs:[283,284,285,286]};
+  const tracks = createAudioTracks(queue, new Map([['German',german]]), 2, continuous);
+  assert.deepEqual(tracks.filter(x=>x.phase==='arabic').map(x=>x.ayah),[1,281]);
+  assert.deepEqual(tracks.filter(x=>x.phase==='translation' && x.ayah>280).map(x=>x.ayah),[281,282]);
+  assert.equal(tracks.some(x=>x.url.includes('/283.mp3') || x.url.includes('/286.mp3')),false);
+  const unexpectedlyMissing = {...german, unavailableTranslationAyahs: []};
+  assert.throws(() => createAudioTracks(queue,new Map([['German',unexpectedlyMissing]]),2,continuous), /Ayah 283/);
+});
+
+test('Arabic sequence is constructed without fetching translation metadata', async () => {
+  const queue = createAudioQueue('both',[2],2,['English','German']);
+  const continuous = {surahId:2,endMs:8000, audioUrl:'https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/002.mp3',
+    timings:[{ayah:1,fromMs:0,toMs:4000},{ayah:2,fromMs:4000,toMs:8000}]};
+  const requests = [];
+  const tracks = createIndependentAudioTracks(queue,2,continuous,async (language,ayah)=>{
+    requests.push([language,ayah]);
+    return language==='German' ? null : `https://translation.example/${ayah}.mp3`;
+  });
+  assert.equal(requests.length,0,'Creating and starting Arabic must not fetch a translation');
+  assert.deepEqual(tracks.map(t=>t.phase),['arabic','translation','translation','translation','translation']);
+  assert.equal(tracks[0].url,continuous.audioUrl);
+  assert.equal(tracks[0].startSeconds,0);
+  assert.equal(tracks[0].endSeconds,8);
+  assert.equal(await tracks[1].resolveUrl(),'https://translation.example/1.mp3');
+  assert.deepEqual(requests,[['English',1]]);
+  assert.equal(await tracks[2].resolveUrl(),null);
+  assert.deepEqual(requests,[['English',1],['German',1]]);
 });
 
 test('QUL metadata rejects incomplete, spoofed or contradictory Ayah timestamps', () => {
@@ -437,7 +409,7 @@ test('long Surah streams the full source rather than downloading hours of PCM', 
       startSeconds: 0, endSeconds: 8.78, recordingEndSeconds: 18342.53
     }, {get:()=>{throw new Error('Full Surah must never be downloaded')}}, new FakeAudioContext(), ()=>false);
     assert.equal(prepared.kind,'element');
-    assert.equal(prepared.audio.preload,'metadata');
+    assert.equal(prepared.audio.preload,'auto');
     assert.equal(sources.length,1);
   } finally { globalThis.Audio = original; }
 });

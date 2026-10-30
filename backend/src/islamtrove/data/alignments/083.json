@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "surahId": 83,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/083.mp3",
+  "audioSha256": "4b44d21cd2534d2034a2180bc4f30a5e2521ae2e7c64e7b044797dbd4b4a6910",
+  "audioBytes": 7681043,
+  "audioDurationMs": 480026,
+  "endMs": 480026,
+  "sourceAyahCount": 36,
+  "alignmentResolutionMs": 200,
+  "source": "QUL original CDN MP3; reference EveryAyah faster individual clips",
+  "method": "offline-global-DTW-four-speech-features",
+  "validationStatus": "experimental-cross-recording",
+  "reviewRequired": true,
+  "reviewAyahs": [],
+  "featureAgreementSecondsByAyah": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.2,
+    0.0,
+    0.2,
+    0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.4,
+    0.2,
+    0.4,
+    0.4,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.2,
+    0.6,
+    0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.2,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.0,
+    0.4
+  ],
+  "dtwCosts": {
+    "mfcc": 0.0810497666994519,
+    "mfcc-delta": 0.07846196616921637,
+    "mel": 0.04558615736510471,
+    "chroma": 0.15782746019023958
+  },
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 5200
+    },
+    {
+      "ayah": 2,
+      "fromMs": 5200,
+      "toMs": 16200
+    },
+    {
+      "ayah": 3,
+      "fromMs": 16200,
+      "toMs": 28000
+    },
+    {
+      "ayah": 4,
+      "fromMs": 28000,
+      "toMs": 57400
+    },
+    {
+      "ayah": 5,
+      "fromMs": 57400,
+      "toMs": 62000
+    },
+    {
+      "ayah": 6,
+      "fromMs": 62000,
+      "toMs": 74800
+    },
+    {
+      "ayah": 7,
+      "fromMs": 74800,
+      "toMs": 88800
+    },
+    {
+      "ayah": 8,
+      "fromMs": 88800,
+      "toMs": 97600
+    },
+    {
+      "ayah": 9,
+      "fromMs": 97600,
+      "toMs": 104400
+    },
+    {
+      "ayah": 10,
+      "fromMs": 104400,
+      "toMs": 127800
+    },
+    {
+      "ayah": 11,
+      "fromMs": 127800,
+      "toMs": 138600
+    },
+    {
+      "ayah": 12,
+      "fromMs": 138600,
+      "toMs": 155200
+    },
+    {
+      "ayah": 13,
+      "fromMs": 155200,
+      "toMs": 173000
+    },
+    {
+      "ayah": 14,
+      "fromMs": 173000,
+      "toMs": 190400
+    },
+    {
+      "ayah": 15,
+      "fromMs": 190400,
+      "toMs": 210600
+    },
+    {
+      "ayah": 16,
+      "fromMs": 210600,
+      "toMs": 223400
+    },
+    {
+      "ayah": 17,
+      "fromMs": 223400,
+      "toMs": 242200
+    },
+    {
+      "ayah": 18,
+      "fromMs": 242200,
+      "toMs": 259800
+    },
+    {
+      "ayah": 19,
+      "fromMs": 259800,
+      "toMs": 271000
+    },
+    {
+      "ayah": 20,
+      "fromMs": 271000,
+      "toMs": 276800
+    },
+    {
+      "ayah": 21,
+      "fromMs": 276800,
+      "toMs": 286000
+    },
+    {
+      "ayah": 22,
+      "fromMs": 286000,
+      "toMs": 294400
+    },
+    {
+      "ayah": 23,
+      "fromMs": 294400,
+      "toMs": 304800
+    },
+    {
+      "ayah": 24,
+      "fromMs": 304800,
+      "toMs": 314600
+    },
+    {
+      "ayah": 25,
+      "fromMs": 314600,
+      "toMs": 322200
+    },
+    {
+      "ayah": 26,
+      "fromMs": 322200,
+      "toMs": 341600
+    },
+    {
+      "ayah": 27,
+      "fromMs": 341600,
+      "toMs": 349000
+    },
+    {
+      "ayah": 28,
+      "fromMs": 349000,
+      "toMs": 360800
+    },
+    {
+      "ayah": 29,
+      "fromMs": 360800,
+      "toMs": 377200
+    },
+    {
+      "ayah": 30,
+      "fromMs": 377200,
+      "toMs": 387000
+    },
+    {
+      "ayah": 31,
+      "fromMs": 387000,
+      "toMs": 405600
+    },
+    {
+      "ayah": 32,
+      "fromMs": 405600,
+      "toMs": 428600
+    },
+    {
+      "ayah": 33,
+      "fromMs": 428600,
+      "toMs": 442800
+    },
+    {
+      "ayah": 34,
+      "fromMs": 442800,
+      "toMs": 456200
+    },
+    {
+      "ayah": 35,
+      "fromMs": 456200,
+      "toMs": 468200
+    },
+    {
+      "ayah": 36,
+      "fromMs": 468200,
+      "toMs": 480026
+    }
+  ]
+}

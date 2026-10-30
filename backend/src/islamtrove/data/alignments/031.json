@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "surahId": 31,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/031.mp3",
+  "audioSha256": "6c074b966bda5e1a9b4ea42928f566528e4f638e894725156f8661d9bc8833e6",
+  "audioBytes": 21023548,
+  "audioDurationMs": 1313933,
+  "endMs": 1313933,
+  "sourceAyahCount": 34,
+  "alignmentResolutionMs": 355,
+  "source": "QUL original CDN MP3; reference EveryAyah faster individual clips",
+  "method": "offline-global-DTW-four-speech-features",
+  "validationStatus": "experimental-cross-recording",
+  "reviewRequired": true,
+  "reviewAyahs": [
+    {
+      "ayah": 27,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 13.32,
+      "mfccDisagreementSeconds": 0.0
+    }
+  ],
+  "featureAgreementSecondsByAyah": [
+    0.0,
+    0.36,
+    0.18,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.36,
+    0.36,
+    0.0,
+    0.36,
+    0.36,
+    0.71,
+    0.71,
+    0.18,
+    0.36,
+    0.0,
+    0.36,
+    0.0,
+    0.0,
+    0.0,
+    0.36,
+    0.36,
+    0.36,
+    0.53,
+    0.18,
+    13.32,
+    0.36,
+    0.0,
+    0.0,
+    0.0,
+    0.36,
+    0.0,
+    0.0
+  ],
+  "dtwCosts": {
+    "mfcc": 0.15037799532567805,
+    "mfcc-delta": 0.14858310737985644,
+    "mel": 0.11476042748513463,
+    "chroma": 0.22010314692634989
+  },
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 7813
+    },
+    {
+      "ayah": 2,
+      "fromMs": 7813,
+      "toMs": 17756
+    },
+    {
+      "ayah": 3,
+      "fromMs": 17756,
+      "toMs": 30186
+    },
+    {
+      "ayah": 4,
+      "fromMs": 30186,
+      "toMs": 54334
+    },
+    {
+      "ayah": 5,
+      "fromMs": 54334,
+      "toMs": 78128
+    },
+    {
+      "ayah": 6,
+      "fromMs": 78128,
+      "toMs": 118257
+    },
+    {
+      "ayah": 7,
+      "fromMs": 118257,
+      "toMs": 164778
+    },
+    {
+      "ayah": 8,
+      "fromMs": 164778,
+      "toMs": 184310
+    },
+    {
+      "ayah": 9,
+      "fromMs": 184310,
+      "toMs": 203842
+    },
+    {
+      "ayah": 10,
+      "fromMs": 203842,
+      "toMs": 262082
+    },
+    {
+      "ayah": 11,
+      "fromMs": 262082,
+      "toMs": 291558
+    },
+    {
+      "ayah": 12,
+      "fromMs": 291558,
+      "toMs": 377143
+    },
+    {
+      "ayah": 13,
+      "fromMs": 377143,
+      "toMs": 405198
+    },
+    {
+      "ayah": 14,
+      "fromMs": 405198,
+      "toMs": 456336
+    },
+    {
+      "ayah": 15,
+      "fromMs": 456336,
+      "toMs": 521679
+    },
+    {
+      "ayah": 16,
+      "fromMs": 521679,
+      "toMs": 566780
+    },
+    {
+      "ayah": 17,
+      "fromMs": 566780,
+      "toMs": 603357
+    },
+    {
+      "ayah": 18,
+      "fromMs": 603357,
+      "toMs": 630702
+    },
+    {
+      "ayah": 19,
+      "fromMs": 630702,
+      "toMs": 653430
+    },
+    {
+      "ayah": 20,
+      "fromMs": 653430,
+      "toMs": 710250
+    },
+    {
+      "ayah": 21,
+      "fromMs": 710250,
+      "toMs": 751444
+    },
+    {
+      "ayah": 22,
+      "fromMs": 751444,
+      "toMs": 782340
+    },
+    {
+      "ayah": 23,
+      "fromMs": 782340,
+      "toMs": 818563
+    },
+    {
+      "ayah": 24,
+      "fromMs": 818563,
+      "toMs": 836674
+    },
+    {
+      "ayah": 25,
+      "fromMs": 836674,
+      "toMs": 870056
+    },
+    {
+      "ayah": 26,
+      "fromMs": 870056,
+      "toMs": 889411
+    },
+    {
+      "ayah": 27,
+      "fromMs": 889411,
+      "toMs": 993285
+    },
+    {
+      "ayah": 28,
+      "fromMs": 993285,
+      "toMs": 1019209
+    },
+    {
+      "ayah": 29,
+      "fromMs": 1019209,
+      "toMs": 1077094
+    },
+    {
+      "ayah": 30,
+      "fromMs": 1077094,
+      "toMs": 1110476
+    },
+    {
+      "ayah": 31,
+      "fromMs": 1110476,
+      "toMs": 1148829
+    },
+    {
+      "ayah": 32,
+      "fromMs": 1148829,
+      "toMs": 1197126
+    },
+    {
+      "ayah": 33,
+      "fromMs": 1197126,
+      "toMs": 1263180
+    },
+    {
+      "ayah": 34,
+      "fromMs": 1263180,
+      "toMs": 1313933
+    }
+  ]
+}

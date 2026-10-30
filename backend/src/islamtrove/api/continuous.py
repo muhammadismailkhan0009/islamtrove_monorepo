@@ -1,13 +1,83 @@
 """QUL Minshawi Mujawwad Surah recording and authoritative Ayah time ranges."""
 
+import json
 from collections.abc import Mapping
+from pathlib import Path as LocalPath
 
 import httpx
 from fastapi import APIRouter, HTTPException, Path, Request
 
+from islamtrove.api.stream import ANBIYA_AUDIO_URL
+
 router = APIRouter(prefix="/api/quran", tags=["Quran"])
 _QUL_ENDPOINT = "https://qul.tarteel.ai/api/v1/audio/surah_segments/8"
 _CDN_PREFIX = "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/"
+_ALIGNMENT_DIRECTORY = LocalPath(__file__).resolve().parents[1] / "data" / "alignments"
+_AYAH_COUNTS = json.loads(
+    (LocalPath(__file__).resolve().parents[1] / "data" / "surah_ayah_counts.json").read_text()
+)
+# All 114 Surahs may have provisional timewarps. Runtime reads only local JSON;
+# no audio analysis or matching is ever performed in the server.
+
+
+def load_verified_alignment(surah_id: int) -> dict | None:
+    """Use a recording-specific, offline-verified timeline when one exists.
+
+    Never apply a correction to another source/reciter. Any invalid local
+    alignment is a deployment error, not a reason to silently use wrong QUL
+    boundaries. The source SHA256 is retained for regeneration/auditing; it
+    is not fetched or rehashed on every browser request.
+    """
+    path = _ALIGNMENT_DIRECTORY / f"{surah_id:03d}.json"
+    if not path.is_file():
+        return None
+    metadata = json.loads(path.read_text(encoding="utf-8"))
+    if surah_id == 21:
+        expected_url = ANBIYA_AUDIO_URL
+    elif surah_id == 1:
+        expected_url = "https://everyayah.com/data/Minshawy_Mujawwad_192kbps/PageMp3s/Page001.mp3"
+    else:
+        expected_url = f"{_CDN_PREFIX}{surah_id:03d}.mp3"
+    allowed_statuses = (
+        "experimental-cross-recording",
+        "manually-reviewed",
+        "automatically-verified",
+        "qul-published",
+    )
+    entries = metadata.get("timings")
+    if (
+        metadata.get("schemaVersion") != 1
+        or metadata.get("surahId") != surah_id
+        or metadata.get("reciter") != "minshawi-mujawwad"
+        or metadata.get("validationStatus") not in allowed_statuses
+        or metadata.get("audioUrl") != expected_url
+        or not isinstance(metadata.get("audioSha256"), str)
+        or len(metadata["audioSha256"]) != 64
+        or not isinstance(metadata.get("audioBytes"), int)
+        or metadata["audioBytes"] <= 0
+        or not isinstance(entries, list)
+        or len(entries) != _AYAH_COUNTS[str(surah_id)]
+    ):
+        raise ValueError(f"Invalid local alignment metadata for Surah {surah_id}")
+    previous = 0
+    for number, entry in enumerate(entries, start=1):
+        if (
+            not isinstance(entry, dict)
+            or entry.get("ayah") != number
+            or type(entry.get("fromMs")) is not int
+            or type(entry.get("toMs")) is not int
+            or entry["fromMs"] != previous
+            or entry["toMs"] <= previous
+        ):
+            raise ValueError(f"Invalid verified alignment at {surah_id}:{number}")
+        previous = entry["toMs"]
+    if (
+        metadata.get("endMs") != previous
+        or type(metadata.get("audioDurationMs")) is not int
+        or previous > metadata["audioDurationMs"]
+    ):
+        raise ValueError(f"Verified alignment exceeds source audio for {surah_id}")
+    return {"surahId": surah_id, "audioUrl": expected_url, "timings": entries, "endMs": previous}
 
 
 def validate_qul(surah_id: int, payload: object) -> dict:
@@ -53,6 +123,20 @@ async def continuous_recitation(request: Request, surah_id: int = Path(ge=1, le=
     cached = cache.get(surah_id)
     if cached is not None:
         return cached
+    # Corrected, recording-specific Ayah times are static app data, generated
+    # once offline. Serve them directly without refetching incorrect QUL data.
+    try:
+        aligned = request.app.state.review_store.effective(surah_id)
+        if aligned is not None:
+            cache[surah_id] = aligned
+            return aligned
+        if surah_id in (21, 55):
+            # Ar-Rahman's mismatched source timestamps must not be used.
+            raise HTTPException(
+                status_code=503, detail="Recording-matched local timeline is missing"
+            )
+    except (ValueError, OSError, json.JSONDecodeError) as exc:
+        raise HTTPException(status_code=500, detail="Verified audio alignment is invalid") from exc
     try:
         async with httpx.AsyncClient(
             timeout=httpx.Timeout(18),

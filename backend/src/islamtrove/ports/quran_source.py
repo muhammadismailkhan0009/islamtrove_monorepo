@@ -17,3 +17,7 @@ class ProviderUnavailable(Exception):
 
 class ProviderDataError(Exception):
     """Remote Quran data cannot be trusted for playback."""
+
+
+class SpokenTranslationUnavailable(Exception):
+    """A spoken-language manifest failed independently of Arabic recitation."""

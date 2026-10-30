@@ -1,8 +1,12 @@
 """QUL continuous Minshawi Mujawwad recitation with authoritative Ayah boundaries."""
 
+from pathlib import Path
+
 import httpx
+import pytest
 from fastapi.testclient import TestClient
 
+import islamtrove.api.continuous as continuous
 from islamtrove.api.continuous import validate_qul
 from islamtrove.main import create_app
 
@@ -64,8 +68,10 @@ def test_invalid_qul_boundaries_are_rejected() -> None:
 
 
 def test_continuous_route_uses_qul_times_and_same_origin_bridge(
-    provider_reply,
+    provider_reply, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
+    monkeypatch.setattr(continuous, "_ALIGNMENT_DIRECTORY", tmp_path)
+
     def handler(request: httpx.Request) -> httpx.Response:
         if request.url.host == "qul.tarteel.ai":
             assert request.url.path == "/api/v1/audio/surah_segments/8"
@@ -81,7 +87,11 @@ def test_continuous_route_uses_qul_times_and_same_origin_bridge(
         assert response.json()["audioUrl"].endswith("/112.mp3")
 
 
-def test_continuous_route_does_not_accept_incomplete_surah(provider_reply) -> None:
+def test_continuous_route_does_not_accept_incomplete_surah(
+    provider_reply, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    monkeypatch.setattr(continuous, "_ALIGNMENT_DIRECTORY", tmp_path)
+
     def handler(request: httpx.Request) -> httpx.Response:
         if request.url.host == "qul.tarteel.ai":
             payload = sample_payload()

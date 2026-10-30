@@ -1,9 +1,9 @@
-import type { AudioMediaPort, SurahAudio } from '../../application/ports/audio-media';
+import type { TranslationAudioPort, TranslationAudioManifest } from '../../application/ports/translation-audio';
 import type { MediaCachePort } from '../../application/ports/media-cache';
 import type { ContinuousRecitationPort } from '../../application/ports/continuous-recitation';
 import type { StreamingSourcePort } from '../../application/ports/streaming-source';
 import type { AudioStage } from './audio-plan';
-import { createAudioTracks, createOpeningBismillah } from './audio-plan';
+import { createIndependentAudioTracks, createOpeningBismillah } from './audio-plan';
 import { BufferedAudioPlayer, type PlaybackTrack } from './media-playback';
 
 export type ClipLanguage = 'Arabic' | 'German' | 'English' | 'Urdu';
@@ -14,13 +14,15 @@ export interface ListeningCallbacks {
   onAyah(ayah: number): void;
   onClipTrack(ayah: number, language: ClipLanguage): void;
   onError(message: string | null): void;
+  onTranslationWarning(message: string): void;
 }
 
 /** Owns the one active audio session: full passage playback OR a single Ayah. */
 export class ListeningController {
   private player: BufferedAudioPlayer | null = null;
   private context: AudioContext | null = null;
-  private readonly urls = new Map<string, Promise<SurahAudio>>();
+  private readonly translations = new Map<string, Promise<TranslationAudioManifest>>();
+  private readonly warnedTranslations = new Set<string>();
   private mode: 'main' | 'clip' | null = null;
   private passageScope: number | null = null;
   private clipKey: string | null = null;
@@ -29,7 +31,7 @@ export class ListeningController {
   private loading = false;
 
   constructor(
-    private readonly media: AudioMediaPort,
+    private readonly translationSource: TranslationAudioPort,
     private readonly cache: MediaCachePort,
     private readonly continuous: ContinuousRecitationPort,
     private readonly streamingSource: StreamingSourcePort,
@@ -47,15 +49,35 @@ export class ListeningController {
     return this.context;
   }
 
-  private mediaFor(surahId: number, reciter: string, language?: string): Promise<SurahAudio> {
-    const key = [surahId, reciter, language ?? 'Arabic'].join('|');
-    let pending = this.urls.get(key);
+  /** Independent language metadata is requested only when its first clip
+   * becomes due. One request per language per session, regardless of Ayahs. */
+  private translationFor(surahId: number, language: string): Promise<TranslationAudioManifest> {
+    const key = `${surahId}|${language}`;
+    let pending = this.translations.get(key);
     if (!pending) {
-      pending = this.media.getSurahAudio(surahId, reciter, language);
-      this.urls.set(key, pending);
-      void pending.catch(() => { if (this.urls.get(key) === pending) this.urls.delete(key); });
+      pending = this.translationSource.getSurah(surahId, language);
+      this.translations.set(key, pending);
     }
     return pending;
+  }
+
+  private async translationUrl(surahId: number, language: string, ayah: number): Promise<string | null> {
+    const manifest = await this.translationFor(surahId, language);
+    if (manifest.surahId !== surahId) throw new Error(`${language} translation belongs to another Surah`);
+    if (manifest.unavailableAyahs.includes(ayah)) {
+      throw new Error(`${language} audio unavailable for Ayahs ${manifest.unavailableAyahs.join(', ')}; Arabic recitation continues`);
+    }
+    const file = manifest.audio.find(item => item.ayah === ayah);
+    if (!file) throw new Error(`${language} recording for ${surahId}:${ayah} was not provided`);
+    return file.url;
+  }
+
+  private reportTranslationWarning(message: string): void {
+    // A failed provider should not produce hundreds of identical warnings.
+    // Different missing-Ayah errors are still visible once each.
+    if (this.warnedTranslations.has(message)) return;
+    this.warnedTranslations.add(message);
+    this.callbacks.onTranslationWarning(message);
   }
 
   private setLoading(value: boolean): void {
@@ -69,6 +91,8 @@ export class ListeningController {
     this.player = null;
     this.mode = null;
     this.passageScope = null;
+    this.translations.clear();
+    this.warnedTranslations.clear();
     this.clipKey = null;
     this.playing = false;
     this.callbacks.onPlaying(false);
@@ -106,6 +130,9 @@ export class ListeningController {
         this.playing = false;
         this.callbacks.onPlaying(false);
         this.callbacks.onError(message ?? 'Recording unavailable');
+      },
+      onTranslationWarning: message => {
+        if (this.request === request) this.reportTranslationWarning(message);
       }
     }, context, this.streamingSource);
   }
@@ -117,12 +144,13 @@ export class ListeningController {
   }
 
   async toggleMain(
-    surahId: number, reciter: string, queue: readonly AudioStage[],
+    surahId: number, _reciter: string, queue: readonly AudioStage[],
     languages: readonly string[], initialStage: number,
     passageScope: number | null = null
   ): Promise<void> {
     const context = this.activateAudio();
-    if (this.mode === 'main' && this.player && this.passageScope === passageScope) {
+    if (this.mode === 'main' && this.player &&
+        (passageScope === null || this.passageScope === passageScope)) {
       await this.resumeCurrent(); return;
     }
     this.stop();
@@ -132,22 +160,22 @@ export class ListeningController {
     this.callbacks.onError(null);
     this.setLoading(true);
     try {
-      // The Arabic source is one continuous MP3; it doesn't need a per-Ayah
-      // audio manifest. Only request translation manifests when selected.
-      const [replies, continuous] = await Promise.all([
-        Promise.all(languages.map(async language =>
-          [language, await this.mediaFor(surahId, reciter, language)] as const)),
-        this.continuous.getSurah(surahId, Math.max(...queue.map(stage => stage.end)))
-      ]);
+      // Arabic starts from QUL alone. No German/English/Urdu request is made
+      // here: the player resolves each spoken recording only when required.
+      const continuous = await this.continuous.getSurah(
+        surahId, Math.max(...queue.map(stage => stage.end))
+      );
       if (request !== this.request) return;
-      const tracks = createAudioTracks(queue, new Map(replies), surahId, continuous);
+      const tracks = createIndependentAudioTracks(
+        queue, surahId, continuous,
+        (language, ayah) => this.translationUrl(surahId, language, ayah)
+      );
       if (initialStage < 0 || initialStage >= queue.length) {
         throw new Error('Invalid playback stage');
       }
-      let selected = tracks.filter(track =>
-        track.stage >= initialStage &&
-        (passageScope === null || track.passageIndex === passageScope)
-      );
+      // A passage click chooses the starting position, not a playback limit.
+      // Keep every later Arabic/translation stage in the sequence.
+      let selected = tracks.filter(track => track.stage >= initialStage);
       if (!selected.length) throw new Error('Selected passage contains no audio');
       // In Arabic-only mode, keep ONE uninterrupted audio element while
       // progressing through all passages. Ayah events update the UI sections.
@@ -170,7 +198,7 @@ export class ListeningController {
     }
   }
 
-  async toggleClip(surahId: number, reciter: string, ayah: number, language: ClipLanguage, ayahCount: number): Promise<void> {
+  async toggleClip(surahId: number, _reciter: string, ayah: number, language: ClipLanguage, ayahCount: number): Promise<void> {
     const context = this.activateAudio();
     const key = [surahId, ayah, language].join(':');
     if (this.mode === 'clip' && this.clipKey === key) {
@@ -197,19 +225,19 @@ export class ListeningController {
           ayahTimings: [selected]
         };
       } else {
-        const payload = await this.mediaFor(surahId, reciter, language);
-        const media = payload.translationAudio[ayah - 1];
-        if (!media || media.ayah !== ayah || !media.url.startsWith('https://')) {
-          throw new Error('The selected Ayah recording is missing');
-        }
-        track = { stage: 0, ayah, url: media.url, phase: 'translation', passageIndex: 0 };
+        const url = await this.translationUrl(surahId, language, ayah);
+        if (!url) throw new Error(`${language} audio is unavailable for Ayah ${surahId}:${ayah}`);
+        if (!url.startsWith('https://')) throw new Error('The selected Ayah recording is invalid');
+        track = { stage: 0, ayah, url, phase: 'translation', passageIndex: 0, language };
       }
       if (request !== this.request) return;
       const opening = language === 'Arabic' ? createOpeningBismillah(surahId, track) : null;
       this.player = this.attach(opening ? [opening, track] : [track], context, request, { ayah, language });
       await this.player.play();
-    } catch {
-      if (request === this.request) this.callbacks.onError('This Ayah recording is unavailable');
+    } catch (error) {
+      if (request === this.request) this.callbacks.onError(
+        error instanceof Error ? error.message : 'This Ayah recording is unavailable'
+      );
     } finally {
       if (request === this.request) this.setLoading(false);
     }
@@ -224,6 +252,6 @@ export class ListeningController {
     this.stop();
     void this.context?.close();
     this.context = null;
-    this.urls.clear();
+    this.translations.clear();
   }
 }

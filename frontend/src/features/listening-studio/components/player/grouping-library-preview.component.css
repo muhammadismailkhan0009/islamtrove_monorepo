@@ -1,0 +1,90 @@
+:host { display:block; }
+.group-library-demo{color:#294b37;display:flex;flex-direction:column;gap:17px;padding:0 0 12px}
+.group-prototype-note{display:flex;gap:10px;align-items:flex-start;background:#fff9e9;border:1px solid #ecdcaf;border-radius:10px;color:#8e753e;padding:12px 14px;font-size:11px;line-height:1.6}
+.group-prototype-note strong{color:#816527}
+.group-library-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:4px 0 0}
+.group-library-heading-copy{flex:1}
+.group-library-heading .micro-label,.group-preview-heading .micro-label{color:#9d8556;font-size:10px;font-weight:850;letter-spacing:1.4px}
+.group-library-heading h3{font-family:Georgia,serif;font-weight:500;font-size:26px;letter-spacing:-.6px;color:#214d39;margin:8px 0 7px}
+.group-library-heading p{font-size:12px;color:#819688;margin:0;line-height:1.55}
+.group-library-total{border-radius:13px;background:#eef6ee;border:1px solid #dcebdc;display:flex;align-items:center;gap:10px;padding:12px 15px}
+.group-library-total strong{font-size:22px;color:#2e7c50}
+.group-library-total span{font-size:11px;color:#77967c}
+.group-source-tabs{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.group-source-tabs button{display:flex;gap:12px;align-items:center;text-align:left;background:#fff;border:1.5px solid #e2eae1;border-radius:14px;color:#6b8b78;padding:16px 17px;cursor:pointer;min-width:0}
+.group-source-tabs button.active{border-color:#5f9b77;background:#f1f8f1;box-shadow:0 0 0 2px #c3dec43d;color:#2a704b}
+.group-source-tabs button:hover{border-color:#7eaf8c}
+.group-source-tabs button>span{display:flex;flex-direction:column;gap:5px;flex:1;min-width:0}
+.group-source-tabs strong{color:#2d533c;font-size:13px}
+.group-source-tabs small{font-size:11px;color:#869c8b}
+.group-library-body{display:grid;grid-template-columns:minmax(225px,.8fr) minmax(0,1.2fr);gap:14px;align-items:start}
+.group-surah-column,.group-preview-column{border:1px solid #e0e9de;background:#fff;border-radius:14px;padding:18px}
+.group-section-label{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#819989;font-size:10px;font-weight:850;letter-spacing:1px;margin-bottom:13px}
+.group-section-label span:last-child{font-weight:550;letter-spacing:0}
+.group-surah-items{display:flex;flex-direction:column;gap:7px}
+.group-surah-entry{width:100%;display:flex;gap:11px;align-items:center;text-align:left;padding:11px;border:1px solid #e9eee7;border-radius:11px;background:#fcfdfb;color:#8ba390;cursor:pointer}
+.group-surah-entry.active{background:#eef7ef;border-color:#a4cdb0;color:#397d53}
+.group-surah-entry:hover{border-color:#96bfa5}
+.group-surah-index{height:33px;width:33px;display:grid;place-items:center;background:#eef4ed;border-radius:9px;font-size:12px;font-weight:800;color:#568364}
+.group-surah-entry.active .group-surah-index{background:#d6ebd9;color:#34784c}
+.group-surah-copy{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
+.group-surah-copy strong{color:#335641;font-size:13px}
+.group-surah-copy small{color:#8fa393;font-size:11px}
+.group-surah-explanation{border-top:1px solid #edf0ea;margin:15px 0 0;padding-top:14px;font-size:11px;line-height:1.6;color:#8a9a8c}
+.group-preview-heading{display:flex;align-items:flex-start;gap:10px;justify-content:space-between}
+.group-preview-heading h4{font-family:Georgia,serif;font-size:25px;font-weight:500;color:#2b513d;margin:7px 0 5px}
+.group-preview-heading p{font-size:11px;color:#97a69a;line-height:1.5;margin:0}
+.group-source-indicator{flex-shrink:0;border-radius:7px;background:#e9f5eb;color:#3e8457;padding:7px 9px;font-size:10px;font-weight:750}
+.group-passage-chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:18px 0}
+.group-passage-chip{display:flex;gap:10px;align-items:center;padding:11px 10px;background:#f8faf6;border:1px solid #e8eee4;border-radius:9px;color:#657f6a;font-size:12px}
+.group-passage-number{display:grid;place-items:center;height:26px;width:26px;border-radius:50%;background:#e5eee4;color:#4f8b61;font-size:11px;font-weight:800}
+.group-passage-chip strong{color:#2c6243;font-weight:800}
+.group-preview-bottom{display:flex;align-items:center;gap:8px;padding-top:14px;border-top:1px solid #edf1eb;color:#91a295;font-size:11px}
+.group-preview-bottom strong{color:#547b5b}
+.group-copy-button{width:100%;margin-top:16px;padding:13px;border:1px solid #85b294;border-radius:10px;background:#edf7ef;color:#2c704a;display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;font-weight:800;cursor:pointer}
+.group-copy-button:hover{background:#e0f0e4}
+.group-publish-section{display:flex;align-items:center;justify-content:space-between;gap:17px;border:1px solid #cddfcb;border-radius:14px;padding:20px;background:linear-gradient(110deg,#f1f8ef,#f8faf3)}
+.group-publish-text{display:flex;align-items:flex-start;gap:13px;min-width:0}
+.group-publish-icon{display:grid;place-items:center;flex-shrink:0;height:42px;width:42px;border-radius:12px;background:#dceede;color:#3c8659}
+.group-publish-text strong{font-size:14px;color:#2a563e}
+.group-publish-text p{font-size:11px;line-height:1.65;color:#7a957d;max-width:420px;margin:6px 0 0}
+.group-publish-button{display:flex;align-items:center;justify-content:center;gap:9px;border:0;border-radius:10px;background:#236346;color:#fff;box-shadow:0 5px 11px #1c614319;font-weight:800;font-size:12px;white-space:nowrap;padding:14px 18px;cursor:pointer}
+.group-publish-button:hover{background:#287955}
+.group-admin-panel{border:1px solid #dbdfc2;border-radius:13px;background:#fefdf6;padding:18px;display:flex;flex-direction:column;gap:11px}
+.group-admin-panel-heading{display:flex;gap:11px;align-items:center;color:#b18f4b}
+.group-admin-panel-heading>div{display:flex;flex-direction:column;gap:4px}
+.group-admin-panel-heading strong{font-size:14px;color:#534f34}
+.group-admin-panel-heading small{font-size:11px;color:#99906c}
+.group-admin-panel label{font-size:11px;font-weight:800;color:#70694d}
+.group-admin-controls{display:flex;gap:9px;align-items:center}
+.group-admin-controls input{flex:1;min-width:0;min-height:39px;border:1px solid #d9ddcd;border-radius:8px;padding:9px 12px;color:#344b38;font-size:13px;background:white}
+.group-admin-controls input:focus-visible{outline:2px solid #4d9362}
+.group-admin-controls button{min-height:41px;border:0;border-radius:8px;background:#266446;color:#fff;padding:10px 15px;cursor:pointer;font-size:12px;font-weight:800}
+.group-admin-controls .group-cancel{background:#ebece5;color:#667265}
+.group-admin-hint{font-size:10px;color:#a49c82}
+.group-admin-error{color:#9f4a40;font-size:11px;margin:0}
+.group-success{display:flex;align-items:flex-start;gap:12px;background:#eaf6e9;border:1px solid #bcd9b8;color:#358052;border-radius:12px;padding:14px}
+.group-success strong{font-size:13px;color:#2b6a44}
+.group-success p{margin:5px 0 0;font-size:11px;line-height:1.5;color:#628a67}
+.group-publish-info{display:flex;align-items:center;gap:11px;background:#f0f5f0;border:1px solid #e3eae2;color:#718f78;padding:15px;border-radius:11px;font-size:11px;line-height:1.6}
+@media(max-width:730px){
+ .group-library-heading h3{font-size:23px}
+ .group-library-body{grid-template-columns:1fr}
+ .group-publish-section{flex-direction:column;align-items:stretch}
+ .group-publish-button{width:100%;min-height:48px}
+}
+@media(max-width:530px){
+ .group-source-tabs{gap:7px}
+ .group-source-tabs button{padding:12px 10px;gap:7px;align-items:flex-start}
+ .group-source-tabs button>it-icon:last-child{display:none}
+ .group-source-tabs strong{font-size:11px}
+ .group-source-tabs small{font-size:10px;line-height:1.4}
+ .group-library-total{padding:8px 10px;gap:5px}
+ .group-library-total strong{font-size:19px}
+ .group-library-heading h3{font-size:21px}
+ .group-passage-chips{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .group-surah-column,.group-preview-column{padding:13px}
+ .group-admin-controls{flex-wrap:wrap}
+ .group-admin-controls input{flex-basis:100%}
+ .group-admin-controls button{flex:1}
+}

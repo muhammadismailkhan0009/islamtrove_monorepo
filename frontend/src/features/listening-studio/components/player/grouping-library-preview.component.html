@@ -1,0 +1,124 @@
+<section class="group-library-demo" aria-label="Grouping library" id="grouping-library-preview">
+  @if (previewOnly) {
+    <div class="group-prototype-note"><it-icon name="info" [size]="16"></it-icon>
+      <span><strong>Design Canvas preview.</strong> Server publication is simulated; personal settings stay on this device.</span>
+    </div>
+  }
+
+  <header class="group-library-heading">
+    <div class="group-library-heading-copy">
+      <span class="micro-label">PASSAGE GROUPING LIBRARY</span>
+      <h3>How would you like to listen?</h3>
+      <p>Keep your own passage groups, or use curated groups published for everyone.</p>
+    </div>
+    <div class="group-library-total"><strong>{{available().length}}</strong><span>Surahs</span></div>
+  </header>
+
+  <div class="group-source-tabs" role="group" aria-label="Select grouping source">
+    <button type="button" [class.active]="source() === 'local'" [attr.aria-pressed]="source() === 'local'"
+      (click)="chooseSource('local')">
+      <it-icon name="book" [size]="19"></it-icon>
+      <span><strong>My local groupings</strong><small>Private to this device</small></span>
+      @if (source() === 'local') { <it-icon name="check" [size]="17"></it-icon> }
+    </button>
+    <button type="button" [class.active]="source() === 'server'" [attr.aria-pressed]="source() === 'server'"
+      (click)="chooseSource('server')">
+      <it-icon name="globe" [size]="19"></it-icon>
+      <span><strong>Published groupings</strong><small>Available to everyone</small></span>
+      @if (source() === 'server') { <it-icon name="check" [size]="17"></it-icon> }
+    </button>
+  </div>
+
+  @if (published()) {
+    <div class="group-success" role="status"><it-icon name="check" [size]="19"></it-icon>
+      <div><strong>All local groupings published</strong><p>{{server().length}} Surahs were published together. Your local copies remain unchanged.</p></div>
+    </div>
+  }
+  @if (copied()) {
+    <div class="group-success" role="status"><it-icon name="check" [size]="19"></it-icon>
+      <div><strong>Copied to your local groupings</strong><p>You can now edit this Surah without changing the published version.</p></div>
+    </div>
+  }
+
+  <div class="group-library-body">
+    <div class="group-surah-column">
+      <div class="group-section-label"><span>{{source() === 'local' ? 'YOUR SURAH GROUPINGS' : 'PUBLISHED ON SERVER'}}</span><span>{{available().length}} entries</span></div>
+      <div class="group-surah-items" role="group" aria-label="Available Surah groupings">
+        @for (group of available(); track group.surah) {
+          <button type="button" class="group-surah-entry" [class.active]="current().surah === group.surah"
+            [attr.aria-pressed]="current().surah === group.surah" (click)="chooseSurah(group.surah)">
+            <span class="group-surah-index">{{group.surah}}</span>
+            <span class="group-surah-copy"><strong>{{group.name}}</strong><small>{{group.total}} Ayahs · {{group.boundaries.length}} passages</small></span>
+            <it-icon name="arrow" [size]="17"></it-icon>
+          </button>
+        }
+      </div>
+      @if (!available().length) { <p class="group-surah-explanation">No {{source() === 'local' ? 'local' : 'published'}} groupings yet.</p> }
+      <p class="group-surah-explanation">
+        @if (source() === 'local') { Your changes stay on this device unless you choose to publish. }
+        @else { Published groups are read-only. Copy one to customize it. }
+      </p>
+    </div>
+
+    @if (current(); as group) {
+      <div class="group-preview-column">
+        <div class="group-preview-heading">
+          <div><span class="micro-label">GROUPING PREVIEW</span><h4>{{group.name}}</h4><p>Arabic recitation followed by selected audio translation</p></div>
+          <span class="group-source-indicator">{{source() === 'local' ? 'My version' : 'Server version'}}</span>
+        </div>
+        <div class="group-passage-chips">
+          @for (passage of passages(); track passage.index) {
+            <div class="group-passage-chip"><span class="group-passage-number">{{passage.index + 1}}</span>
+              <span>Ayahs <strong>{{passage.start}}–{{passage.end}}</strong></span>
+            </div>
+          }
+        </div>
+        <div class="group-preview-bottom">
+          <it-icon name="layers" [size]="17"></it-icon>
+          <span><strong>{{passages().length}} complete passages</strong> · {{group.total}} Ayahs included</span>
+        </div>
+        @if (source() === 'server') {
+          <button type="button" class="group-copy-button" (click)="copyPublishedToLocal()">
+            <it-icon name="plus" [size]="17"></it-icon> Use this as my local grouping
+          </button>
+        }
+      </div>
+    }
+  </div>
+
+  @if (source() === 'local') {
+    <div class="group-publish-section">
+      <div class="group-publish-text">
+        <span class="group-publish-icon"><it-icon name="globe" [size]="21"></it-icon></span>
+        <div><strong>Publish all my local groupings</strong>
+          <p>Send the entire collection: <b>{{local().length}} Surahs</b> and <b>{{totalPassages()}} passages</b>. Existing published versions will be replaced. No per-passage submissions.</p>
+        </div>
+      </div>
+      <button type="button" class="group-publish-button" [disabled]="!local().length || busy()" (click)="openBulkPublish()">
+        <it-icon name="arrow" [size]="17"></it-icon> Publish all groupings
+      </button>
+    </div>
+
+    @if (unlockOpen()) {
+      <form class="group-admin-panel" (submit)="$event.preventDefault(); submitAllGroupings()">
+        <div class="group-admin-panel-heading"><it-icon name="lock" [size]="20"></it-icon>
+          <div><strong>Administrator approval</strong><small>One submission publishes the complete local collection.</small></div>
+        </div>
+        <label for="group-admin-code">Administrator code</label>
+        <div class="group-admin-controls">
+          <input id="group-admin-code" type="password" autocomplete="off" placeholder="Enter admin code"
+            [value]="adminCode()" (input)="adminCode.set($any($event.target).value)">
+          <button type="submit" [disabled]="busy()">{{busy() ? 'Publishing…' : 'Confirm publication'}}</button>
+          <button type="button" class="group-cancel" (click)="cancelPublish()">Cancel</button>
+        </div>
+        @if (adminError()) { <p class="group-admin-error" role="alert">{{adminError()}}</p> }
+        @if (previewOnly) { <small class="group-admin-hint">Design Canvas only · Demo code: <strong>2468</strong> · No production data is changed.</small> }
+        @else { <small class="group-admin-hint">Protected using the existing administrator login. Entire collection replaces the published set.</small> }
+      </form>
+    }
+  } @else {
+    <div class="group-publish-info"><it-icon name="info" [size]="18"></it-icon>
+      <span>These groupings were published by an administrator. Select a Surah to preview, or copy it to your device to make personal edits.</span>
+    </div>
+  }
+</section>

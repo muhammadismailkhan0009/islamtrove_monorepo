@@ -1,19 +1,14 @@
 
 /* Focused player layout and native listening-settings dialog. */
-.heading-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.heading-configure,.configure-button{display:flex;align-items:center;justify-content:center;gap:9px;min-height:42px;background:#215d46;border:1px solid #215d46;color:#fff;padding:10px 16px;border-radius:9px;font-size:12px;font-weight:780;white-space:nowrap;cursor:pointer}
-.heading-configure:hover,.configure-button:hover{background:#2d7758}
+.configure-button{display:flex;align-items:center;justify-content:center;gap:9px;min-height:42px;background:#215d46;border:1px solid #215d46;color:#fff;padding:10px 16px;border-radius:9px;font-size:12px;font-weight:780;white-space:nowrap;cursor:pointer}
 .sidebar-settings-link{display:flex;align-items:center;gap:12px;width:100%;margin:-23px 0 28px;padding:12px 13px;text-align:left;background:#fff;border:1px solid #e4ece1;border-radius:9px;color:#518167;font-size:12px;font-weight:750;cursor:pointer}
 .sidebar-settings-link:hover{background:#f2f8f2}
 .sidebar-settings-link it-icon:last-child{margin-left:auto}
-.listen-summary{display:flex;align-items:center;gap:17px;background:#fff;border:1px solid #e1eae0;border-radius:12px;margin-top:23px;padding:19px 22px;box-shadow:0 4px 15px #24482c0a}
-.listen-summary-icon{height:43px;width:43px;display:grid;place-items:center;background:#e8f4e9;color:#458666;border-radius:11px;flex-shrink:0}
+.listen-summary{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid #e1eae0;border-radius:12px;margin:0;padding:15px 19px;box-shadow:0 4px 15px #24482c0a}
 .listen-summary-copy{display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
-.listen-summary-copy>span{font-size:9px;color:#91a797;font-weight:850;letter-spacing:1.5px}
 .listen-summary-copy strong{font-size:14px;color:#28553c;line-height:1.4;overflow-wrap:anywhere}
 .listen-summary-copy small{font-size:11px;color:#91a295}
-.passage-tabs{display:flex;align-items:center;gap:9px;margin:17px 0 0;overflow-x:auto;padding:0 0 5px}
-.passage-tabs>span{color:#8b9e8c;font-size:9px;letter-spacing:1.1px;font-weight:850;padding-right:6px}
+.passage-tabs{display:flex;align-items:center;gap:9px;margin:15px 0 0;overflow-x:auto;padding:0 0 5px}
 .passage-tabs button{flex-shrink:0;padding:9px 12px;border:1px solid #e0e9df;background:#fff;border-radius:8px;color:#6c8d75;font-size:11px;font-weight:760;cursor:pointer}
 .passage-tabs button.active{background:#e5f2e7;border-color:#9bbea5;color:#267346}
 .reading-studio{margin-top:23px}
@@ -73,5 +68,53 @@
 .fixed-reciter>div{display:flex;flex-direction:column;gap:5px}
 .fixed-reciter span{font-size:9px;color:#819688;font-weight:850;letter-spacing:1.2px}
 .fixed-reciter strong{font-size:12px;color:#31523d}
-.auto-save-label{display:flex;align-items:center;gap:6px;font-size:10px;color:#689276;font-weight:720;white-space:nowrap}
 @media(max-width:680px){.auto-save-label{font-size:9px}}
+
+.configure-button:hover{background:#2d7758}
+
+/* Discoverable grouping-library navigation within the normal listening UI. */
+.listen-actions{display:flex;align-items:center;gap:9px;flex-shrink:0}
+.groupings-entry-button{display:flex;align-items:center;justify-content:center;gap:8px;min-height:42px;border:1px solid #b4d2bc;border-radius:9px;background:#f0f7f0;color:#296b49;padding:9px 13px;font-size:12px;font-weight:800;white-space:nowrap;cursor:pointer}
+.groupings-entry-button:hover{background:#e1f0e4;border-color:#8ebc9e}
+.groupings-entry-button span,.group-preview-label{border-radius:5px;background:#e6eee3;color:#6d8669;font-size:9px;font-weight:850;letter-spacing:.3px;padding:4px 6px}
+.settings-view-tabs{display:flex;align-items:center;gap:7px;flex-shrink:0;padding:9px 30px;border-bottom:1px solid #e9eee5;background:#fafbf7}
+.settings-view-tabs button{display:flex;align-items:center;gap:8px;min-height:42px;border:1px solid transparent;border-radius:9px;background:transparent;color:#77917c;padding:9px 14px;font-size:12px;font-weight:800;cursor:pointer}
+.settings-view-tabs button.active{background:#eaf5ec;border-color:#bdd9c4;color:#2b7650}
+.settings-view-tabs button:hover{background:#f0f7ed}
+.settings-view-tabs button:focus-visible,.groupings-entry-button:focus-visible{outline:3px solid #b29a5a;outline-offset:2px}
+.grouping-not-connected{display:flex;gap:14px;align-items:flex-start;margin-top:12px;padding:23px;border:1px solid #dce8d6;border-radius:13px;background:#f7faf5;color:#5c8c69}
+.grouping-not-connected>div{flex:1}
+.grouping-not-connected strong{display:block;color:#376b4b;font-size:15px}
+.grouping-not-connected p{font-size:12px;color:#7e9781;line-height:1.7;margin:8px 0 0}
+.grouping-not-connected button{min-height:40px;border:1px solid #a2c9a8;background:#e7f4e8;border-radius:8px;color:#31734e;padding:9px 13px;font-size:11px;font-weight:800;cursor:pointer}
+@media(max-width:680px){
+  .listen-actions{width:100%;display:grid;grid-template-columns:1fr 1fr}
+  .listen-actions .configure-button,.groupings-entry-button{width:100%;min-height:45px;padding:9px;flex-wrap:wrap}
+  .settings-view-tabs{padding:8px 17px;gap:5px}
+  .settings-view-tabs button{flex:1;justify-content:center;min-height:44px;padding:8px 5px;font-size:11px;gap:5px}
+  .group-preview-label{font-size:8px;padding:3px 4px}
+  .grouping-not-connected{flex-direction:column;padding:18px}
+}
+
+/* Sharing the current Surah with its spoken-translation configuration. */
+.share-listening-button{display:flex;align-items:center;justify-content:center;gap:8px;min-height:42px;border:1px solid #b4d2bc;border-radius:9px;background:#f0f7f0;color:#296b49;padding:9px 13px;font-size:12px;font-weight:800;cursor:pointer}
+.share-listening-button:hover{background:#e1f0e4}
+.share-listening-button:disabled{opacity:.7;cursor:progress}
+.share-listening-panel{margin-top:12px;background:#f8fbf7;border:1px solid #d7e7d8;border-radius:12px;padding:15px 18px;display:flex;flex-direction:column;gap:11px}
+.share-listening-header{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.share-listening-header>div{display:flex;flex-direction:column;gap:5px}
+.share-listening-header strong{color:#28553c;font-size:14px}
+.share-listening-header small{color:#829a8c;font-size:11px;line-height:1.5}
+.share-listening-close{border:0;background:#e7f0e5;color:#487a57;display:grid;place-items:center;width:32px;height:32px;border-radius:8px;cursor:pointer}
+.share-link-row{display:flex;gap:8px}
+.share-link-row input{flex:1;min-width:0;background:white;border:1px solid #c9dacb;border-radius:8px;color:#385d47;padding:11px 12px;font-size:12px}
+.share-link-row button{background:#276b4a;color:#fff;border:0;border-radius:8px;padding:10px 17px;white-space:nowrap;font-size:12px;font-weight:800;cursor:pointer}
+.share-link-row button:hover{background:#318059}
+.share-link-feedback{font-size:11px;color:#4c7d57;line-height:1.5}
+.share-listening-button:focus-visible,.share-listening-close:focus-visible,.share-link-row button:focus-visible{outline:3px solid #beac72;outline-offset:2px}
+@media(max-width:680px){
+  .listen-actions{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .listen-actions .share-listening-button{width:100%;min-height:45px;flex-wrap:wrap}
+  .share-listening-panel{padding:13px}
+  .share-link-row button{padding:10px 12px}
+}

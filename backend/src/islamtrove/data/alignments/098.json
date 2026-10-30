@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "surahId": 98,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/098.mp3",
+  "audioSha256": "08aa0e8236f951152fe47f9462061314010835be54c788a3d0a7d41b9b1eb746",
+  "audioBytes": 4000075,
+  "audioDurationMs": 249966,
+  "endMs": 249966,
+  "sourceAyahCount": 8,
+  "alignmentResolutionMs": 200,
+  "source": "QUL original CDN MP3; reference EveryAyah faster individual clips",
+  "method": "offline-global-DTW-four-speech-features",
+  "validationStatus": "experimental-cross-recording",
+  "reviewRequired": true,
+  "reviewAyahs": [],
+  "featureAgreementSecondsByAyah": [
+    0.0,
+    0.2,
+    0.2,
+    0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "dtwCosts": {
+    "mfcc": 0.08975000669165785,
+    "mfcc-delta": 0.07970544895344367,
+    "mel": 0.05118398294290954,
+    "chroma": 0.14788838846890479
+  },
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 25800
+    },
+    {
+      "ayah": 2,
+      "fromMs": 25800,
+      "toMs": 39400
+    },
+    {
+      "ayah": 3,
+      "fromMs": 39400,
+      "toMs": 48000
+    },
+    {
+      "ayah": 4,
+      "fromMs": 48000,
+      "toMs": 70600
+    },
+    {
+      "ayah": 5,
+      "fromMs": 70600,
+      "toMs": 117600
+    },
+    {
+      "ayah": 6,
+      "fromMs": 117600,
+      "toMs": 156200
+    },
+    {
+      "ayah": 7,
+      "fromMs": 156200,
+      "toMs": 180000
+    },
+    {
+      "ayah": 8,
+      "fromMs": 180000,
+      "toMs": 249966
+    }
+  ]
+}

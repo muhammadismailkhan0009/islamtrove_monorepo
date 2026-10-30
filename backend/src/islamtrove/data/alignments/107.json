@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "surahId": 107,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/107.mp3",
+  "audioSha256": "c899e542b54105e929790b264a8c4a03e498872e1baff9281ac53dda9f1d2c82",
+  "audioBytes": 875828,
+  "audioDurationMs": 54700,
+  "endMs": 54700,
+  "sourceAyahCount": 7,
+  "alignmentResolutionMs": 200,
+  "source": "QUL original CDN MP3; reference EveryAyah faster individual clips",
+  "method": "offline-global-DTW-four-speech-features",
+  "validationStatus": "experimental-cross-recording",
+  "reviewRequired": true,
+  "reviewAyahs": [],
+  "featureAgreementSecondsByAyah": [
+    0.0,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.0,
+    0.2
+  ],
+  "dtwCosts": {
+    "mfcc": 0.1254533889430095,
+    "mfcc-delta": 0.14018817163746933,
+    "mel": 0.10386569936665059,
+    "chroma": 0.23724533899161093
+  },
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 7600
+    },
+    {
+      "ayah": 2,
+      "fromMs": 7600,
+      "toMs": 14600
+    },
+    {
+      "ayah": 3,
+      "fromMs": 14600,
+      "toMs": 24200
+    },
+    {
+      "ayah": 4,
+      "fromMs": 24200,
+      "toMs": 31400
+    },
+    {
+      "ayah": 5,
+      "fromMs": 31400,
+      "toMs": 40000
+    },
+    {
+      "ayah": 6,
+      "fromMs": 40000,
+      "toMs": 47200
+    },
+    {
+      "ayah": 7,
+      "fromMs": 47200,
+      "toMs": 54700
+    }
+  ]
+}

@@ -33,3 +33,83 @@ coverage/
 .serena/
 frontend/.design/.cache/
 frontend/.design/.runtime/
+
+# Local administrator-code recovery file (never commit)
+backend/.admin-review-code
+
+# Locally provisioned large Quran recordings must never enter Git
+backend/src/islamtrove/data/audio/
+
+# Public repository safety: machine-specific credentials and signing material.
+# Keep examples such as backend/.env.example versioned.
+.envrc
+.direnv/
+.npmrc
+.pypirc
+.netrc
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa
+id_ed25519
+credentials.json
+client_secret*.json
+*service-account*.json
+firebase-adminsdk*.json
+
+# Quran synchronization is part of the public product dataset:
+# - backend/src/islamtrove/data/alignments/*.json: base audio timelines
+# - backend/review-data/*.json: verified Ayahs, corrections, and review history
+# Both directories MUST remain eligible for Git. Deployed writes still need
+# persistence, backups, and a deliberate sync/PR to enter Git history.
+
+# Generated alignment experiments and reports, not published canonical timelines.
+backend/scripts/offline-audio-alignment/candidates/
+backend/scripts/offline-audio-alignment/reports/
+
+# Third-party audio downloads / source recordings are not part of source control.
+*.mp3
+*.m4a
+*.wav
+*.flac
+*.ogg
+*.opus
+*.aac
+
+# Local databases, test reports, and disposable runtime state.
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
+*.sqlite-wal
+*.sqlite-shm
+*.pid
+*.pid.lock
+*.tsbuildinfo
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.hypothesis/
+.tox/
+.nox/
+junit.xml
+test-results/
+playwright-report/
+
+# Temporary/editor files and personal backups.
+*.swp
+*.swo
+*~
+*.tmp
+*.bak
+*.backup
+.codex/hooks.json
+.codex/hooks/project_map_hook.py
+.codex/hooks/project_map_runtime.md

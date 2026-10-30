@@ -1,0 +1,363 @@
+{
+  "schemaVersion": 1,
+  "surahId": 74,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/074.mp3",
+  "audioSha256": "7ecd76ad123b1dfeec3395eace271d0247a7733a26265b80daf8d91af7383cc0",
+  "audioBytes": 10776450,
+  "audioDurationMs": 673489,
+  "endMs": 673489,
+  "sourceAyahCount": 56,
+  "alignmentResolutionMs": 200,
+  "source": "QUL original CDN MP3; reference EveryAyah faster individual clips",
+  "method": "offline-global-DTW-four-speech-features",
+  "validationStatus": "experimental-cross-recording",
+  "reviewRequired": true,
+  "reviewAyahs": [],
+  "featureAgreementSecondsByAyah": [
+    0.0,
+    0.2,
+    0.3,
+    0.6,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.2,
+    0.4,
+    0.4,
+    0.0,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.1,
+    0.0,
+    0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.1,
+    0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.1,
+    0.0,
+    0.2,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.6,
+    0.2,
+    0.2,
+    0.4,
+    0.0,
+    0.0,
+    0.4,
+    0.0,
+    0.2,
+    0.4,
+    0.0,
+    0.2,
+    0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.4
+  ],
+  "dtwCosts": {
+    "mfcc": 0.08936316244874888,
+    "mfcc-delta": 0.08797740009905143,
+    "mel": 0.03804538738471208,
+    "chroma": 0.14843002117613785
+  },
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 5000
+    },
+    {
+      "ayah": 2,
+      "fromMs": 5000,
+      "toMs": 9800
+    },
+    {
+      "ayah": 3,
+      "fromMs": 9800,
+      "toMs": 16800
+    },
+    {
+      "ayah": 4,
+      "fromMs": 16800,
+      "toMs": 21200
+    },
+    {
+      "ayah": 5,
+      "fromMs": 21200,
+      "toMs": 24800
+    },
+    {
+      "ayah": 6,
+      "fromMs": 24800,
+      "toMs": 30800
+    },
+    {
+      "ayah": 7,
+      "fromMs": 30800,
+      "toMs": 36000
+    },
+    {
+      "ayah": 8,
+      "fromMs": 36000,
+      "toMs": 45400
+    },
+    {
+      "ayah": 9,
+      "fromMs": 45400,
+      "toMs": 54000
+    },
+    {
+      "ayah": 10,
+      "fromMs": 54000,
+      "toMs": 62600
+    },
+    {
+      "ayah": 11,
+      "fromMs": 62600,
+      "toMs": 72200
+    },
+    {
+      "ayah": 12,
+      "fromMs": 72200,
+      "toMs": 81000
+    },
+    {
+      "ayah": 13,
+      "fromMs": 81000,
+      "toMs": 95400
+    },
+    {
+      "ayah": 14,
+      "fromMs": 95400,
+      "toMs": 102200
+    },
+    {
+      "ayah": 15,
+      "fromMs": 102200,
+      "toMs": 108800
+    },
+    {
+      "ayah": 16,
+      "fromMs": 108800,
+      "toMs": 126400
+    },
+    {
+      "ayah": 17,
+      "fromMs": 126400,
+      "toMs": 133400
+    },
+    {
+      "ayah": 18,
+      "fromMs": 133400,
+      "toMs": 143000
+    },
+    {
+      "ayah": 19,
+      "fromMs": 143000,
+      "toMs": 147200
+    },
+    {
+      "ayah": 20,
+      "fromMs": 147200,
+      "toMs": 152800
+    },
+    {
+      "ayah": 21,
+      "fromMs": 152800,
+      "toMs": 156000
+    },
+    {
+      "ayah": 22,
+      "fromMs": 156000,
+      "toMs": 161800
+    },
+    {
+      "ayah": 23,
+      "fromMs": 161800,
+      "toMs": 170800
+    },
+    {
+      "ayah": 24,
+      "fromMs": 170800,
+      "toMs": 180200
+    },
+    {
+      "ayah": 25,
+      "fromMs": 180200,
+      "toMs": 188200
+    },
+    {
+      "ayah": 26,
+      "fromMs": 188200,
+      "toMs": 196800
+    },
+    {
+      "ayah": 27,
+      "fromMs": 196800,
+      "toMs": 204400
+    },
+    {
+      "ayah": 28,
+      "fromMs": 204400,
+      "toMs": 209200
+    },
+    {
+      "ayah": 29,
+      "fromMs": 209200,
+      "toMs": 213600
+    },
+    {
+      "ayah": 30,
+      "fromMs": 213600,
+      "toMs": 220400
+    },
+    {
+      "ayah": 31,
+      "fromMs": 220400,
+      "toMs": 397200
+    },
+    {
+      "ayah": 32,
+      "fromMs": 397200,
+      "toMs": 404200
+    },
+    {
+      "ayah": 33,
+      "fromMs": 404200,
+      "toMs": 408200
+    },
+    {
+      "ayah": 34,
+      "fromMs": 408200,
+      "toMs": 412800
+    },
+    {
+      "ayah": 35,
+      "fromMs": 412800,
+      "toMs": 430000
+    },
+    {
+      "ayah": 36,
+      "fromMs": 430000,
+      "toMs": 433800
+    },
+    {
+      "ayah": 37,
+      "fromMs": 433800,
+      "toMs": 448000
+    },
+    {
+      "ayah": 38,
+      "fromMs": 448000,
+      "toMs": 461400
+    },
+    {
+      "ayah": 39,
+      "fromMs": 461400,
+      "toMs": 468400
+    },
+    {
+      "ayah": 40,
+      "fromMs": 468400,
+      "toMs": 482400
+    },
+    {
+      "ayah": 41,
+      "fromMs": 482400,
+      "toMs": 485800
+    },
+    {
+      "ayah": 42,
+      "fromMs": 485800,
+      "toMs": 491800
+    },
+    {
+      "ayah": 43,
+      "fromMs": 491800,
+      "toMs": 502200
+    },
+    {
+      "ayah": 44,
+      "fromMs": 502200,
+      "toMs": 508200
+    },
+    {
+      "ayah": 45,
+      "fromMs": 508200,
+      "toMs": 530600
+    },
+    {
+      "ayah": 46,
+      "fromMs": 530600,
+      "toMs": 538200
+    },
+    {
+      "ayah": 47,
+      "fromMs": 538200,
+      "toMs": 547400
+    },
+    {
+      "ayah": 48,
+      "fromMs": 547400,
+      "toMs": 561200
+    },
+    {
+      "ayah": 49,
+      "fromMs": 561200,
+      "toMs": 572200
+    },
+    {
+      "ayah": 50,
+      "fromMs": 572200,
+      "toMs": 581400
+    },
+    {
+      "ayah": 51,
+      "fromMs": 581400,
+      "toMs": 588200
+    },
+    {
+      "ayah": 52,
+      "fromMs": 588200,
+      "toMs": 608200
+    },
+    {
+      "ayah": 53,
+      "fromMs": 608200,
+      "toMs": 622200
+    },
+    {
+      "ayah": 54,
+      "fromMs": 622200,
+      "toMs": 633200
+    },
+    {
+      "ayah": 55,
+      "fromMs": 633200,
+      "toMs": 641200
+    },
+    {
+      "ayah": 56,
+      "fromMs": 641200,
+      "toMs": 673489
+    }
+  ]
+}

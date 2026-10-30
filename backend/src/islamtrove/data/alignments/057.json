@@ -1,0 +1,340 @@
+{
+  "schemaVersion": 1,
+  "surahId": 57,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/057.mp3",
+  "audioSha256": "14cc00c7e2d63b798c62ef8d6c9c05143472222a2dcc58fec2fbafe143b53109",
+  "audioBytes": 25459788,
+  "audioDurationMs": 1591200,
+  "endMs": 1591200,
+  "sourceAyahCount": 29,
+  "alignmentResolutionMs": 430,
+  "source": "QUL original CDN MP3; reference EveryAyah faster individual clips",
+  "method": "offline-global-DTW-four-speech-features",
+  "validationStatus": "experimental-cross-recording",
+  "reviewRequired": true,
+  "reviewAyahs": [
+    {
+      "ayah": 2,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 10.32,
+      "mfccDisagreementSeconds": 9.46
+    },
+    {
+      "ayah": 3,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 21.94,
+      "mfccDisagreementSeconds": 3.44
+    },
+    {
+      "ayah": 4,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 26.24,
+      "mfccDisagreementSeconds": 2.15
+    },
+    {
+      "ayah": 5,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 38.71,
+      "mfccDisagreementSeconds": 7.31
+    },
+    {
+      "ayah": 6,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 30.11,
+      "mfccDisagreementSeconds": 0.43
+    },
+    {
+      "ayah": 7,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 30.11,
+      "mfccDisagreementSeconds": 0.86
+    },
+    {
+      "ayah": 8,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 25.81,
+      "mfccDisagreementSeconds": 16.34
+    },
+    {
+      "ayah": 9,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 19.14,
+      "mfccDisagreementSeconds": 0.86
+    },
+    {
+      "ayah": 10,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 33.12,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 11,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 30.11,
+      "mfccDisagreementSeconds": 0.43
+    },
+    {
+      "ayah": 12,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 33.76,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 13,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 69.47,
+      "mfccDisagreementSeconds": 0.22
+    },
+    {
+      "ayah": 14,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 87.75,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 15,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 100.86,
+      "mfccDisagreementSeconds": 0.86
+    },
+    {
+      "ayah": 16,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 99.36,
+      "mfccDisagreementSeconds": 0.22
+    },
+    {
+      "ayah": 17,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 81.94,
+      "mfccDisagreementSeconds": 0.0
+    },
+    {
+      "ayah": 18,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 78.07,
+      "mfccDisagreementSeconds": 0.22
+    },
+    {
+      "ayah": 19,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 65.81,
+      "mfccDisagreementSeconds": 0.43
+    },
+    {
+      "ayah": 20,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 52.05,
+      "mfccDisagreementSeconds": 0.43
+    },
+    {
+      "ayah": 21,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 48.6,
+      "mfccDisagreementSeconds": 0.65
+    },
+    {
+      "ayah": 22,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 65.16,
+      "mfccDisagreementSeconds": 1.72
+    },
+    {
+      "ayah": 23,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 34.41,
+      "mfccDisagreementSeconds": 3.01
+    },
+    {
+      "ayah": 24,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 9.89,
+      "mfccDisagreementSeconds": 2.15
+    }
+  ],
+  "featureAgreementSecondsByAyah": [
+    0.0,
+    10.32,
+    21.94,
+    26.24,
+    38.71,
+    30.11,
+    30.11,
+    25.81,
+    19.14,
+    33.12,
+    30.11,
+    33.76,
+    69.47,
+    87.75,
+    100.86,
+    99.36,
+    81.94,
+    78.07,
+    65.81,
+    52.05,
+    48.6,
+    65.16,
+    34.41,
+    9.89,
+    0.22,
+    0.0,
+    0.0,
+    0.43,
+    0.0
+  ],
+  "dtwCosts": {
+    "mfcc": 0.6555612326343492,
+    "mfcc-delta": 0.6900820459751977,
+    "mel": 0.4093976221179847,
+    "chroma": 0.6052346491822531
+  },
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 21076
+    },
+    {
+      "ayah": 2,
+      "fromMs": 21076,
+      "toMs": 61078
+    },
+    {
+      "ayah": 3,
+      "fromMs": 61078,
+      "toMs": 92047
+    },
+    {
+      "ayah": 4,
+      "fromMs": 92047,
+      "toMs": 216353
+    },
+    {
+      "ayah": 5,
+      "fromMs": 216353,
+      "toMs": 227536
+    },
+    {
+      "ayah": 6,
+      "fromMs": 227536,
+      "toMs": 254634
+    },
+    {
+      "ayah": 7,
+      "fromMs": 254634,
+      "toMs": 286033
+    },
+    {
+      "ayah": 8,
+      "fromMs": 286033,
+      "toMs": 313346
+    },
+    {
+      "ayah": 9,
+      "fromMs": 313346,
+      "toMs": 360015
+    },
+    {
+      "ayah": 10,
+      "fromMs": 360015,
+      "toMs": 455072
+    },
+    {
+      "ayah": 11,
+      "fromMs": 455072,
+      "toMs": 486471
+    },
+    {
+      "ayah": 12,
+      "fromMs": 486471,
+      "toMs": 572066
+    },
+    {
+      "ayah": 13,
+      "fromMs": 572066,
+      "toMs": 638736
+    },
+    {
+      "ayah": 14,
+      "fromMs": 638736,
+      "toMs": 693362
+    },
+    {
+      "ayah": 15,
+      "fromMs": 693362,
+      "toMs": 731428
+    },
+    {
+      "ayah": 16,
+      "fromMs": 731428,
+      "toMs": 795731
+    },
+    {
+      "ayah": 17,
+      "fromMs": 795731,
+      "toMs": 827345
+    },
+    {
+      "ayah": 18,
+      "fromMs": 827345,
+      "toMs": 870143
+    },
+    {
+      "ayah": 19,
+      "fromMs": 870143,
+      "toMs": 925199
+    },
+    {
+      "ayah": 20,
+      "fromMs": 925199,
+      "toMs": 1032730
+    },
+    {
+      "ayah": 21,
+      "fromMs": 1032730,
+      "toMs": 1137681
+    },
+    {
+      "ayah": 22,
+      "fromMs": 1137681,
+      "toMs": 1193597
+    },
+    {
+      "ayah": 23,
+      "fromMs": 1193597,
+      "toMs": 1238760
+    },
+    {
+      "ayah": 24,
+      "fromMs": 1238760,
+      "toMs": 1268869
+    },
+    {
+      "ayah": 25,
+      "fromMs": 1268869,
+      "toMs": 1344141
+    },
+    {
+      "ayah": 26,
+      "fromMs": 1344141,
+      "toMs": 1381992
+    },
+    {
+      "ayah": 27,
+      "fromMs": 1381992,
+      "toMs": 1491243
+    },
+    {
+      "ayah": 28,
+      "fromMs": 1491243,
+      "toMs": 1544579
+    },
+    {
+      "ayah": 29,
+      "fromMs": 1544579,
+      "toMs": 1591200
+    }
+  ]
+}

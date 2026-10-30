@@ -1,0 +1,45 @@
+# Mirrors mcp-registry: independent main-branch Docker-socket deployment.
+when:
+  - event: push
+    branch: main
+    path:
+      include:
+        - frontend/**
+        - .dockerignore
+        - .woodpecker/frontend-pipeline.yml
+      ignore_message: "[ALL]"
+      on_empty: false
+
+steps:
+  - name: build IslamTrove frontend image
+    image: docker:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      - DOCKER_BUILDKIT=1 docker build -f frontend/Dockerfile -t islamtrove_frontend:$CI_COMMIT_SHA .
+
+  - name: deploy IslamTrove frontend
+    image: docker:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    when:
+      - status: success
+    commands:
+      - docker network inspect islamtrove_private >/dev/null 2>&1 || docker network create islamtrove_private
+      - docker rm -f islamtrove_frontend || true
+      - >-
+        docker run -d
+        --name islamtrove_frontend
+        --network islamtrove_private
+        --restart unless-stopped
+        --cap-drop ALL
+        --security-opt no-new-privileges
+        --read-only
+        --tmpfs /tmp:rw,noexec,nosuid,size=64m
+        -p 127.0.0.1:3055:8080
+        islamtrove_frontend:$CI_COMMIT_SHA
+      - >-
+        docker images --format "{{.Repository}}:{{.Tag}}"
+        | grep '^islamtrove_frontend:'
+        | grep -Fvx "islamtrove_frontend:$CI_COMMIT_SHA"
+        | xargs -r docker rmi -f

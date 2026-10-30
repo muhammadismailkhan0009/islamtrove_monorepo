@@ -24,3 +24,5 @@
 /* The introductory Bismillah is separate from numbered Quran Ayahs. */
 .opening-bismillah{padding:19px 18px 12px;text-align:center;color:#306649;background:#fcfdf9;
   font-family:serif;font-size:25px;line-height:1.8;border-bottom:1px solid #e9f0e7}
+
+.reading-audio-warning{display:flex;gap:10px;align-items:center;border-top:1px solid #e7ddbc;background:#fff9e9;padding:11px 25px;color:#80632c;font-size:12px;line-height:1.5}

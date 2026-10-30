@@ -13,8 +13,5 @@ class Settings(BaseSettings):
 
     quran_api_base_url: HttpUrl = HttpUrl("https://api.alquran.cloud/v1")
     http_timeout_seconds: float = Field(default=12, gt=0, le=60)
-    cors_origins: str = ""
-
-    @property
-    def allowed_origins(self) -> list[str]:
-        return [value.strip() for value in self.cors_origins.split(",") if value.strip()]
+    admin_code: str = ""
+    review_data_dir: str = ""

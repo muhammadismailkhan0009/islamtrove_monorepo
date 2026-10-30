@@ -2,25 +2,31 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './features/listening-studio/components/player/app.component';
 import { QURAN_SURAHS, type QuranCatalogPort } from './application/ports/quran-catalog';
 import { AUDIO_OPTIONS, type AudioOptionsPort } from './application/ports/audio-options';
-import { AUDIO_MEDIA, type AudioMediaPort } from './application/ports/audio-media';
+import { TRANSLATION_AUDIO, type TranslationAudioPort } from './application/ports/translation-audio';
 import { VERSE_PREVIEW, type VersePreviewPort } from './application/ports/verse-preview';
 import { MEDIA_CACHE, type MediaCachePort } from './application/ports/media-cache';
 import { CONTINUOUS_RECITATION, type ContinuousRecitationPort } from './application/ports/continuous-recitation';
 import { STREAMING_SOURCE, type StreamingSourcePort } from './application/ports/streaming-source';
 import { mockQuranCatalogAdapter } from './infrastructure/adapters/mock/quran-catalog';
 import { mockAudioOptionsAdapter } from './infrastructure/adapters/mock/audio-options';
-import { mockAudioMediaAdapter } from './infrastructure/adapters/mock/audio-media';
+import { mockTranslationAudioAdapter } from './infrastructure/adapters/mock/translation-audio';
 import { mockVersePreviewAdapter } from './infrastructure/adapters/mock/verse-preview';
 import { mockMediaCacheAdapter } from './infrastructure/adapters/mock/media-cache';
 import { mockContinuousRecitationAdapter } from './infrastructure/adapters/mock/continuous-recitation';
 import { mockStreamingSourceAdapter } from './infrastructure/adapters/mock/streaming-source';
 import { productionQuranCatalogAdapter } from './infrastructure/adapters/production/quran-catalog';
 import { productionAudioOptionsAdapter } from './infrastructure/adapters/production/audio-options';
-import { productionAudioMediaAdapter } from './infrastructure/adapters/production/audio-media';
+import { productionTranslationAudioAdapter } from './infrastructure/adapters/production/translation-audio';
 import { productionVersePreviewAdapter } from './infrastructure/adapters/production/verse-preview';
 import { productionMediaCacheAdapter } from './infrastructure/adapters/production/media-cache';
 import { productionContinuousRecitationAdapter } from './infrastructure/adapters/production/continuous-recitation';
 import { productionStreamingSourceAdapter } from './infrastructure/adapters/production/streaming-source';
+import { ALIGNMENT_REVIEW, type AlignmentReviewPort } from './application/ports/alignment-review';
+import { mockAlignmentReviewAdapter } from './infrastructure/adapters/mock/alignment-review';
+import { productionAlignmentReviewAdapter } from './infrastructure/adapters/production/alignment-review';
+import { GROUPING_LIBRARY, type GroupingLibraryPort } from './application/ports/grouping-library';
+import { mockGroupingLibraryAdapter } from './infrastructure/adapters/mock/grouping-library';
+import { productionGroupingLibraryAdapter } from './infrastructure/adapters/production/grouping-library';
 import { registerPersistentAudioCache } from './infrastructure/media/register-stream-cache';
 import { DC_ADAPTER_MODE } from './environments/environment';
 
@@ -31,8 +37,8 @@ async function start(): Promise<void> {
   const audio: AudioOptionsPort = DC_ADAPTER_MODE === 'mock'
     ? mockAudioOptionsAdapter : productionAudioOptionsAdapter;
 
-  const audioMedia: AudioMediaPort = DC_ADAPTER_MODE === 'mock'
-    ? mockAudioMediaAdapter : productionAudioMediaAdapter;
+  const translationAudio: TranslationAudioPort = DC_ADAPTER_MODE === 'mock'
+    ? mockTranslationAudioAdapter : productionTranslationAudioAdapter;
 
   const verseText: VersePreviewPort = DC_ADAPTER_MODE === 'mock'
     ? mockVersePreviewAdapter : productionVersePreviewAdapter;
@@ -45,6 +51,10 @@ async function start(): Promise<void> {
 
   const streamingSource: StreamingSourcePort = DC_ADAPTER_MODE === 'mock'
     ? mockStreamingSourceAdapter : productionStreamingSourceAdapter;
+  const alignmentReview: AlignmentReviewPort = DC_ADAPTER_MODE === 'mock'
+    ? mockAlignmentReviewAdapter : productionAlignmentReviewAdapter;
+  const groupingLibrary: GroupingLibraryPort = DC_ADAPTER_MODE === 'mock'
+    ? mockGroupingLibraryAdapter : productionGroupingLibraryAdapter;
   if (DC_ADAPTER_MODE === 'production') registerPersistentAudioCache();
 
   const [surahs, audioOptions] = await Promise.all([catalog.listSurahs(), audio.listAudioOptions()]);
@@ -54,11 +64,13 @@ async function start(): Promise<void> {
     providers: [
       { provide: QURAN_SURAHS, useValue: surahs },
       { provide: AUDIO_OPTIONS, useValue: audioOptions },
-      { provide: AUDIO_MEDIA, useValue: audioMedia },
+      { provide: TRANSLATION_AUDIO, useValue: translationAudio },
       { provide: VERSE_PREVIEW, useValue: verseText },
       { provide: MEDIA_CACHE, useValue: mediaCache },
       { provide: CONTINUOUS_RECITATION, useValue: continuousAudio },
-      { provide: STREAMING_SOURCE, useValue: streamingSource }
+      { provide: STREAMING_SOURCE, useValue: streamingSource },
+      { provide: ALIGNMENT_REVIEW, useValue: alignmentReview },
+      { provide: GROUPING_LIBRARY, useValue: groupingLibrary }
     ]
   });
 }

@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "surahId": 49,
+  "reciter": "minshawi-mujawwad",
+  "audioUrl": "https://audio-cdn.tarteel.ai/quran/surah/minshawy/mujawwad/mp3/049.mp3",
+  "audioSha256": "250494383a4d2b48526fae5ebf8759d91db47f4b6d44b741298f2c8d581e3cf5",
+  "audioBytes": 17287502,
+  "audioDurationMs": 1080432,
+  "endMs": 1080432,
+  "sourceAyahCount": 18,
+  "alignmentResolutionMs": 292,
+  "source": "QUL original CDN MP3; reference EveryAyah faster individual clips",
+  "method": "offline-global-DTW-four-speech-features",
+  "validationStatus": "experimental-cross-recording",
+  "reviewRequired": true,
+  "reviewAyahs": [
+    {
+      "ayah": 2,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 4.23,
+      "mfccDisagreementSeconds": 1.9
+    },
+    {
+      "ayah": 3,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 7.74,
+      "mfccDisagreementSeconds": 0.44
+    },
+    {
+      "ayah": 7,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 3.8,
+      "mfccDisagreementSeconds": 1.61
+    },
+    {
+      "ayah": 8,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 15.48,
+      "mfccDisagreementSeconds": 1.17
+    },
+    {
+      "ayah": 9,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 13.14,
+      "mfccDisagreementSeconds": 0.88
+    },
+    {
+      "ayah": 10,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 1.75,
+      "mfccDisagreementSeconds": 1.75
+    },
+    {
+      "ayah": 11,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 2.63,
+      "mfccDisagreementSeconds": 1.75
+    },
+    {
+      "ayah": 12,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 8.76,
+      "mfccDisagreementSeconds": 0.15
+    },
+    {
+      "ayah": 17,
+      "kind": "different-feature-alignment",
+      "timeSpreadSeconds": 9.34,
+      "mfccDisagreementSeconds": 0.0
+    }
+  ],
+  "featureAgreementSecondsByAyah": [
+    0.15,
+    4.23,
+    7.74,
+    1.46,
+    0.58,
+    2.19,
+    3.8,
+    15.48,
+    13.14,
+    1.75,
+    2.63,
+    8.76,
+    1.9,
+    0.0,
+    0.88,
+    0.88,
+    9.34,
+    0.29
+  ],
+  "dtwCosts": {
+    "mfcc": 0.5206080495200088,
+    "mfcc-delta": 0.5799733689744628,
+    "mel": 0.3622621202959877,
+    "chroma": 0.49142088208193563
+  },
+  "timings": [
+    {
+      "ayah": 1,
+      "fromMs": 0,
+      "toMs": 39274
+    },
+    {
+      "ayah": 2,
+      "fromMs": 39274,
+      "toMs": 106726
+    },
+    {
+      "ayah": 3,
+      "fromMs": 106726,
+      "toMs": 163228
+    },
+    {
+      "ayah": 4,
+      "fromMs": 163228,
+      "toMs": 191114
+    },
+    {
+      "ayah": 5,
+      "fromMs": 191114,
+      "toMs": 221336
+    },
+    {
+      "ayah": 6,
+      "fromMs": 221336,
+      "toMs": 275794
+    },
+    {
+      "ayah": 7,
+      "fromMs": 275794,
+      "toMs": 367336
+    },
+    {
+      "ayah": 8,
+      "fromMs": 367336,
+      "toMs": 386316
+    },
+    {
+      "ayah": 9,
+      "fromMs": 386316,
+      "toMs": 470412
+    },
+    {
+      "ayah": 10,
+      "fromMs": 470412,
+      "toMs": 499904
+    },
+    {
+      "ayah": 11,
+      "fromMs": 499904,
+      "toMs": 607506
+    },
+    {
+      "ayah": 12,
+      "fromMs": 607506,
+      "toMs": 708246
+    },
+    {
+      "ayah": 13,
+      "fromMs": 708246,
+      "toMs": 781684
+    },
+    {
+      "ayah": 14,
+      "fromMs": 781684,
+      "toMs": 850012
+    },
+    {
+      "ayah": 15,
+      "fromMs": 850012,
+      "toMs": 972360
+    },
+    {
+      "ayah": 16,
+      "fromMs": 972360,
+      "toMs": 997472
+    },
+    {
+      "ayah": 17,
+      "fromMs": 997472,
+      "toMs": 1050908
+    },
+    {
+      "ayah": 18,
+      "fromMs": 1050908,
+      "toMs": 1080432
+    }
+  ]
+}
