@@ -1,5 +1,7 @@
 # Dual-Translation Listening Studio — UI Design Handoff
 
+> Historical design reference: the current Urdu **written** translation is Fateh Muhammad Jalandhari (`ur.jalandhry` via Al Quran Cloud). Shamshad Ali Khan remains the separate Urdu audio narrator. Obsolete Junagarhi references below describe the earlier implementation.
+
 **Date:** 29 October 2026
 **Scope:** Angular + Design Canvas UI only. Backend and real multi-translation audio have **not** been implemented or changed.
 **Status:** Latest Web Audio, per-Ayah controls and production text/audio adapters implemented; see the final dated section.

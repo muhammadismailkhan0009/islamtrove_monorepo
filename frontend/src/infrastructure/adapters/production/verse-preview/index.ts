@@ -2,8 +2,8 @@ import type {
   VersePreviewPort, VerseText, WrittenTranslationResult, TranslationLanguage
 } from '../../../../application/ports/verse-preview';
 
-async function request<T>(url: string, resource: string): Promise<T> {
-  const response = await fetch(url);
+async function request<T>(url: string, resource: string, options?: RequestInit): Promise<T> {
+  const response = await fetch(url, options);
   if (!response.ok) {
     let detail = `HTTP ${response.status}`;
     try {
@@ -30,7 +30,7 @@ export const productionVersePreviewAdapter: VersePreviewPort = {
     const query = new URLSearchParams({language});
     const data = await request<unknown>(
       `/api/quran/surahs/${surahId}/translation-text?${query}`,
-      `${language} translation`
+      `${language} translation`, {cache: 'no-store'}
     );
     const record = data as Partial<WrittenTranslationResult> | null;
     const verses = record?.verses;

@@ -1,5 +1,7 @@
 # Long-Surah progressive streaming — implementation handoff
 
+> Historical note: written Urdu now uses Al Quran Cloud `ur.jalandhry` (Fateh Muhammad Jalandhari), not QuranEnc `urdu_junagarhi`. See `backend/docs/API_CONTRACTS.md` for the current provider contract.
+
 Clarified requirement: **start playing a large Surah MP3 while it is still downloading**, without a new "Play from Ayah" UI. The latter was removed.
 
 ## Player pipeline

@@ -36,7 +36,11 @@ async def get_translation_text(
     if language not in {"German", "English", "Urdu"}:
         raise HTTPException(status_code=422, detail="Unsupported written translation")
     output = await service.translation_details(surah_id, language)
-    response.headers["Cache-Control"] = "public, max-age=86400"
+    # The Urdu edition changed from Junagarhi to Jalandhari; prevent old
+    # browser/proxy caches from serving the previous translator under this URL.
+    response.headers["Cache-Control"] = (
+        "no-store" if language == "Urdu" else "public, max-age=86400"
+    )
     return output
 
 

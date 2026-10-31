@@ -1,5 +1,5 @@
 {
-  "source": "QuranEnc (german_bubenheim, english_rwwad, urdu_junagarhi)",
+  "source": "QuranEnc fixture for German and English only; Urdu Jalandhari loads from Al Quran Cloud",
   "previewOnly": true,
   "surahs": {
     "1": [
@@ -8,8 +8,7 @@
         "arabic": "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
         "translations": {
           "German": "Im Namen Allahs, des Allerbarmers, des Barmherzigen.",
-          "English": "In the name of Allah, the Most Compassionate, the Most Merciful.",
-          "Urdu": "شروع کرتا ہوں اللہ تعالیٰ کے نام سے جو بڑا مہربان نہایت رحم واﻻ ہے۔[1]"
+          "English": "In the name of Allah, the Most Compassionate, the Most Merciful."
         }
       },
       {
@@ -17,8 +16,7 @@
         "arabic": "ٱلۡحَمۡدُ لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ",
         "translations": {
           "German": "(Alles) Lob gehört Allah, dem Herrn der Welten,",
-          "English": "All praise be to Allah[1], the Lord[2] of the worlds[3],",
-          "Urdu": "سب تعریف اللہ تعالیٰ کے لئے ہے[1] جو تمام جہانوں کا پالنے واﻻ ہے۔[2]"
+          "English": "All praise be to Allah[1], the Lord[2] of the worlds[3],"
         }
       },
       {
@@ -26,8 +24,7 @@
         "arabic": "ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
         "translations": {
           "German": "dem Allerbarmer, dem Barmherzigen,",
-          "English": "the Most Compassionate, the Most Merciful[1],",
-          "Urdu": "بڑا مہربان نہایت رحم کرنے واﻻ۔[1]"
+          "English": "the Most Compassionate, the Most Merciful[1],"
         }
       },
       {
@@ -35,8 +32,7 @@
         "arabic": "مَٰلِكِ يَوۡمِ ٱلدِّينِ",
         "translations": {
           "German": "dem Herrscher am Tag des Gerichts.",
-          "English": "Master[1] of the Day of Judgment.",
-          "Urdu": "بدلے کے دن (یعنی قیامت) کا مالک ہے۔[1]"
+          "English": "Master[1] of the Day of Judgment."
         }
       },
       {
@@ -44,8 +40,7 @@
         "arabic": "إِيَّاكَ نَعۡبُدُ وَإِيَّاكَ نَسۡتَعِينُ",
         "translations": {
           "German": "Dir allein dienen wir, und zu Dir allein flehen wir um Hilfe.",
-          "English": "You alone we worship, and You alone we ask for help.",
-          "Urdu": "ہم صرف تیری ہی عبادت کرتے ہیں اور صرف تجھ ہی سے مدد چاہتے ہیں۔[1]"
+          "English": "You alone we worship, and You alone we ask for help."
         }
       },
       {
@@ -53,8 +48,7 @@
         "arabic": "ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ",
         "translations": {
           "German": "Leite uns den geraden Weg,",
-          "English": "Guide us to the straight path,",
-          "Urdu": "ہمیں سیدھی (اور سچی) راه دکھا۔[1]"
+          "English": "Guide us to the straight path,"
         }
       },
       {
@@ -62,8 +56,7 @@
         "arabic": "صِرَٰطَ ٱلَّذِينَ أَنۡعَمۡتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ",
         "translations": {
           "German": "den Weg derjenigen, denen Du Gunst erwiesen hast, nicht derjenigen, die (Deinen) Zorn erregt haben, und nicht der Irregehenden!",
-          "English": "the path of those whom You have blessed[1]; not of those who incurred Your Wrath[2], or of those who went astray[3].",
-          "Urdu": "ان لوگوں کی راه جن پر تو نے انعام کیا[1] ان کی نہیں جن پر غضب کیا گیا (یعنی وه لوگ جنہوں نے حق کو پہچانا، مگر اس پر عمل پیرا نہیں ہوئے) اور نہ گمراہوں کی[2] (یعنی وه لوگ جو جہالت کے سبب راه حق سے برگشتہ ہوگئے)۔"
+          "English": "the path of those whom You have blessed[1]; not of those who incurred Your Wrath[2], or of those who went astray[3]."
         }
       }
     ],
@@ -73,8 +66,7 @@
         "arabic": "وَٱلۡعَصۡرِ",
         "translations": {
           "German": "Beim Zeitalter!",
-          "English": "By the time,",
-          "Urdu": "زمانے کی قسم.[1]"
+          "English": "By the time,"
         }
       },
       {
@@ -82,8 +74,7 @@
         "arabic": "إِنَّ ٱلۡإِنسَٰنَ لَفِي خُسۡرٍ",
         "translations": {
           "German": "Der Mensch befindet sich wahrlich in Verlust,",
-          "English": "man is in utter loss,",
-          "Urdu": "بیشک (بالیقین) انسان سرتا سر نقصان میں ہے.[1]"
+          "English": "man is in utter loss,"
         }
       },
       {
@@ -91,8 +82,7 @@
         "arabic": "إِلَّا ٱلَّذِينَ ءَامَنُواْ وَعَمِلُواْ ٱلصَّٰلِحَٰتِ وَتَوَاصَوۡاْ بِٱلۡحَقِّ وَتَوَاصَوۡاْ بِٱلصَّبۡرِ",
         "translations": {
           "German": "außer denjenigen, die glauben und rechtschaffene Werke tun und einander die Wahrheit eindringlich empfehlen und einander die Standhaftigkeit eindringlich empfehlen.",
-          "English": "except those who believe and do righteous deeds, and exhort one another to the truth and exhort one another to patience.",
-          "Urdu": "سوائے ان لوگوں کے جو ایمان ﻻئے اور نیک عمل[1] کیے اور (جنہوں نے) آپس میں حق کی وصیت کی[2] اور ایک دوسرے کو صبر کی نصیحت کی.[3]"
+          "English": "except those who believe and do righteous deeds, and exhort one another to the truth and exhort one another to patience."
         }
       }
     ],
@@ -102,8 +92,7 @@
         "arabic": "قُلۡ هُوَ ٱللَّهُ أَحَدٌ",
         "translations": {
           "German": "Sag: Er ist Allah, Einer,",
-          "English": "Say: “He is Allah, the One[1];",
-          "Urdu": "آپ کہہ دیجئے کہ وه اللہ تعالیٰ ایک (ہی) ہے."
+          "English": "Say: “He is Allah, the One[1];"
         }
       },
       {
@@ -111,8 +100,7 @@
         "arabic": "ٱللَّهُ ٱلصَّمَدُ",
         "translations": {
           "German": "Allah, der Überlegene.",
-          "English": "Allah, the Eternal Refuge[1].",
-          "Urdu": "اللہ تعالیٰ بے نیاز ہے.[1]"
+          "English": "Allah, the Eternal Refuge[1]."
         }
       },
       {
@@ -120,8 +108,7 @@
         "arabic": "لَمۡ يَلِدۡ وَلَمۡ يُولَدۡ",
         "translations": {
           "German": "Er hat nicht gezeugt und ist nicht gezeugt worden,",
-          "English": "He neither begets nor is He begotten,",
-          "Urdu": "نہ اس سے کوئی پیدا ہوا نہ وه کسی سے پیدا ہوا.[1]"
+          "English": "He neither begets nor is He begotten,"
         }
       },
       {
@@ -129,8 +116,7 @@
         "arabic": "وَلَمۡ يَكُن لَّهُۥ كُفُوًا أَحَدُۢ",
         "translations": {
           "German": "und niemand ist Ihm jemals gleich.",
-          "English": "and there is none comparable to Him.”[1]",
-          "Urdu": "اور نہ کوئی اس کا ہمسر ہے.[1]"
+          "English": "and there is none comparable to Him.”[1]"
         }
       }
     ],
@@ -140,8 +126,7 @@
         "arabic": "قُلۡ أَعُوذُ بِرَبِّ ٱلۡفَلَقِ",
         "translations": {
           "German": "Sag: Ich nehme Zuflucht beim Herrn des Tagesanbruchs",
-          "English": "Say, “I seek refuge with the Lord of the daybreak,",
-          "Urdu": "آپ کہہ دیجئے! کہ میں صبح کے رب کی پناه میں آتا ہوں.[1]"
+          "English": "Say, “I seek refuge with the Lord of the daybreak,"
         }
       },
       {
@@ -149,8 +134,7 @@
         "arabic": "مِن شَرِّ مَا خَلَقَ",
         "translations": {
           "German": "vor dem Übel dessen, was Er erschaffen hat,",
-          "English": "from the harm of all what He has created;",
-          "Urdu": "ہر اس چیز کے شر سے جو اس نے پیدا کی ہے.[1]"
+          "English": "from the harm of all what He has created;"
         }
       },
       {
@@ -158,8 +142,7 @@
         "arabic": "وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ",
         "translations": {
           "German": "und vor dem Übel der Dunkelheit, wenn sie zunimmt,",
-          "English": "from the harm of darkening [night] when it spreads around,",
-          "Urdu": "اور اندھیری رات کی تاریکی کے شر سے جب اس کا اندھیرا پھیل جائے.[1]"
+          "English": "from the harm of darkening [night] when it spreads around,"
         }
       },
       {
@@ -167,8 +150,7 @@
         "arabic": "وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِي ٱلۡعُقَدِ",
         "translations": {
           "German": "und vor dem Übel der Knotenanbläserinnen",
-          "English": "from the harm of the sorceresses[1] who blow on knots,",
-          "Urdu": "اور گره (لگا کر ان) میں پھونکنے والیوں کے شر سے (بھی).[1]"
+          "English": "from the harm of the sorceresses[1] who blow on knots,"
         }
       },
       {
@@ -176,8 +158,7 @@
         "arabic": "وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
         "translations": {
           "German": "und vor dem Übel eines (jeden) Neidenden, wenn er neidet.",
-          "English": "and from the harm of the envier when he envies.\"",
-          "Urdu": "اور حسد کرنے والے کی برائی سے بھی جب وه حسد کرے.[1]"
+          "English": "and from the harm of the envier when he envies.\""
         }
       }
     ],
@@ -187,8 +168,7 @@
         "arabic": "قُلۡ أَعُوذُ بِرَبِّ ٱلنَّاسِ",
         "translations": {
           "German": "Sag: Ich nehme Zuflucht beim Herrn der Menschen,",
-          "English": "Say, “I seek refuge with the Lord of mankind,",
-          "Urdu": "آپ کہہ دیجئے! کہ میں لوگوں کے پروردگار کی پناه میں آتا ہوں.[1]"
+          "English": "Say, “I seek refuge with the Lord of mankind,"
         }
       },
       {
@@ -196,8 +176,7 @@
         "arabic": "مَلِكِ ٱلنَّاسِ",
         "translations": {
           "German": "dem König der Menschen,",
-          "English": "the Sovereign of mankind[1],",
-          "Urdu": "لوگوں کے مالک کی[1] (اور)."
+          "English": "the Sovereign of mankind[1],"
         }
       },
       {
@@ -205,8 +184,7 @@
         "arabic": "إِلَٰهِ ٱلنَّاسِ",
         "translations": {
           "German": "dem Gott der Menschen,",
-          "English": "the God of mankind,",
-          "Urdu": "لوگوں کے معبود کی (پناه میں).[1]"
+          "English": "the God of mankind,"
         }
       },
       {
@@ -214,8 +192,7 @@
         "arabic": "مِن شَرِّ ٱلۡوَسۡوَاسِ ٱلۡخَنَّاسِ",
         "translations": {
           "German": "vor dem Übel des Einflüsterers, des Davonschleichers,",
-          "English": "from the harm of the lurking whisperer[1],",
-          "Urdu": "وسوسہ ڈالنے والے پیچھے ہٹ جانے والے کے شر سے.[1]"
+          "English": "from the harm of the lurking whisperer[1],"
         }
       },
       {
@@ -223,8 +200,7 @@
         "arabic": "ٱلَّذِي يُوَسۡوِسُ فِي صُدُورِ ٱلنَّاسِ",
         "translations": {
           "German": "der in die Brüste der Menschen einflüstert,",
-          "English": "who whispers into the hearts of mankind,",
-          "Urdu": "جو لوگوں کے سینوں میں وسوسہ ڈالتا ہے."
+          "English": "who whispers into the hearts of mankind,"
         }
       },
       {
@@ -232,8 +208,7 @@
         "arabic": "مِنَ ٱلۡجِنَّةِ وَٱلنَّاسِ",
         "translations": {
           "German": "von den Ginn und den Menschen.",
-          "English": "from among jinn and mankind[1].”",
-          "Urdu": "(خواه) وه جن میں سے ہو یا انسان میں سے.[1]"
+          "English": "from among jinn and mankind[1].”"
         }
       }
     ]

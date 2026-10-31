@@ -15,12 +15,11 @@ from islamtrove.ports.quran_source import ProviderDataError, ProviderUnavailable
 _PRIMARY_EDITIONS = {
     "German": ("de.bubenheim", "Bubenheim & Elyas"),
     "English": ("en.sahih", "Saheeh International"),
-    "Urdu": ("ur.junagarhi", "Muhammad Junagarhi"),
+    "Urdu": ("ur.jalandhry", "Fateh Muhammad Jalandhari"),
 }
 _QURANENC_EDITIONS = {
     "German": ("german_bubenheim", "Bubenheim & Elyas"),
     "English": ("english_rwwad", "Rowwad Translation Center"),
-    "Urdu": ("urdu_junagarhi", "Muhammad Junagarhi"),
 }
 
 
@@ -60,13 +59,22 @@ def validate_arabic_payload(surah_id: int, payload: object) -> list[dict[str, ob
     return result
 
 
-def validate_cloud_translation(surah_id: int, payload: object) -> list[dict[str, object]]:
+def validate_cloud_translation(
+    surah_id: int, payload: object, expected_edition: str
+) -> list[dict[str, object]]:
     """Validate independent Al Quran Cloud translated edition per Surah."""
     if not isinstance(payload, dict) or payload.get("code") != 200:
         raise ProviderDataError("Al Quran Cloud translation returned an invalid envelope")
     data = payload.get("data")
     if not isinstance(data, dict) or data.get("number") != surah_id:
         raise ProviderDataError("Al Quran Cloud translation belongs to another Surah")
+    # Protect attribution: an upstream edition mismatch must never be labeled
+    # with the requested translator's name.
+    edition = data.get("edition")
+    if edition is not None and (
+        not isinstance(edition, dict) or edition.get("identifier") != expected_edition
+    ):
+        raise ProviderDataError("Al Quran Cloud returned a different translation edition")
     ayahs, count = data.get("ayahs"), data.get("numberOfAyahs")
     if (
         not isinstance(count, int)
@@ -161,7 +169,7 @@ class QuranEncVerseSource:
             try:
                 response = await client.get(f"/surah/{surah_id}/{primary_edition}")
                 response.raise_for_status()
-                verses = validate_cloud_translation(surah_id, response.json())
+                verses = validate_cloud_translation(surah_id, response.json(), primary_edition)
                 return {
                     "language": language,
                     "source": "Al Quran Cloud",
@@ -172,7 +180,14 @@ class QuranEncVerseSource:
             except (httpx.HTTPError, ValueError, ProviderDataError) as exc:
                 errors.append(exc)
 
-        # Fallback is an independently attributed QuranEnc edition.
+        # No unrelated Urdu translator fallback: the display must remain
+        # Jalandhari, including when both Al Quran Cloud hosts are unavailable.
+        if language not in _QURANENC_EDITIONS:
+            raise ProviderUnavailable(
+                f"{language} written translation ({primary_attribution}) unavailable"
+            ) from errors[-1]
+
+        # Other languages retain their independently attributed QuranEnc fallback.
         quranenc_edition, quranenc_attribution = _QURANENC_EDITIONS[language]
         try:
             response = await self._quranenc.get(

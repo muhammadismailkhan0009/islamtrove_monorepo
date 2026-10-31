@@ -193,7 +193,7 @@ def test_verse_text_uses_independent_arabic_and_written_translation_sources() ->
         assert combined.json()[0]["translations"] == {
             "German": "de.bubenheim 1",
             "English": "en.sahih 1",
-            "Urdu": "ur.junagarhi 1",
+            "Urdu": "ur.jalandhry 1",
         }
 
 
@@ -298,3 +298,96 @@ def test_quranenc_fallback_reports_correct_english_attribution() -> None:
         assert response.json()["source"] == "QuranEnc"
         assert response.json()["attribution"] == "Rowwad Translation Center"
         assert response.json()["verses"][1]["text"] == "Rowwad 2"
+
+
+def _urdu_cloud_response(edition: str = "ur.jalandhry") -> httpx.Response:
+    return httpx.Response(
+        200, json={
+            "code": 200,
+            "data": {
+                "number": 1, "numberOfAyahs": 3,
+                "edition": {"identifier": edition},
+                "ayahs": [
+                    {"numberInSurah": n, "text": f"Urdu Jalandhari {n}"}
+                    for n in range(1, 4)
+                ],
+            },
+        },
+    )
+
+
+def test_urdu_text_uses_jalandhari_with_correct_edition_and_attribution() -> None:
+    requested: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        requested.append(str(request.url))
+        if request.url.path == "/v1/surah/1/ur.jalandhry":
+            return _urdu_cloud_response()
+        return httpx.Response(404)
+
+    with TestClient(create_app(transport=httpx.MockTransport(handler))) as client:
+        result = client.get("/api/quran/surahs/1/translation-text?language=Urdu")
+        assert result.status_code == 200, result.text
+        doc = result.json()
+        assert doc["edition"] == "ur.jalandhry"
+        assert doc["attribution"] == "Fateh Muhammad Jalandhari"
+        assert doc["source"] == "Al Quran Cloud"
+        assert doc["verses"][1] == {"ayah": 2, "text": "Urdu Jalandhari 2"}
+        assert requested == ["https://api.alquran.cloud/v1/surah/1/ur.jalandhry"]
+
+
+def test_urdu_uses_same_edition_on_alternate_cloud_host_without_junagarhi() -> None:
+    requested: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        requested.append(str(request.url))
+        if request.url.host == "alquran.api.islamic.network" and (
+            request.url.path == "/v1/surah/1/ur.jalandhry"
+        ):
+            return _urdu_cloud_response()
+        return httpx.Response(503)
+
+    with TestClient(create_app(transport=httpx.MockTransport(handler))) as client:
+        result = client.get("/api/quran/surahs/1/translation-text?language=Urdu")
+        assert result.status_code == 200
+        assert result.json()["edition"] == "ur.jalandhry"
+        assert len(requested) == 2
+        assert all(url.endswith("/ur.jalandhry") for url in requested)
+
+
+def test_urdu_wrong_edition_does_not_masquerade_as_jalandhari() -> None:
+    requested: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        requested.append(str(request.url))
+        if request.url.path == "/v1/surah/1/ur.jalandhry":
+            return _urdu_cloud_response("ur.junagarhi")
+        if request.url.path == "/v1/surah/1/quran-uthmani":
+            return _arabic_response()
+        return httpx.Response(503)
+
+    with TestClient(create_app(transport=httpx.MockTransport(handler))) as client:
+        result = client.get("/api/quran/surahs/1/translation-text?language=Urdu")
+        assert result.status_code == 503
+        assert len(requested) == 2
+        assert all("jalandhry" in url for url in requested)
+        # Other sources/Arabic must remain usable despite Urdu text failure.
+        assert client.get("/api/quran/surahs/1/verses").status_code == 200
+
+
+def test_urdu_503_does_not_fall_back_to_junagarhi_or_quranenc() -> None:
+    requested: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        requested.append(str(request.url))
+        if request.url.path == "/v1/surah/1/quran-uthmani":
+            return _arabic_response()
+        return httpx.Response(503)
+
+    with TestClient(create_app(transport=httpx.MockTransport(handler))) as client:
+        failed = client.get("/api/quran/surahs/1/translation-text?language=Urdu")
+        assert failed.status_code == 503
+        assert all("junagarhi" not in url and "quranenc.com" not in url for url in requested)
+        arabic = client.get("/api/quran/surahs/1/arabic-verses")
+        assert arabic.status_code == 200
+        assert arabic.json()[0]["arabic"] == "Uthmani Arabic 1"

@@ -3,10 +3,9 @@ import type {
 } from '../../../../application/ports/verse-preview';
 import preview from '../../../mock-data/verse-preview/verses.json';
 
-const EDITIONS: Record<TranslationLanguage, string> = {
+const EDITIONS: Record<Exclude<TranslationLanguage, 'Urdu'>, string> = {
   German: 'german_bubenheim',
-  English: 'english_rwwad',
-  Urdu: 'urdu_junagarhi'
+  English: 'english_rwwad'
 };
 const arabicCache = new Map<number, Promise<VerseText[]>>();
 const translationCache = new Map<string, Promise<WrittenTranslationResult>>();
@@ -47,50 +46,56 @@ async function fetchArabic(surahId: number): Promise<VerseText[]> {
 const CLOUD_EDITIONS: Record<TranslationLanguage, {id:string; attribution:string}> = {
   German: {id:'de.bubenheim', attribution:'Bubenheim & Elyas'},
   English: {id:'en.sahih', attribution:'Saheeh International'},
-  Urdu: {id:'ur.junagarhi', attribution:'Muhammad Junagarhi'}
+  Urdu: {id:'ur.jalandhry', attribution:'Fateh Muhammad Jalandhari'}
 };
-const QURANENC_CREDITS: Record<TranslationLanguage, string> = {
-  German:'Bubenheim & Elyas', English:'Rowwad Translation Center',
-  Urdu:'Muhammad Junagarhi'
+const QURANENC_CREDITS: Record<Exclude<TranslationLanguage, 'Urdu'>, string> = {
+  German:'Bubenheim & Elyas', English:'Rowwad Translation Center'
 };
 
 async function fetchTranslation(surahId: number, language: TranslationLanguage): Promise<WrittenTranslationResult> {
   const primary = CLOUD_EDITIONS[language];
-  try {
-    const response = await fetch(
-      `https://api.alquran.cloud/v1/surah/${surahId}/${primary.id}`
-    );
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const payload = await response.json() as {
-      code?:number;
-      data?: {number?:number;numberOfAyahs?:number;ayahs?:{numberInSurah:number;text:string}[]}
-    };
-    const rows = payload.data?.ayahs;
-    if (payload.code !== 200 || payload.data?.number !== surahId ||
-        !Array.isArray(rows) || !rows.length || rows.length !== payload.data?.numberOfAyahs ||
-        !rows.every((row,i)=>row.numberInSurah===i+1 &&
-          typeof row.text==='string' && row.text.trim())) {
-      throw new Error('Al Quran Cloud translation incomplete');
-    }
-    return {language,source:'Al Quran Cloud',edition:primary.id,
-      attribution:primary.attribution,
-      verses:rows.map(row=>({ayah:row.numberInSurah,text:row.text}))};
-  } catch {
-    const response = await fetch(
-      `https://quranenc.com/api/v1/translation/sura/${EDITIONS[language]}/${surahId}`
-    );
-    if (!response.ok) throw new Error(`${language} translation unavailable (HTTP ${response.status})`);
-    const payload = await response.json() as {result?:{aya:string;translation:string}[]};
-    const rows = payload.result;
-    if (!Array.isArray(rows) || !rows.length ||
-        !rows.every((row, i)=>String(row.aya)===String(i+1) &&
-          typeof row.translation==='string' && row.translation.trim())) {
-      throw new Error(`QuranEnc ${language} translation incomplete`);
-    }
-    return {language,source:'QuranEnc',edition:EDITIONS[language],
-      attribution:QURANENC_CREDITS[language],
-      verses:rows.map((row,i)=>({ayah:i+1,text:row.translation}))};
+  // Urdu must never silently fall back to a different translator. The alternate
+  // Al Quran Cloud host serves the same Jalandhari edition.
+  const hosts = language === 'Urdu'
+    ? ['https://api.alquran.cloud/v1', 'https://alquran.api.islamic.network/v1']
+    : ['https://api.alquran.cloud/v1'];
+  for (const host of hosts) {
+    try {
+      const response = await fetch(`${host}/surah/${surahId}/${primary.id}`);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const payload = await response.json() as {
+        code?:number;
+        data?: {number?:number;numberOfAyahs?:number;
+          edition?:{identifier?:string};ayahs?:{numberInSurah:number;text:string}[]};
+      };
+      const rows = payload.data?.ayahs;
+      if (payload.code !== 200 || payload.data?.number !== surahId ||
+          (payload.data.edition?.identifier && payload.data.edition.identifier !== primary.id) ||
+          !Array.isArray(rows) || !rows.length || rows.length !== payload.data?.numberOfAyahs ||
+          !rows.every((row,i)=>row.numberInSurah===i+1 &&
+            typeof row.text==='string' && row.text.trim())) {
+        throw new Error('Al Quran Cloud translation incomplete or mismatched');
+      }
+      return {language,source:'Al Quran Cloud',edition:primary.id,
+        attribution:primary.attribution,
+        verses:rows.map(row=>({ayah:row.numberInSurah,text:row.text}))};
+    } catch { /* Try the alternate host or, for other languages, QuranEnc. */ }
   }
+  if (language === 'Urdu') throw new Error('Urdu Jalandhari translation unavailable');
+  const response = await fetch(
+    `https://quranenc.com/api/v1/translation/sura/${EDITIONS[language]}/${surahId}`
+  );
+  if (!response.ok) throw new Error(`${language} translation unavailable (HTTP ${response.status})`);
+  const payload = await response.json() as {result?:{aya:string;translation:string}[]};
+  const rows = payload.result;
+  if (!Array.isArray(rows) || !rows.length ||
+      !rows.every((row, i)=>String(row.aya)===String(i+1) &&
+        typeof row.translation==='string' && row.translation.trim())) {
+    throw new Error(`QuranEnc ${language} translation incomplete`);
+  }
+  return {language,source:'QuranEnc',edition:EDITIONS[language],
+    attribution:QURANENC_CREDITS[language],
+    verses:rows.map((row,i)=>({ayah:i+1,text:row.translation}))};
 }
 
 export const mockVersePreviewAdapter: VersePreviewPort = {
@@ -101,7 +106,7 @@ export const mockVersePreviewAdapter: VersePreviewPort = {
   },
   getTranslationVerses(surahId, language): Promise<WrittenTranslationResult> {
     const items = fixture(surahId);
-    if (items?.length && items.every(row => typeof row.translations[language] === 'string')) {
+    if (language !== 'Urdu' && items?.length && items.every(row => typeof row.translations[language] === 'string')) {
       return Promise.resolve({language,source:'Design fixture',edition:EDITIONS[language],
         attribution:QURANENC_CREDITS[language],
         verses:items.map(row => ({ayah:row.ayah,text:row.translations[language]!}))});

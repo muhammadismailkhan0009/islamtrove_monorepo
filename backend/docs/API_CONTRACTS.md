@@ -68,13 +68,15 @@ The frontend compares the returned Arabic text count against the selected Surah 
 
 ## Written translation provider fallback (Al Quran Cloud first)
 
-As of October 2026, QuranEnc's written translation API can time out repeatedly. For **written text only**, IslamTrove now queries an edition of Al Quran Cloud first, tries its documented alternate host if that fails, and uses the originally selected QuranEnc translation as a last fallback.
+As of October 2026, QuranEnc's written translation API can time out repeatedly. For **written text only**, IslamTrove queries Al Quran Cloud first and tries its documented alternate host if necessary. German and English also have individually credited QuranEnc fallbacks. Urdu deliberately does not fall back to another translator: it remains Fateh Muhammad Jalandhari or reports a translation-only error, leaving Arabic and audio working.
 
 | Language | Primary text edition / attribution | QuranEnc fallback / attribution |
 | --- | --- | --- |
 | German | `de.bubenheim` — Bubenheim & Elyas | `german_bubenheim` — Bubenheim & Elyas |
 | English | `en.sahih` — Saheeh International | `english_rwwad` — Rowwad Translation Center |
-| Urdu | `ur.junagarhi` — Muhammad Junagarhi | `urdu_junagarhi` — Muhammad Junagarhi |
+| Urdu | `ur.jalandhry` — Fateh Muhammad Jalandhari | Same Jalandhari edition on alternate Al Quran Cloud host; **no different-translator fallback** |
+
+**Written Urdu and spoken Urdu:** `ur.jalandhry` credits Fateh Muhammad Jalandhari. The independently sourced Urdu audio remains narrated by Shamshad Ali Khan and is not changed by this text selection. The Urdu response is marked `Cache-Control: no-store` to avoid stale Junagarhi caches after deployment. Source: https://alquran.cloud/terms-and-conditions (attribution); https://tanzil.net/trans/ (translation noncommercial use terms).
 
 **Different English editions must not share attribution.** The backend validates the complete numbered Surah response, caches successful text by Surah and language, and returns the actual provenance.
 
