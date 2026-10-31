@@ -180,7 +180,7 @@
 
   <dialog #settingsDialog class="settings-dialog" aria-labelledby="settings-title" (click)="closeOnBackdrop($event)">
     <div class="settings-surface">
-      <header class="settings-heading"><div><span class="micro-label">PERSONALIZE YOUR LISTENING</span><h2 id="settings-title">{{groupingLibraryOpen() ? "Grouping library" : "Listening settings"}}</h2><p>{{groupingLibraryOpen() ? "Choose your local or published groupings, and publish with administrator approval." : "Change your audio order, visible translations, and passage boundaries."}}</p></div><button class="settings-close" type="button" aria-label="Close listening settings" (click)="closeSettings()"><it-icon name="close" [size]="20"></it-icon></button></header>
+      <header class="settings-heading"><div><span class="micro-label">PERSONALIZE YOUR LISTENING</span><h2 id="settings-title">{{groupingLibraryOpen() ? "Grouping library" : "Listening settings"}}</h2><p>{{groupingLibraryOpen() ? "Published groupings play by default. Switch to Local to customize the current Surah or publish edits." : "Change your audio order, visible translations, and passage boundaries."}}</p></div><button class="settings-close" type="button" aria-label="Close listening settings" (click)="closeSettings()"><it-icon name="close" [size]="20"></it-icon></button></header>
       <nav class="settings-view-tabs" aria-label="Listening settings sections">
         <button type="button" [class.active]="!groupingLibraryOpen()" [attr.aria-current]="!groupingLibraryOpen() ? 'page' : null" (click)="groupingLibraryOpen.set(false)">
           <it-icon name="settings" [size]="17"></it-icon> Listening setup
@@ -240,7 +240,7 @@
         }
       }
       @if (true) {
-        <div class="section-title break-title"><span class="section-number">{{groupingLibraryOpen() ? "01" : "03"}}</span><div><h3>{{groupingLibraryOpen() ? "Choose passage groupings" : "Set passage boundaries"}}</h3><p>{{groupingLibraryOpen() ? "Switch local or published groupings; publish the complete collection with administrator approval." : "Tap an Ayah number to set where the next listening passage begins."}}</p></div></div>
+        <div class="section-title break-title"><span class="section-number">{{groupingLibraryOpen() ? "01" : "03"}}</span><div><h3>{{groupingLibraryOpen() ? "Choose passage groupings" : "Set passage boundaries"}}</h3><p>{{groupingLibraryOpen() ? "Published groupings are the default. Switch to Local to customize and publish this Surah." : "Tap an Ayah number to set where the next listening passage begins."}}</p></div></div>
         @if (!groupingLibraryOpen() && reviewEnabled && reviewItems().length > 0) {
           <div class="review-summary-bar" aria-label="Audio alignment review progress">
             <div class="review-summary-main">
@@ -261,7 +261,7 @@
 
         @if (groupingLibraryOpen()) {
           @if (groupingLoadError()) {
-            <div class="group-prototype-note" role="alert">Published grouping service unavailable: {{groupingLoadError()}}. Your local groupings remain available.</div>
+            <div class="group-prototype-note" role="alert">Published grouping service unavailable: {{groupingLoadError()}}. Offline default passages and your saved local groupings remain available.</div>
           }
           <it-grouping-library-preview
             [catalog]="surahs" [localGroupings]="localGroupings()" [serverDocument]="serverGroupings()"
@@ -272,15 +272,29 @@
         } @else {
         <div class="editing-layout">
           <section class="editor-card" aria-label="Breakpoints editor">
-            @if (groupingSource() === 'server') { <div class="group-prototype-note">You are using published groupings. Switch to My local groupings or copy a published Surah to make edits.</div> }
+            @if (groupingSource() === 'server') {
+              @if (hasPublishedGrouping()) {
+                <div class="group-prototype-note">This Surah uses its published grouping. Switch to My local groupings or copy the published version to make edits.</div>
+              } @else {
+                <div class="group-prototype-note">
+                  No published grouping for this Surah yet.
+                  @if (fallbackPresetSource() === 'qpc') {
+                    Using offline thematic passages from the Quranic Passage Collection (QPC).
+                  } @else if (fallbackPresetSource() === 'ruku') {
+                    Using traditional Rukūʿ boundaries from <a href="https://tanzil.net/docs/Quran_Metadata" target="_blank" rel="noopener noreferrer">Tanzil Quran Metadata</a>.
+                  } @else {
+                    Using the whole Surah as one passage.
+                  }
+                  Switch to My local groupings to customize.
+                </div>
+              }
+            }
             <div class="editor-top">
               <div><strong>Ayah breakpoints</strong><span>Choose where each passage ends</span></div>
               <div class="preset-buttons">
                 <button type="button" [class.active]="isWholeSurah()" [disabled]="groupingSource() === 'server'" (click)="setPreset('whole')">End only</button>
                 <button type="button" [class.active]="isEveryAyah()" [disabled]="groupingSource() === 'server'" (click)="setPreset('each')">Each Ayah</button>
-                @if (selectedId() === 18) {
-                  <button type="button" [disabled]="groupingSource() === 'server'" (click)="applySuggestedBreakpoints()">Al-Kahf groups</button>
-                }
+                <button type="button" [disabled]="groupingSource() === 'server'" (click)="applySuggestedBreakpoints()">Default passages</button>
               </div>
             </div>
             <div class="ayah-grid" aria-label="Ayah numbers">

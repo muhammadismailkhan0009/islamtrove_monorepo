@@ -1,0 +1,158 @@
+#!/usr/bin/env python3
+"""Rebuild IslamTrove's offline QPC passage-boundary fallback.
+
+Source: Qur'an QA 2023, Task A, Thematic QPC v1.1.
+Run: python3 frontend/tools/generate_qpc_boundaries.py
+No network or external Python packages are required; the source TSV is vendored.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import re
+from collections import defaultdict
+from pathlib import Path
+
+FRONTEND = Path(__file__).resolve().parents[1]
+SOURCE = FRONTEND / "data/qpc/QQA23_TaskA_QPC_v1.1.tsv"
+OUTPUT = FRONTEND / "src/features/listening-studio/qpc-boundaries.ts"
+RUKU_COUNTS = FRONTEND / "src/features/listening-studio/ruku-boundaries.ts"
+SOURCE_SHA256 = "0a86c33c465ab6cf9321924d2c03b23ed72f8360134ae92ba4bd4a90c93be08c"
+EXPECTED_PASSAGES = 1266
+EXPECTED_AYAHS = 6236
+
+
+def reference_ayah_counts(source: str) -> dict[int, int]:
+    """Read authoritative final Ayah counts from the Tanzil-based Rukūʿ table."""
+    counts: dict[int, int] = {}
+    for match in re.finditer(r"^\s*(\d+):\s*\[([\d, ]+)\],?$", source, re.MULTILINE):
+        surah = int(match.group(1))
+        values = [int(piece.strip()) for piece in match.group(2).split(",")]
+        if surah in counts or not values:
+            raise ValueError(f"Invalid Rukūʿ metadata for Surah {surah}")
+        counts[surah] = values[-1]
+    if sorted(counts) != list(range(1, 115)) or sum(counts.values()) != EXPECTED_AYAHS:
+        raise ValueError("Rukūʿ reference must cover 114 Surahs and 6,236 Ayahs")
+    return counts
+
+
+def parse_qpc_tsv(text: str) -> list[tuple[int, int, int]]:
+    """Parse the passage reference column, preserving source order."""
+    rows: list[tuple[int, int, int]] = []
+    pattern = re.compile(r"^(\d+):(\d+)-(\d+)$")
+    for lineno, line in enumerate(text.splitlines(), 1):
+        if not line.strip():
+            raise ValueError(f"Unexpected blank line at {lineno}")
+        reference, separator, _arabic = line.partition("\t")
+        if not separator:
+            raise ValueError(f"TSV row {lineno} missing tab separator")
+        match = pattern.fullmatch(reference.strip())
+        if not match:
+            raise ValueError(f"Invalid passage reference at TSV line {lineno}: {reference!r}")
+        surah, first, last = (int(value) for value in match.groups())
+        if surah < 1 or first < 1 or last < first:
+            raise ValueError(f"Invalid Ayah range at TSV line {lineno}: {reference}")
+        rows.append((surah, first, last))
+    return rows
+
+
+def normalize_passages(
+    rows: list[tuple[int, int, int]],
+    ayah_counts: dict[int, int],
+) -> tuple[dict[int, list[int]], list[tuple[int, int, int, int]]]:
+    """Resolve overlaps by earliest passage ownership; never silently fill gaps.
+
+    Each next passage loses already-assigned leading Ayahs. A fully consumed
+    passage is omitted. The original order is maintained, and every Surah must
+    still cover 1..ayahCount exactly once after normalization.
+    """
+    assigned: dict[int, list[int]] = defaultdict(list)
+    overlap_log: list[tuple[int, int, int, int]] = []
+    previous_surah = 0
+
+    for surah, first, last in rows:
+        if surah not in ayah_counts:
+            raise ValueError(f"Unrecognized Surah {surah}")
+        if last > ayah_counts[surah]:
+            raise ValueError(f"Surah {surah}: range {first}-{last} exceeds Ayah count")
+        if surah < previous_surah:
+            raise ValueError(f"TSV passages are not ordered by Surah (saw {surah})")
+        previous_surah = surah
+
+        previous_end = assigned[surah][-1] if assigned[surah] else 0
+        if first > previous_end + 1:
+            raise ValueError(f"Surah {surah}: gap from {previous_end + 1} to {first - 1}")
+        accepted_first = max(first, previous_end + 1)
+        if accepted_first > first:
+            overlap_log.append((surah, first, last, accepted_first))
+        if accepted_first > last:
+            continue  # Passage was entirely covered by earlier passages.
+        assigned[surah].append(last)
+
+    if sorted(assigned) != sorted(ayah_counts):
+        raise ValueError("QPC must supply passages for every Surah")
+    for surah, count in ayah_counts.items():
+        ends = assigned[surah]
+        if not ends or ends[-1] != count:
+            raise ValueError(f"Surah {surah}: final covered Ayah is {ends[-1] if ends else 0}, expected {count}")
+        if any(a >= b for a, b in zip(ends, ends[1:])):
+            raise ValueError(f"Surah {surah}: non-increasing passage endings")
+    return dict(assigned), overlap_log
+
+
+def render_typescript(
+    boundaries: dict[int, list[int]],
+    sha256: str,
+    corrections: list[tuple[int, int, int, int]],
+) -> str:
+    lines = [
+        "/**",
+        " * Offline QPC v1.1 thematic passage fallback for IslamTrove.",
+        " * Source: Qur'an QA 2023, Task A / Thematic_QPC / QQA23_TaskA_QPC_v1.1.tsv",
+        f" * Original TSV SHA-256: {sha256}",
+        " * Generated by: python3 frontend/tools/generate_qpc_boundaries.py",
+        " * First-passage-wins overlap normalization; no Ayahs skipped or repeated.",
+        f" * {sum(map(len, boundaries.values()))} normalized passages / {sum(v[-1] for v in boundaries.values())} Ayahs.",
+        f" * Overlaps corrected: {len(corrections)} (details in docs/GROUPINGS.md).",
+        " * This is an editorial listening scaffold, not authoritative tafsir.",
+        " */",
+        "export const QPC_ENDINGS: Readonly<Record<number, readonly number[]>> = {",
+    ]
+    for surah in sorted(boundaries):
+        values = ", ".join(map(str, boundaries[surah]))
+        lines.append(f"  {surah}: [{values}],")
+    lines += ["};", ""]
+    return "\n".join(lines)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--check", action="store_true", help="Verify generated file is up to date")
+    args = parser.parse_args()
+
+    original = SOURCE.read_bytes()
+    digest = hashlib.sha256(original).hexdigest()
+    if digest != SOURCE_SHA256:
+        raise ValueError(f"QPC source changed (SHA-256 {digest}); review the source before regenerating")
+    rows = parse_qpc_tsv(original.decode("utf-8-sig"))
+    if len(rows) != EXPECTED_PASSAGES:
+        raise ValueError(f"Expected {EXPECTED_PASSAGES} source passages, got {len(rows)}")
+    reference = reference_ayah_counts(RUKU_COUNTS.read_text(encoding="utf-8"))
+    boundaries, changes = normalize_passages(rows, reference)
+    result = render_typescript(boundaries, digest, changes)
+    if args.check:
+        if not OUTPUT.exists() or OUTPUT.read_text(encoding="utf-8") != result:
+            raise SystemExit("QPC generated boundaries out of date; rerun this script without --check")
+    else:
+        OUTPUT.write_text(result, encoding="utf-8")
+    print(f"Validated {len(boundaries)} Surahs, {sum(map(len, boundaries.values()))} passages, "
+          f"{sum(v[-1] for v in boundaries.values())} Ayahs, {len(changes)} overlap corrections.")
+    for surah, start, end, accepted in changes:
+        print(f"  Surah {surah}: {start}-{end} -> "
+              + (f"{accepted}-{end}" if accepted <= end else "discarded"))
+    if not args.check:
+        print(f"Wrote {OUTPUT.relative_to(FRONTEND.parent)}")
+
+
+if __name__ == "__main__":
+    main()

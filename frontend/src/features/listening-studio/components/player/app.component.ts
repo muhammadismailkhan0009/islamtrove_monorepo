@@ -13,7 +13,7 @@ import { GroupingLibraryPreviewComponent } from './grouping-library-preview.comp
 import { GROUPING_LIBRARY, type GroupingDocument, type SurahGrouping } from '../../../../application/ports/grouping-library';
 import type { GroupSource } from './grouping-library-preview.component';
 import { ListeningController, type ClipLanguage } from '../../listening-controller';
-import { suggestedBreakpoints } from '../../passage-presets';
+import { passagePresetSource, suggestedBreakpoints } from '../../passage-presets';
 import { parseSharedListeningLink, createSharedListeningUrl } from '../../shared-listening-link';
 import { createReviewBlocks } from '../../alignment-review-blocks';
 
@@ -279,7 +279,9 @@ export class AppComponent implements OnDestroy {
   readonly surahs = inject(QURAN_SURAHS);
   readonly audioOptions = inject(AUDIO_OPTIONS);
   readonly selectedId = signal(1);
-  readonly groupingSource = signal<GroupSource>('local');
+  // Published passages are the normal listening mode. Switching to Local is
+  // temporary for this Surah; changing Surahs returns to published defaults.
+  readonly groupingSource = signal<GroupSource>('server');
   readonly serverGroupings = signal<GroupingDocument>({schemaVersion:1,revision:0,groupings:[]});
   readonly groupingLoadError = signal('');
   private serverGroupingReady: Promise<void> = Promise.resolve();
@@ -320,7 +322,7 @@ export class AppComponent implements OnDestroy {
   readonly textTranslationWarnings = signal<Partial<Record<TranslationLanguage, string>>>({});
   readonly textTranslationCredits = signal<Partial<Record<TranslationLanguage, {source: string; attribution: string}>>>({});
   readonly listeningMode = signal<ListeningMode>('both');
-  readonly breakpoints = signal<number[]>([3, 7]);
+  readonly breakpoints = signal<number[]>(suggestedBreakpoints(1, 7));
   readonly stageIndex = signal(0);
   readonly isPlaying = signal(false);
   readonly sidebarOpen = signal(false);
@@ -331,6 +333,10 @@ export class AppComponent implements OnDestroy {
   ));
   readonly ayahs = computed(() => Array.from({ length: this.selectedSurah().ayahCount }, (_, i) => i + 1));
   readonly passages = computed<Passage[]>(() => createPassages(this.breakpoints(), this.selectedSurah().ayahCount));
+  readonly hasPublishedGrouping = computed(() =>
+    this.serverGroupings().groupings.some(item => item.surahId === this.selectedId()));
+  readonly fallbackPresetSource = computed(() =>
+    passagePresetSource(this.selectedId(), this.selectedSurah().ayahCount));
   readonly localGroupings = computed<SurahGrouping[]>(() => {
     this.selectedId(); this.breakpoints(); // re-read when a local grouping changes
     return [...this.boundariesBySurah.entries()]
@@ -446,34 +452,32 @@ export class AppComponent implements OnDestroy {
             }
           }
         }
-        const lastUsedServer = values?.groupingSource === 'server';
-        const restored = this.boundariesBySurah.get(this.selectedId())
-          ?? (!lastUsedServer && Array.isArray(values?.breakpoints)
-            ? normalizeBreakpoints(values.breakpoints, count)
-            : suggestedBreakpoints(this.selectedId(), count));
-        // Saved playback boundaries may describe a server grouping; never
-        // import them into local data without an explicit Copy action.
-        this.setBoundaries(restored, !lastUsedServer);
+        // Migrate legacy local breakpoints only when they were explicitly
+        // saved in Local mode, never when they came from a published grouping.
+        if (!this.boundariesBySurah.has(this.selectedId()) &&
+            values?.groupingSource === 'local' && Array.isArray(values?.breakpoints)) {
+          this.boundariesBySurah.set(
+            this.selectedId(), normalizeBreakpoints(values.breakpoints, count));
+        }
+        // Start with built-in boundaries until published data is loaded.
+        // Stored local breakpoints remain available when Local is selected.
+        this.setBoundaries(suggestedBreakpoints(this.selectedId(), count), false);
         if (values?.listeningMode === 'recitation' || values?.listeningMode === 'both') this.listeningMode.set(values.listeningMode);
         if (this.supportedLanguages.includes(values?.translationLanguage)) this.translationLanguage.set(values.translationLanguage);
         if (this.supportedLanguages.includes(values?.secondTranslation)) this.secondTranslation.set(values.secondTranslation);
         if (typeof values?.dualTranslation === 'boolean') this.dualTranslation.set(values.dualTranslation);
-        if (values?.groupingSource === 'local' || values?.groupingSource === 'server') {
-          this.groupingSource.set(values.groupingSource);
-        }
         if (values?.displayChoice === 'first' || values?.displayChoice === 'second' || values?.displayChoice === 'both') this.displayChoice.set(values.displayChoice);
         if (this.translationLanguage() === this.secondTranslation()) this.secondTranslation.set(this.supportedLanguages.find(x => x !== this.translationLanguage())!);
       }
     } catch { /* Nonpersistent preview if browser storage is unavailable. */ }
-    if (!this.sharedListeningLink && !this.sharedLinkDesignPreview &&
-        !this.boundariesBySurah.has(this.selectedId())) {
-      // A first visit still has a local grouping for the selected Surah.
-      this.setBoundaries(this.selectedId() === 1 ? this.breakpoints()
-        : suggestedBreakpoints(this.selectedId(), this.selectedSurah().ayahCount));
-    }
+
     if (this.groupingsDesignPreview) {
       const route = new URLSearchParams(window.location.search).get('groups-demo');
       this.groupingSource.set(route === 'server' || route === 'success' ? 'server' : 'local');
+      // Design Canvas needs a local example for its Local/Publish artboards.
+      if (this.groupingSource() === 'local' && !this.boundariesBySurah.has(this.selectedId())) {
+        this.setBoundaries(suggestedBreakpoints(this.selectedId(), this.selectedSurah().ayahCount));
+      }
     }
     if (this.sharedListeningLink) {
       // Deep-link parameters override local preferences for this visit only.
@@ -496,8 +500,7 @@ export class AppComponent implements OnDestroy {
       if (this.sharedLinkDesignPreview || this.sharedListeningLink || this.groupingsDesignPreview) return;
       // Never persist link overrides to this browser's own preferences.
       const settings = {
-        groupingSource: this.groupingSource(),
-        selectedId: this.selectedId(), breakpoints: this.breakpoints(),
+        selectedId: this.selectedId(),
         boundariesBySurah: Object.fromEntries(this.boundariesBySurah),
         listeningMode: this.listeningMode(),
         translationLanguage: this.translationLanguage(), secondTranslation: this.secondTranslation(),
@@ -693,11 +696,16 @@ export class AppComponent implements OnDestroy {
   copyPublishedGrouping(group: SurahGrouping): void {
     const surah = this.surahs.find(item => item.id === group.surahId);
     if (!surah) return;
-    this.groupingSource.set('local');
     this.boundariesBySurah.set(group.surahId, normalizeBreakpoints(group.boundaries,surah.ayahCount));
     this.selectSurah(surah);
+    // Copy is an explicit decision to edit this Surah locally.
+    this.groupingSource.set('local');
+    this.applySourceGrouping();
   }
   selectSurah(surah: SurahSummary): void {
+    if (this.selectedId() !== surah.id) {
+      this.groupingSource.set('server');
+    }
     this.selectedId.set(surah.id);
     this.applySourceGrouping();
     this.resetQueue();
